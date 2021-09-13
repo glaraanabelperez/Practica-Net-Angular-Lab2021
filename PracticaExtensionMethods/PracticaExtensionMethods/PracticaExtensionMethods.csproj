@@ -46,11 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entidades\CalculationsOfDivisions.cs" />
+    <Compile Include="Entidades\Calculos.cs" />
+    <Compile Include="Entidades\DividingForZero.cs" />
     <Compile Include="Entidades\Dividing.cs" />
-    <Compile Include="Entidades\ExcerciseDividingByZero.cs" />
-    <Compile Include="ExtensionMethodsHelpers\CalculateDivisions.cs" />
-    <Compile Include="ExtensionMethodsHelpers\ValidationsAndConversions.cs" />
+    <Compile Include="Entidades\Logic.cs" />
+    <Compile Include="Entidades\MyExceptioncs.cs" />
+    <Compile Include="ExtensionMethodsHelpers\CatchingExceptionExtension.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

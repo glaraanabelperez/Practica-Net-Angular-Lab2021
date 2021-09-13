@@ -1,29 +1,28 @@
-﻿using System;
-
+﻿
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using PracticaExtensionMethods.ExtensionMethodsHelpers;
 
 namespace PracticaExtensionMethods.Clases
 {
-    public class Dividing : DividingForZero
+    public class DividingForZero : Calculos
     {
-        public Dividing()
+        public DividingForZero() : base(0)
         {
 
         }
         public override void MessageResult(String tipMessage)
         {
-            if (tipMessage.Equals("FormatException"))
-            {
-                Message = $"Seguro Ingreso una letra o no ingreso nada!, {Message}";
-                
-            }
             if (tipMessage.Equals("DivideByZeroException"))
             {
-                Message = $"Solo Chuck Norris divide por cero!, {Message}";
+                Message = $"Operacion con exito, {Message}";
             }
-            if (tipMessage.Equals("FormatExceptionOK"))
+            if (tipMessage.Equals("FormatException"))
             {
-                Message = "Datos Correctos";
+                Message = $"Operacion sin exito, {Message}";
             }
 
         }
@@ -45,10 +44,14 @@ namespace PracticaExtensionMethods.Clases
             return resultConvertion;
         }
 
-        public override int CalculateDivisions(int dividend, int divisor)
+        public override int CalculateDivisionsByZero(int dividendo)
         {
-            return divisor.DividingAndCatchingException(dividend);
+            return Divisor.DividingAndCatchingException(dividendo);
         }
 
+        public override int CalculateDivisions(int dividendo, int divisor)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

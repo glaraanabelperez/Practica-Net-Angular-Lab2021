@@ -1,106 +1,159 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PracticaExtensionMethods.Clases;
+using PracticaExtensionMethods.Entidades;
 using PracticaExtensionMethods.ExtensionMethodsHelpers;
 
 namespace PracticaExtensionMethods
 {
     public partial class Form1 : Form
     {
-
         public Form1()
         {
             InitializeComponent();
         }
+        private void DivisionX0_Click(object sender, EventArgs e)
+        {
+            Calculos excercise1 = new DividingForZero();
+
+            String dividend = textBoxDividendo.Text;
+            int[] resultConvertion = new int[2];
+            int resultDivision = 0;
+
+            resultConvertion = excercise1.ConversionStringToNumber(dividend);
+            label1Dividend.Text = excercise1.Message;
+            labelResultCalculo.Text = "";
+
+            if (resultConvertion[0] == 1)
+            {
+                try
+                {
+                    resultDivision = excercise1.CalculateDivisionsByZero(resultConvertion[1]);
+                }
+                catch (DivideByZeroException ex)
+                {
+                    excercise1.Message = ex.Message;
+                    excercise1.MessageResult("DivideByZeroException");
+                }
+                labelResultCalculo.Text = excercise1.Message;
+            }
+            textBoxResult.Text = resultDivision.ToString();
+        }
 
         private void CalculateDivision_Click(object sender, EventArgs e)
         {
-            //textBoxDivisor.Enabled = true;
-            //int numberEntrie = 0, numberEntrie2 = 0;
-            //int resultDivision = 0;
-            //String message = "";
- 
-            //try
-            //{
-            //    numberEntrie = textBoxDividendo.Text.ConversionStringToNumber();
-            //    numberEntrie2 = textBoxDivisor.Text.ConversionStringToNumber();
+            Calculos excercise1 = new Dividing();
+            labelResultCalculo.Text = "";
+            textBoxResult.Text = "";
 
-            //    resultDivision = numberEntrie.CalculateDivisionsForCero();
-            //    message = "Operacion Exitosa";
-            //    labelMessage.Text = textBoxDividendo.Text + message;
-            //}
-            //catch (FormatException ex)
-            //{
-            //    message = string.Format("Operacion sin exito {0}", ex.Message);
-            //    labelMessage.Text = " Ingreso no valido " + message;
-            //}
-            //catch (OverflowException ex) when (ex.GetType() != typeof(FormatException))
-            //{
-            //    message = string.Format("Operacion sin exito, {0}", ex.Message);
-            //    labelMessage.Text = message;
-            //}
-            //catch (DivideByZeroException ex)
-            //{
-            //    message = string.Format("Operacion sin exito, {0}", ex.Message);
-            //    labelMessage.Text = message;
-            //}
+            textBoxDivisor.Enabled = true;
+            int[] resultConvertion1 = new int[2];
+            int[] resultConvertion2 = new int[2];
+
+            String dividend = textBoxDividend2.Text;
+            String divisor = textBoxDivisor.Text;
+
+            int result = 0;
+
+
+            resultConvertion1 = excercise1.ConversionStringToNumber(dividend);
+            resultConvertion2 = excercise1.ConversionStringToNumber(divisor);
+
+            labelDividend2.Text = excercise1.Message;
+            labelResultCalculo.Text = "";
+
+            if (resultConvertion1[0] == 1 && resultConvertion2[0] == 1)
+            {
+                try
+                {
+                    result = excercise1.CalculateDivisions(resultConvertion1[1], resultConvertion2[1]);
+                }
+                catch (DivideByZeroException ex)
+                {
+                    excercise1.Message = ex.Message;
+                    excercise1.MessageResult("DivideByZeroException");
+                }
+                labelResultCalculo.Text = excercise1.Message;
+                labelDividend2.Text = "";
+
+            }
+            textBoxResult.Text = result.ToString();
         }
 
-        private void Division0_Click(object sender, EventArgs e)
+        private void buttonOperaciones_Click(object sender, EventArgs e)
         {
-            CalculationsOfDivisions excercise1 = new ExcerciseDividingByZero();
-            textBoxDivisor.Enabled = false;
-            String dividend = "";
-            int dividendNumber = 0;
+            bool result = false;
+            int[] resultConvertion = new int[2];
+            Logic logic = new Logic();
 
-            dividend = excercise1.CalculateDivisions(dividend);
-            labelMessage.Text = textBoxDividendo.Text + excercise1.Message;
+            try
+            {
+                resultConvertion = textBoxOperations.Text.ConversionStringToNumber();
+            }
+            catch (FormatException ex)
+            {
+                labelTipoOperacion.Text = ex.Message;
+            }
 
-            dividendNumber = excercise1.CalculateDivisionsForCero(dividendNumber);
-            labelMessage.Text = textBoxDividendo.Text + excercise1.Message;
+            if (resultConvertion[0] == 1)
+            {
+                try
+                {
+                    result = logic.LockForOperations(resultConvertion[1]);
+                    labelTipoOperacion.Text = "Bien";
+                }
+                catch (IndexOutOfRangeException ex)
+                {
+                    labelTipoOperacion.Text = ex.Message;
+                }
+            }
 
- 
-            //textBoxDivisor.Enabled = false;
-            //int numberEntrie = 0;
-            //int resultDivision = 0;
-            //String message = "";
-
-            //try
-            //{
-            //    numberEntrie = textBoxDividendo.Text.ConversionStringToNumber();
-
-            //    resultDivision = numberEntrie.CalculateDivisionsForCero();
-            //    message = "Operacion Exitosa";
-            //    labelMessage.Text = textBoxDividendo.Text + message;
-            //}
-            //catch (FormatException ex)
-            //{
-            //    message = string.Format("Operacion sin exito {0}", ex.Message);
-            //    labelMessage.Text = " Ingreso no valido " + message;
-            //}
-            //catch (OverflowException ex) when (ex.GetType() != typeof(FormatException))
-            //{
-            //    message = string.Format("Operacion sin exito, {0}", ex.Message);
-            //    labelMessage.Text = message;
-            //}
-            //catch (DivideByZeroException ex)
-            //{
-            //    message = string.Format("Operacion sin exito, {0}", ex.Message);
-            //    labelMessage.Text = message;
-            //}
+            textBoxOperations.Text = result.ToString();
 
         }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            bool result = false;
+            int[] resultConvertion = new int[2];
+            Logic logic = new Logic();
+            labelMyExceptionOperation.Text = "";
+            label5ExcptionMessage.Text = "";
+
+            try
+            {
+                resultConvertion = textBoxOperationMyException.Text.ConversionStringToNumber();
+            }
+            catch (FormatException ex)
+            {
+                labelMyExceptionOperation.Text = ex.Message;
+            }
+
+            if (string.IsNullOrEmpty(textBoxExceptionMessage.Text))
+            {
+                label5ExcptionMessage.Text = "El campo no puede quedar vacio";
+                return;
+            }
+
+            if (resultConvertion[0] == 1)
+                {
+                    try
+                    {
+                        result = logic.LockForOperations(resultConvertion[1], textBoxExceptionMessage.Text);
+                    }
+                    catch (MyExceptioncs ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+
+        }
+
+        ///////////////////////////////////////////////////////               
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            labelMessage.Text = "";
+            label1Dividend.Text = "";
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -119,6 +172,26 @@ namespace PracticaExtensionMethods
         }
 
         private void textBoxDivisor_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelResultCalculo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_3(object sender, EventArgs e)
         {
 
         }

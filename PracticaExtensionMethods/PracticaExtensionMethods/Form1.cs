@@ -16,12 +16,14 @@ namespace PracticaExtensionMethods
         {
             Calculos excercise1 = new DividingForZero();
 
-            String dividend = textBoxDividendo.Text;
+            String dividendTexto = textBoxDividendo.Text;
+
             int[] resultConvertion = new int[2];
             int resultDivision = 0;
 
-            resultConvertion = excercise1.ConversionStringToNumber(dividend);
+            resultConvertion = excercise1.ConversionStringToNumber(dividendTexto);
             label1Dividend.Text = excercise1.Message;
+
             labelResultCalculo.Text = "";
 
             if (resultConvertion[0] == 1)
@@ -148,6 +150,22 @@ namespace PracticaExtensionMethods
 
         }
 
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         ///////////////////////////////////////////////////////               
 
 
@@ -172,11 +190,6 @@ namespace PracticaExtensionMethods
         }
 
         private void textBoxDivisor_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

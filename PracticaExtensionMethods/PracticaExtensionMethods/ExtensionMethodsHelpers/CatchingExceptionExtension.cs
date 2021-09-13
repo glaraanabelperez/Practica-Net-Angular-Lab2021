@@ -10,7 +10,7 @@ namespace PracticaExtensionMethods.ExtensionMethodsHelpers
     {
         public static int[] ConversionStringToNumber(this String entrie)
         {
-
+            //objetos anonimos....
             int i = 0;
             bool result = int.TryParse(entrie, out i); //i now = 108
             int [] resultToSend = new int[2];
@@ -23,9 +23,10 @@ namespace PracticaExtensionMethods.ExtensionMethodsHelpers
                 resultToSend[0] = 1;
                 resultToSend[1] = i;
             }
-
+            //poner true, 
             return resultToSend;
         }
+
         public static int DividingAndCatchingException(this  int divisor, int dividendo)
         {
             if (divisor == 0)

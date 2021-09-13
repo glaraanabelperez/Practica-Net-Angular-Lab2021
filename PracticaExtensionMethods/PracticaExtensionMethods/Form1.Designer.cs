@@ -201,7 +201,6 @@ namespace PracticaExtensionMethods
             this.textBoxOperations.Name = "textBoxOperations";
             this.textBoxOperations.Size = new System.Drawing.Size(283, 22);
             this.textBoxOperations.TabIndex = 19;
-            this.textBoxOperations.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // tipoOperacion
             // 

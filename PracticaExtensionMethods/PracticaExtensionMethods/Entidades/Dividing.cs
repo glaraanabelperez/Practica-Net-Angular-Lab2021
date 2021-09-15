@@ -28,11 +28,10 @@ namespace PracticaExtensionMethods.Clases
 
         }
 
-        public override int[] ConversionStringToNumber(string entrada)
+        public override Tuple<bool, int> ConversionStringToNumber(string entrada)
         {
-            int[] resultConvertion = new int[2];
-
-            try
+            var resultConvertion = Tuple.Create(false, 0);
+            try 
             {
                 resultConvertion = entrada.ConversionStringToNumber();
             }
@@ -45,10 +44,21 @@ namespace PracticaExtensionMethods.Clases
             return resultConvertion;
         }
 
-        public override int CalculateDivisions(int dividend, int divisor)
+        public override int CalculateDivisionsByZero(int dividend)
         {
-            return divisor.DividingAndCatchingException(dividend);
+            int rsta = 0;
+            try
+            {
+                rsta = Divisor.DividingAndCatchingException(dividend);
+            }
+            catch (DivideByZeroException ex)
+            {
+                Message = ex.Message;
+                MessageResult("DivideByZeroException");
+            }
+            return rsta;
         }
+
 
     }
 }

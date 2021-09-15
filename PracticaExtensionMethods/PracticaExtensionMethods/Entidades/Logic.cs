@@ -9,6 +9,7 @@ namespace PracticaExtensionMethods.Entidades
     public class Logic
     {
         protected String[] Operations;
+        public String message { get; protected set; }
 
         public Logic()
         {
@@ -32,6 +33,7 @@ namespace PracticaExtensionMethods.Entidades
             {
                 throw new MyExceptioncs(message);
             }
+            this.message = "Correcto la operacion existe";
             return true;
         }
 

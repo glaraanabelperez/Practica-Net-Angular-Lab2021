@@ -5,7 +5,7 @@ namespace PracticaExtensionMethods.Clases
 {
     public abstract class Calculos
     {
-        protected int Divisor {get; set;}
+        public int Divisor {get; set;}
         public String Message { get; set; }
 
         public Calculos(int divisor)
@@ -13,13 +13,12 @@ namespace PracticaExtensionMethods.Clases
             this.Divisor = divisor;
             }
 
-        public abstract int [] ConversionStringToNumber(string entrada);
+        public abstract Tuple<bool, int> ConversionStringToNumber(string entrada);
 
         public abstract void MessageResult(string tipeMessage);
 
         public abstract int CalculateDivisionsByZero(int dividendo);
 
-        public abstract int CalculateDivisions(int dividendo, int divisor);
 
 
     }

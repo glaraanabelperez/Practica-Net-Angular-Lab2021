@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{84549EFF-0EF0-4BBB-A1F8-02A44B4E008B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>PracticaExtensionMethods</RootNamespace>
-    <AssemblyName>PracticaExtensionMethods</AssemblyName>
+    <RootNamespace>PracticeExtensionMethods</RootNamespace>
+    <AssemblyName>PracticeExtensionMethods</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,22 +46,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entidades\Calculos.cs" />
-    <Compile Include="Entidades\DividingForZero.cs" />
-    <Compile Include="Entidades\Dividing.cs" />
-    <Compile Include="Entidades\Logic.cs" />
-    <Compile Include="Entidades\MyExceptioncs.cs" />
+    <Compile Include="Entities\Calculations.cs" />
+    <Compile Include="Entities\DividingForZero.cs" />
+    <Compile Include="Entities\Dividing.cs" />
+    <Compile Include="FormularyHelpers\FormularyHelpers.cs" />
+    <Compile Include="Logic\Logic.cs" />
+    <Compile Include="Exceptions\MyExceptions.cs" />
     <Compile Include="ExtensionMethodsHelpers\CatchingExceptionExtension.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="FormCalculations.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FormCalculations.Designer.cs">
+      <DependentUpon>FormCalculations.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="FormCalculations.resx">
+      <DependentUpon>FormCalculations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -71,6 +72,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -85,5 +87,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

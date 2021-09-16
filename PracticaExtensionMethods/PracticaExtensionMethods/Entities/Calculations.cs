@@ -1,14 +1,13 @@
 ﻿using System;
-using PracticaExtensionMethods.Entidades;
 
-namespace PracticaExtensionMethods.Clases
+namespace ExcerciseExtensionMethods.Entities
 {
-    public abstract class Calculos
+    public abstract class Calculations
     {
         public int Divisor {get; set;}
         public String Message { get; set; }
 
-        public Calculos(int divisor)
+        public Calculations(int divisor)
             {
             this.Divisor = divisor;
             }

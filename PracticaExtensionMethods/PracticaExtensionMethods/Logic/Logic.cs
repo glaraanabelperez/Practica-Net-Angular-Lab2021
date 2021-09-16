@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PracticaExtensionMethods.Entidades
+
+namespace ExcerciseExtensionMethods.Entities
 {
     public class Logic
     {
@@ -23,6 +20,7 @@ namespace PracticaExtensionMethods.Entidades
             {
                 throw new IndexOutOfRangeException();
             }
+            this.message = "Muy Bien";
             return true ;
          }
 
@@ -31,7 +29,7 @@ namespace PracticaExtensionMethods.Entidades
 
             if (index < 0 || index > Operations.Length)
             {
-                throw new MyExceptioncs(message);
+                throw new MyExceptions(message);
             }
             this.message = "Correcto la operacion existe";
             return true;

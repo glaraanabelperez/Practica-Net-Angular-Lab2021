@@ -130,12 +130,6 @@ namespace PracticaExtensionMethods
              }
         }
 
-        //private void cleasCamps()
-        //{
-        //    //Control c = new Control();
-        //    //c.ResetText();
-        //    this.ResetText();
-        //}
     }
 
 }

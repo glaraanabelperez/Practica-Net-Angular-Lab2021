@@ -49,7 +49,6 @@
     <Compile Include="Entities\Calculations.cs" />
     <Compile Include="Entities\DividingForZero.cs" />
     <Compile Include="Entities\Dividing.cs" />
-    <Compile Include="FormularyHelpers\FormularyHelpers.cs" />
     <Compile Include="Logic\Logic.cs" />
     <Compile Include="Exceptions\MyExceptions.cs" />
     <Compile Include="ExtensionMethodsHelpers\CatchingExceptionExtension.cs" />

@@ -9,7 +9,7 @@ namespace Practica_EF_Logic
 {
     public class ShippersLogic : BaseLogic, IABMLogic<Shippers>
     {
-        public string Delete(int id)
+        public void Delete(int id)
         {
             string message;
             var shiper_delete = context.Shippers.Find(id);
@@ -17,7 +17,6 @@ namespace Practica_EF_Logic
             try
             {
                 context.SaveChanges();
-                message = "MUY BIEN SE ELIMINO EL TRANSPORTISTA";
             }
             catch (NotSupportedException)
             {
@@ -32,27 +31,45 @@ namespace Practica_EF_Logic
                 throw new InvalidOperationException();
 
             }
-            return message;
         }
-
         public List<Shippers> GetAll()
         {
-            throw new NotImplementedException();
+            return context.Shippers.ToList();
         }
-
         public void GetByCodigo(string id)
         {
             throw new NotImplementedException();
         }
-
+        public string Update(Shippers c)
+        {
+            throw new NotImplementedException();
+        }
         public void GetById(int id)
         {
-            throw new NotImplementedException();
+            var ship = context.Customers.Find(id);
+        }
+        public void Insert(Shippers newShiper)
+        {
+            context.Shippers.Add(newShiper);
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (NotSupportedException)
+            {
+                throw new NotSupportedException();
+            }
+            catch (ObjectDisposedException)
+            {
+                throw new ObjectDisposedException("Id: order_delete");
+            }
+            catch (InvalidOperationException)
+            {
+                throw new InvalidOperationException();
+
+            }
+
         }
 
-        public string Update(Shippers id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

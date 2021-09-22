@@ -9,7 +9,7 @@ namespace Practica_EF_Logic
 {
     public class OrderDetailsLogic : BaseLogic, IABMLogic<Order_Details>
     {
-        public string Delete(int id)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -21,11 +21,15 @@ namespace Practica_EF_Logic
         {
             throw new NotImplementedException();
         }
-        void IABMLogic<Order_Details>.GetById(int id)
+        public void GetById(int id)
         {
             throw new NotImplementedException();
         }
         public string Update(Order_Details id)
+        {
+            throw new NotImplementedException();
+        }
+        public void Insert(Shippers newShiper)
         {
             throw new NotImplementedException();
         }

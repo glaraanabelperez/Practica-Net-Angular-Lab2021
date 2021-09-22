@@ -31,7 +31,7 @@ namespace Practica_EF_Logic.ExtensionMethodsLogic
             {
                 Console.WriteLine("\n DESEA CONITNUAR? (si/no)");
                 entrie = Console.ReadLine();
-            } while (String.IsNullOrEmpty(entrie));
+            } while (String.IsNullOrEmpty(entrie) );
             return entrie;
         }
         public static string InsertDates()
@@ -40,11 +40,19 @@ namespace Practica_EF_Logic.ExtensionMethodsLogic
             String entrada = Console.ReadLine();
             return entrada.ThrowingNulReference();
         }
-        public static string InsertNumber()
+        public static int InsertNumber()
         {
             Console.WriteLine(" \n INGRESE EL Numero");
             String entrada = Console.ReadLine();
-            return entrada.ThrowingNulReference();
+            try
+            {
+                int result = Int32.Parse(entrada);
+                return result;
+            }
+            catch (FormatException)
+            {
+                throw new Exception();
+            }
         }
     }
 }

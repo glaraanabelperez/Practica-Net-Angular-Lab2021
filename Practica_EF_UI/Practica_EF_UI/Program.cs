@@ -34,7 +34,7 @@ namespace Practica_EF_UI
             {
                 case "ORDERS":
                     ListOrders();
-                    Console.WriteLine(" \n QUIERE ACCEDER AL CLIENTE D ELA ORDEN?");
+                    Console.WriteLine(" \n QUIERE ACCEDER AL CLIENTE DE LA ORDEN?");
                     changeOperation = InteractionUserHelpers.Continuar();
 
                     if (changeOperation.Equals("si"))
@@ -58,25 +58,49 @@ namespace Practica_EF_UI
                     Console.WriteLine("INGRESE CODIGO A BUSCAR DE LOS INDICADOS ANTERIORMENTE");
                     try
                     {
-                      selectionIdCustomers = InteractionUserHelpers.InsertDates();
-                      Console.WriteLine($"\n CODIGO SELECCIONADO: {selectionIdCustomers}");
-                      GetCustomerById(customerLogic, selectionIdCustomers);
-                      UpdateCustomerById(customerLogic, selectionIdCustomers);
+                        selectionIdCustomers = InteractionUserHelpers.InsertDates();
+                        Console.WriteLine($"\n CODIGO SELECCIONADO: {selectionIdCustomers}");
+                        GetCustomerById(customerLogic, selectionIdCustomers);
+                        UpdateCustomerById(customerLogic, selectionIdCustomers);
                     }
                     catch (NullReferenceException)
                     {
                         Console.WriteLine("NO AH INHGRESADO NINGUN DATO");
                     }
-                 return "INICIO"; 
+                    return "INICIO";
 
                 case "SHIPPERS":
-                    ShippersLogic shipperLogic = new ShippersLogic();
-                    Delete_Shipper(shipperLogic, id);
-                    Console.WriteLine("Failed measurement.");
-                    break;
+                    ShippersLogic shipperLo = new ShippersLogic();
+                    shipperLo.GetAll();
+
+                    Console.WriteLine("Seleccione numero del iD_Shipper para eliminar o ingrese nuevo numero en cado de Agregar in Transporte");
+                    int idShipper;
+                    try
+                    {
+                        idShipper = InteractionUserHelpers.InsertNumber();
+                        Console.WriteLine("Desea Eliminar (e) o Insertar (i) un Transporte?");
+                        string selection = InteractionUserHelpers.InsertDates();
+                        if (selection.Equals("e"))
+                        {
+                            Delete_Shipper(shipperLo, idShipper);
+                            shipperLo.GetAll();
+                        }
+                        if (selection.Equals("i"))
+                        {
+                            Insert_Shipper(shipperLo, idShipper);
+                            shipperLo.GetAll();
+                        }
+
+                        break;
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("No ha podido realizar la operacion");
+                    }
+                    return "INICIO";
 
                 default:
-                    Console.WriteLine($"Measured value is .");
+                    Console.WriteLine($"INGRESE UNA OPCION");
                     break;
             }
             return "INICIO";
@@ -91,13 +115,12 @@ namespace Practica_EF_UI
 
             return typOperation;
         }
-
         public static void ListOrders()
         {
             OrdersLogic ordersLogic = new OrdersLogic();
 
             Console.WriteLine($"Ordenes Disponibles:");
-            foreach (Orders ord in ordersLogic.GetAllOrders())
+            foreach (Orders ord in ordersLogic.GetAll())
             {
                 Console.WriteLine($"Orden:");
                 Console.WriteLine($"Numero_orden: {ord.OrderID}.");
@@ -116,10 +139,10 @@ namespace Practica_EF_UI
         }
         public static void Delete_Shipper(ShippersLogic shipperLogic, int id)
         {
-            string message;
             try
             {
-                message= shipperLogic.Delete(id);
+                shipperLogic.Delete(id);
+                Console.WriteLine("Transportista Eliminado");
             }
             catch (NotSupportedException)
             {
@@ -135,7 +158,32 @@ namespace Practica_EF_UI
 
             }
         }
-        public static void  GetCustomerById(CustomersLogic custom, string selection) {
+        public static void Insert_Shipper(ShippersLogic shipperLogic, int id)
+        {
+           
+            try
+            {
+                Shippers newShip = new Shippers();
+                newShip.CompanyName = "Mercadores";
+                newShip.ShipperID = id;
+                shipperLogic.Insert(newShip);
+                Console.WriteLine("Shiper INsertado");
+            }
+            catch (NotSupportedException)
+            {
+                Console.WriteLine("HUBO UN PROBLEMA CON LA CONSULTA.");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("EL TRANSPORTISTA NO SE HA ENCONTRADO.");
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("EL TRANSPORTISTA NO SE PUEDE EDITAR.");
+
+            }
+        }
+        public static void GetCustomerById(CustomersLogic custom, string selection) {
             try
             {
                 custom.GetByCodigo(selection);
@@ -153,9 +201,7 @@ namespace Practica_EF_UI
         {
             try
             {
-                //GetCustomerById(customerLogic, selectionIdCustomers);
                 Console.WriteLine("\n QUIERE  EDITAR EL NOMBRE DEL CONTACTO DEL CLIENTES?");
-                //exception en if???
                 if (InteractionUserHelpers.Continuar().Equals("si"))
                 {
                     string newDate = null;

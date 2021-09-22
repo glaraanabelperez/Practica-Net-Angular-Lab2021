@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntitiesLogic.cs" />
     <Compile Include="BaseLogic.cs" />
     <Compile Include="CustomersLogic .cs" />
     <Compile Include="ExtensionMethodsLogic\ExceptionsMethods.cs" />
@@ -57,7 +56,6 @@
     <Compile Include="OrdersDetailsLogic.cs" />
     <Compile Include="ShippersLogic.cs" />
     <Compile Include="OrdersLogic.cs" />
-    <Compile Include="EmployeesLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,6 @@ namespace Practica_EF_Data
         }
 
         public virtual DbSet<Customers> Customers { get; set; }
-        public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<Order_Details> Order_Details { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Shippers> Shippers { get; set; }
@@ -24,11 +23,6 @@ namespace Practica_EF_Data
             modelBuilder.Entity<Customers>()
                 .Property(e => e.CustomerID)
                 .IsFixedLength();
-
-            modelBuilder.Entity<Employees>()
-                .HasMany(e => e.Employees1)
-                .WithOptional(e => e.Employees2)
-                .HasForeignKey(e => e.ReportsTo);
 
             modelBuilder.Entity<Order_Details>()
                 .Property(e => e.UnitPrice)

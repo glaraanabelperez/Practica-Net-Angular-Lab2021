@@ -53,7 +53,7 @@ namespace Practica_EF_Entities
 
         public virtual Customers Customers { get; set; }
 
-        public virtual Employees Employees { get; set; }
+        //public virtual Employees Employees { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Details> Order_Details { get; set; }

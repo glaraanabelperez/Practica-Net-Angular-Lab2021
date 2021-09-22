@@ -10,8 +10,7 @@ namespace Practica_EF_Logic
     public class CustomersLogic : BaseLogic, IABMLogic<Customers>
     {
         public Customers customer { get; set; }
-
-        public string Delete(int id)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -19,13 +18,13 @@ namespace Practica_EF_Logic
         {
             return context.Customers.ToList();
         }
-        public void GetByCodigo(string codigo)
+        public void GetByCodigo(string id)
         {
             try
             {
                 Customers cust = new Customers();
                 cust = (from c in context.Customers
-                        where c.CustomerID.Equals(codigo)
+                        where c.CustomerID.Equals(id)
                         select c).Single();
                 this.customer = cust;
 
@@ -39,11 +38,15 @@ namespace Practica_EF_Logic
                 throw new Exception();
             }
         }
-        void IABMLogic<Customers>.GetById(int id)
+        public void GetById(int id)
         {
             throw new NotImplementedException();
         }
-        public string Update(Customers customer)
+        public void Insert(Shippers newShiper)
+        {
+            throw new NotImplementedException();
+        }
+        public string Update(Customers c)
         {
             var customerUpdate = context.Customers.Find(customer.CustomerID);
             customerUpdate.ContactName = customer.ContactName;

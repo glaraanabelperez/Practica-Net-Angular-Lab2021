@@ -13,42 +13,89 @@ namespace Practica_EF_UI
     {
         static void Main(string[] args)
         {
-            OrdersLogic ordersLogic = new OrdersLogic();
-            Console.WriteLine($"Ordenes disponibles:");
+            string entrie=InteractionUserHelpers.Menu();
+            switch (entrie)
+            {
+                case "Orders":
+                    ListOperations();
+                    string selection;
+                    try
+                    {
+                        selection = InteractionUserHelpers.SelectionID();
+                        Console.WriteLine($"CODIGO SELECCIONADO: {selection}");
+                        try
+                        {
+                            GetCustomerById(selection);
+                        }
+                        catch (System.InvalidOperationException)
+                        {
+                            Console.WriteLine($"El cliente no existe");
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine($"Ops algo salio mal!");
+                        }
+                    }
+                    catch (NullReferenceException)
+                    {
+                        Console.WriteLine("Debe Ingresar una opcion para poder operar o salir del sistema");
+                    }
 
+                    break;
+
+                case "Order_Details":
+                    Console.WriteLine($"Measured value is  too high.");
+                    break;
+
+                case "Customers":
+                    Console.WriteLine($"Measured value is too high.");
+                    break;
+
+                case "Shippers":
+                    Console.WriteLine("Failed measurement.");
+                    break;
+
+                default:
+                    Console.WriteLine($"Measured value is .");
+                    break;
+            }
+
+ 
+            Console.ReadLine();
+
+        }
+
+        public static void ListOperations()
+        {
+            OrdersLogic ordersLogic = new OrdersLogic();
+
+            Console.WriteLine($"Ordenes Disponibles:");
             foreach (Orders ord in ordersLogic.GetAllOrders())
             {
-                Console.WriteLine($" \n Ordenes:");
-                Console.WriteLine($"Numero_orden: {ord.OrderID}. Compania: {ord.Customers.CompanyName}. IdCustomer: {ord.Customers.CustomerID}.");
+                Console.WriteLine(ord.ToString());
+                
+                //Console.WriteLine($"Orden:");
+                //Console.WriteLine($"Numero_orden: {ord.OrderID}.");
+                //Console.WriteLine($"Compania: {ord.Customers.CompanyName}.");
+                //Console.WriteLine($"IdCustomer: {ord.Customers.CustomerID}.");
+
             }
-            //Console.ReadLine();
-            string selection = null;
-            try
-            {
-                selection = InteractionUserHelpers.InsertCodigoString();
-                Console.WriteLine($"Codigo Cliente: {selection}");
-            }
-            catch (NullReferenceException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            //do while;retunr??
-            Console.WriteLine("Datos del Clientes:");
+        }
+        public  static void  GetCustomerById(string selection) {
 
             CustomersLogic custom = new CustomersLogic();
             try
             {
-                Customers c = custom.GetDatesCustomer(selection);
-                Console.WriteLine($"Compania: {c.CompanyName}. Contacto: {c.CompanyName}. IdCustomer: {c.CustomerID}. Region: {c.Region}.");
+                Customers c = custom.GetById(selection);
                 Console.WriteLine("Los datos del Cliente son: ");
+                Console.WriteLine($"Compania: {c.CompanyName}. " +
+                    $"Contacto: {c.CompanyName}. Region: {c.Region}.");
             }
-            catch (System.InvalidOperationException ex)
+            catch (System.InvalidOperationException)
             {
-                Console.WriteLine("El cliente no existe" + ex.Message);
-                //Console.WriteLine(ex.Message);
+                throw new System.InvalidOperationException();
             }
-
-            Console.ReadLine();
+ 
 
         }
     }

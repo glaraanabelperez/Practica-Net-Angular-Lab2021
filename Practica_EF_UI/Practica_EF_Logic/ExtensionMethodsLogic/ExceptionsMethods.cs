@@ -6,15 +6,9 @@ using System.Threading.Tasks;
 
 namespace Practica_EF_Logic.ExtensionMethodsLogic
 {
-    public static class InteractionUserHelpers
+    public static class ExceptionMethods
     {
-        public static string InsertCodigoString()
-        {
-            Console.WriteLine(" \n INGRESE EL CODIGO A BUSCAR");
-            String entrada = Console.ReadLine();
-            return ValidationNull(entrada);
-        }
-        public static string ValidationNull(this String entrie)
+        public static string ThrowingNulReference(this String entrie)
         {
             if (String.IsNullOrEmpty(entrie))
             {

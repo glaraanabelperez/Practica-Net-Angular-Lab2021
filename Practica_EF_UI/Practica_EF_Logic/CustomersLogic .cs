@@ -9,23 +9,27 @@ namespace Practica_EF_Logic
 {
     public class CustomersLogic : BaseLogic
     {
-        public List<Customers> GetAllCustomers()
+        public List<Customers> GetAll()
         {
             return context.Customers.ToList();
         }
-        public Customers GetDatesCustomer(string codigo)
+        public Customers GetById(string codigo)
         {
             Customers cust = null;
             try
             {
               cust= (from c in context.Customers
-                 where c.CustomerID.Equals(codigo)
-                 select c).Single();
-                return cust;
+                where c.CustomerID.Equals(codigo)
+                select c).Single();
+                    return cust;
             }
             catch (System.InvalidOperationException)
             {
                 throw new System.InvalidOperationException();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception();
             }
 
         }

@@ -7,12 +7,13 @@ using Practica_EF_Entities;
 
 namespace Practica_EF_Logic
 {
-    public class OrdersLogic : BaseLogic
+    interface IABMLogic<T>
     {
-        public List<Orders> GetAllOrders()
-        {
-            return context.Orders.ToList();
-        }
- 
+        string Delete(int id);
+        List<T> GetAll();
+        void GetByCodigo(string id);
+        void GetById(int id);
+        string Update(T id);
+
     }
 }

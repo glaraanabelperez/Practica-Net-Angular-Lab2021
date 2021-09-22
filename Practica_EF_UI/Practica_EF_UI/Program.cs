@@ -13,45 +13,65 @@ namespace Practica_EF_UI
     {
         static void Main(string[] args)
         {
-            string entrie=InteractionUserHelpers.Menu();
-            switch (entrie)
+            string typOperation;
+            typOperation=CallMenu();
+
+            do
             {
-                case "Orders":
-                    ListOperations();
-                    string selection;
+                typOperation = InitOperation(typOperation);
+
+            } while (!typOperation.Equals("INICIO"));
+
+            Console.ReadLine();
+
+        }
+
+        public static string InitOperation(string typOperation)
+        {
+            string changeOperation = "no";
+
+            switch (typOperation)
+            {
+                case "ORDERS":
+                    ListOrders();
+                    Console.WriteLine(" \n QUIERE ACCEDER AL CLIENTE D ELA ORDEN?");
+                    changeOperation = InteractionUserHelpers.Continuar();
+
+                    if (changeOperation.Equals("si"))
+                    {
+                        return "CUSTOMERS";
+                    }
+                    else
+                    {
+                        return "INICIO";
+                    }
+
+                case "ORDER_DETAILS":
+                    OrderDetailsLogic ordersLogic = new OrderDetailsLogic();
+                    ListOrdersDetails(ordersLogic);
+                    break;
+
+                case "CUSTOMERS":
+                    CustomersLogic customerLogic = new CustomersLogic();
+                    string selectionIdCustomers;
+                    Console.WriteLine("BIENVENIDOS A CUSTOMERS");
+                    Console.WriteLine("INGRESE CODIGO A BUSCAR DE LOS INDICADOS ANTERIORMENTE");
                     try
                     {
-                        selection = InteractionUserHelpers.SelectionID();
-                        Console.WriteLine($"CODIGO SELECCIONADO: {selection}");
-                        try
-                        {
-                            GetCustomerById(selection);
-                        }
-                        catch (System.InvalidOperationException)
-                        {
-                            Console.WriteLine($"El cliente no existe");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine($"Ops algo salio mal!");
-                        }
+                      selectionIdCustomers = InteractionUserHelpers.InsertDates();
+                      Console.WriteLine($"\n CODIGO SELECCIONADO: {selectionIdCustomers}");
+                      GetCustomerById(customerLogic, selectionIdCustomers);
+                      UpdateCustomerById(customerLogic, selectionIdCustomers);
                     }
                     catch (NullReferenceException)
                     {
-                        Console.WriteLine("Debe Ingresar una opcion para poder operar o salir del sistema");
+                        Console.WriteLine("NO AH INHGRESADO NINGUN DATO");
                     }
+                 return "INICIO"; 
 
-                    break;
-
-                case "Order_Details":
-                    Console.WriteLine($"Measured value is  too high.");
-                    break;
-
-                case "Customers":
-                    Console.WriteLine($"Measured value is too high.");
-                    break;
-
-                case "Shippers":
+                case "SHIPPERS":
+                    ShippersLogic shipperLogic = new ShippersLogic();
+                    Delete_Shipper(shipperLogic, id);
                     Console.WriteLine("Failed measurement.");
                     break;
 
@@ -59,34 +79,67 @@ namespace Practica_EF_UI
                     Console.WriteLine($"Measured value is .");
                     break;
             }
+            return "INICIO";
+        }
+        public static string CallMenu()
+        {
+            string typOperation = null;
+            do
+            {
+                typOperation = InteractionUserHelpers.Menu();
+            } while (String.IsNullOrEmpty(typOperation));
 
- 
-            Console.ReadLine();
-
+            return typOperation;
         }
 
-        public static void ListOperations()
+        public static void ListOrders()
         {
             OrdersLogic ordersLogic = new OrdersLogic();
 
             Console.WriteLine($"Ordenes Disponibles:");
             foreach (Orders ord in ordersLogic.GetAllOrders())
             {
-                Console.WriteLine(ord.ToString());
-                
-                //Console.WriteLine($"Orden:");
-                //Console.WriteLine($"Numero_orden: {ord.OrderID}.");
-                //Console.WriteLine($"Compania: {ord.Customers.CompanyName}.");
-                //Console.WriteLine($"IdCustomer: {ord.Customers.CustomerID}.");
+                Console.WriteLine($"Orden:");
+                Console.WriteLine($"Numero_orden: {ord.OrderID}.");
+                Console.WriteLine($"Compania: {ord.Customers.CompanyName}.");
+                Console.WriteLine($"IdCustomer: {ord.Customers.CustomerID}.");
+            }
+        }
+        public static void ListOrdersDetails(OrderDetailsLogic ordersLogic)
+        {
+            Console.WriteLine($"DETALLE ORDEN:");
+            foreach (Order_Details ord in ordersLogic.GetAll())
+            {
+                Console.WriteLine($"Id Detalle: {ord.OrderID}.");
+                Console.WriteLine($"Precio unidad: {ord.UnitPrice}.");
+            }
+        }
+        public static void Delete_Shipper(ShippersLogic shipperLogic, int id)
+        {
+            string message;
+            try
+            {
+                message= shipperLogic.Delete(id);
+            }
+            catch (NotSupportedException)
+            {
+                Console.WriteLine("HUBO UN PROBLEMA CON LA CONSULTA.");
+            }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("EL TRANSPORTISTA NO SE HA ENCONTRADO.");
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("EL TRANSPORTISTA NO SE PUEDE EDITAR.");
 
             }
         }
-        public  static void  GetCustomerById(string selection) {
-
-            CustomersLogic custom = new CustomersLogic();
+        public static void  GetCustomerById(CustomersLogic custom, string selection) {
             try
             {
-                Customers c = custom.GetById(selection);
+                custom.GetByCodigo(selection);
+                Customers c = custom.customer;
                 Console.WriteLine("Los datos del Cliente son: ");
                 Console.WriteLine($"Compania: {c.CompanyName}. " +
                     $"Contacto: {c.CompanyName}. Region: {c.Region}.");
@@ -95,8 +148,64 @@ namespace Practica_EF_UI
             {
                 throw new System.InvalidOperationException();
             }
- 
+        }
+        public static void UpdateCustomerById(CustomersLogic customerLogic, string selectionIdCustomers)
+        {
+            try
+            {
+                //GetCustomerById(customerLogic, selectionIdCustomers);
+                Console.WriteLine("\n QUIERE  EDITAR EL NOMBRE DEL CONTACTO DEL CLIENTES?");
+                //exception en if???
+                if (InteractionUserHelpers.Continuar().Equals("si"))
+                {
+                    string newDate = null;
+                    do
+                    {
+                        Console.WriteLine("INGRESE UN NUEVO NOMBRE DE CONTACTO");
+                        try
+                        {
+                            newDate = InteractionUserHelpers.InsertDates();
+                        }
+                        catch (System.InvalidOperationException)
+                        {
+                            Console.WriteLine($"LOS DATOS NO PUEDE QUEDAR VACIOS");
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine($"OPS ALGO AH SALIDO MAL!");
+                        }
+                    } while (newDate == null);
 
+                    try
+                    {
+                        Customers customers = new Customers();
+                        customers.ContactName = newDate;
+                        customerLogic.Update(customers);
+                    }
+                    catch (NotSupportedException)
+                    {
+                        Console.WriteLine("HUBO UN PROBLEMA CON LA CONSULTA.");
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        Console.WriteLine("EL CUSTOMER NO SE HA ENCONTRADO.");
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        Console.WriteLine("EL CUSTOMER NO SE PUEDE EDITAR.");
+
+                    }
+                    GetCustomerById(customerLogic, selectionIdCustomers);
+                }
+            }
+            catch (System.InvalidOperationException)
+            {
+                Console.WriteLine($"LOS DATOS NO PUEDEN SER NULOS!");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"OPS ALGO AH SALIDO MAL!");
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,6 @@ namespace Practica_EF_Logic
     {
         public void Delete(int id)
         {
-            string message;
             var shiper_delete = context.Shippers.Find(id);
             context.Shippers.Remove(shiper_delete);
             try
@@ -29,7 +29,10 @@ namespace Practica_EF_Logic
             catch (InvalidOperationException)
             {
                 throw new InvalidOperationException();
-
+            }
+            catch (Exception)
+            {
+                throw new Exception();
             }
         }
         public List<Shippers> GetAll()

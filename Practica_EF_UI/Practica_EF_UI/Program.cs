@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Practica_EF_Entities;
 using Practica_EF_Logic;
-using Practica_EF_Logic.ExtensionMethodsLogic;
+using Practica_EF_UI.ExtensionMethodsLogic;
 
 namespace Practica_EF_UI
 {
@@ -13,16 +14,19 @@ namespace Practica_EF_UI
     {
         static void Main(string[] args)
         {
-            string typOperation;
-            typOperation=CallMenu();
-
+            string typOperation="";
             do
             {
+                if (typOperation.Equals("MENU") || typOperation=="")
+                {
+                    typOperation = HelpersProgramLogic.CallMenu();
+                    typOperation=typOperation.ToUpper();
+                }
                 typOperation = InitOperation(typOperation);
 
-            } while (!typOperation.Equals("INICIO"));
+            } while (!typOperation.Equals("FIN"));
 
-            Console.ReadLine();
+            Console.WriteLine("HASTA LUEGO!!");
 
         }
 
@@ -33,226 +37,128 @@ namespace Practica_EF_UI
             switch (typOperation)
             {
                 case "ORDERS":
-                    ListOrders();
+                    Console.WriteLine(" \n ORDERS");
+                    HelpersProgramLogic.ListOrders();
                     Console.WriteLine(" \n QUIERE ACCEDER AL CLIENTE DE LA ORDEN?");
                     changeOperation = InteractionUserHelpers.Continuar();
-
-                    if (changeOperation.Equals("si"))
+                    changeOperation = changeOperation.ToUpper();
+                    if (changeOperation.Equals("SI"))
                     {
                         return "CUSTOMERS";
                     }
                     else
                     {
-                        return "INICIO";
+                        Console.WriteLine(" \nESTA INGRESANDO DATOS INVALIDOS");
+                        return "MENU";
                     }
 
                 case "ORDER_DETAILS":
+                    Console.WriteLine(" \n ORDER_DETAILS");
                     OrderDetailsLogic ordersLogic = new OrderDetailsLogic();
-                    ListOrdersDetails(ordersLogic);
+                    ordersLogic.ListOrdersDetails();
                     break;
 
                 case "CUSTOMERS":
                     CustomersLogic customerLogic = new CustomersLogic();
-                    string selectionIdCustomers;
-                    Console.WriteLine("BIENVENIDOS A CUSTOMERS");
-                    Console.WriteLine("INGRESE CODIGO A BUSCAR DE LOS INDICADOS ANTERIORMENTE");
-                    try
+                    string selectionIdCustomers = null;
+                    Console.WriteLine(" \n CUSTOMERS");
+                    HelpersProgramLogic.ListCustomers();
+                    Console.WriteLine(" \n INGRESE CODIGO A BUSCAR DE LOS INDICADOS ANTERIORMENTE");
+                    do
                     {
                         selectionIdCustomers = InteractionUserHelpers.InsertDates();
-                        Console.WriteLine($"\n CODIGO SELECCIONADO: {selectionIdCustomers}");
-                        GetCustomerById(customerLogic, selectionIdCustomers);
-                        UpdateCustomerById(customerLogic, selectionIdCustomers);
-                    }
-                    catch (NullReferenceException)
-                    {
-                        Console.WriteLine("NO AH INHGRESADO NINGUN DATO");
-                    }
-                    return "INICIO";
+                        changeOperation = changeOperation.ToUpper();
+                        Console.WriteLine($" \nCODIGO SELECCIONADO: {selectionIdCustomers}");
+                        try
+                        {
+                            customerLogic.GetCustomerById(selectionIdCustomers);
+                            customerLogic.UpdateCustomerById(selectionIdCustomers);
+                            try
+                            {
+                                customerLogic.GetCustomerById(selectionIdCustomers);
+                            }
+                            catch (System.InvalidOperationException)
+                            {
+                                Console.WriteLine(" \n NO SE ENCONTRO EL CLIENTE");
+                                selectionIdCustomers = null;
+                            }
+                        }
+                        catch (System.InvalidOperationException)
+                        {
+                            Console.WriteLine(" \n EL CODIGO ES INCORRECTO");
+                            selectionIdCustomers = null;
+                        }
+                    } while (selectionIdCustomers == null);
+
+                    return "MENU";
 
                 case "SHIPPERS":
+                    Console.WriteLine(" \n SHIPPERS");
                     ShippersLogic shipperLo = new ShippersLogic();
-                    shipperLo.GetAll();
+                    HelpersProgramLogic.ListShippers();
 
-                    Console.WriteLine("Seleccione numero del iD_Shipper para eliminar o ingrese nuevo numero en cado de Agregar in Transporte");
-                    int idShipper;
-                    try
+                    Console.WriteLine(" \n DESEA ELIMINAR (E) o INSERTAR (I) UN TRANSPORTE?");
+                    string selection = InteractionUserHelpers.InsertDates();
+                    selection = selection.ToUpper();
+                    if (selection.Equals("E"))
                     {
-                        idShipper = InteractionUserHelpers.InsertNumber();
-                        Console.WriteLine("Desea Eliminar (e) o Insertar (i) un Transporte?");
-                        string selection = InteractionUserHelpers.InsertDates();
-                        if (selection.Equals("e"))
+                        Console.WriteLine(" \n SELECCIONE UN ID DEL TRANSPORTE A ELIMINAR");
+                        int idShipper = InteractionUserHelpers.InsertNumber();
+                        try
                         {
-                            Delete_Shipper(shipperLo, idShipper);
-                            shipperLo.GetAll();
+                            shipperLo.Delete_Shipper(idShipper);
                         }
-                        if (selection.Equals("i"))
+                        catch (NotSupportedException)
                         {
-                            Insert_Shipper(shipperLo, idShipper);
-                            shipperLo.GetAll();
+                            Console.WriteLine("ERROR AL ELIMINAR");
                         }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("NO SE ENCUENTRA EL TRANDPORTE");
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            Console.WriteLine("ERROR AL ELIMINAR");
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("POSIBLEMENTE EL TRANSPORTE ESTA VINCULADO CON OTRAS EMPRESAS");
+                        }
+                    }
+                    if (selection.Equals("I"))
+                     {
+                        try
+                        {
+                            shipperLo.Insert_Shipper();
+                        }
+                        catch (NotSupportedException)
+                        {
+                            Console.WriteLine("ERROR AL INSERTAR");
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            Console.WriteLine("NO ES POSIBLE INSERTAR LOS DATOS");
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            Console.WriteLine("ERROR AL INSERTAR");
 
-                        break;
+                        }
                     }
-                    catch (FormatException)
-                    {
-                        Console.WriteLine("No ha podido realizar la operacion");
-                    }
-                    return "INICIO";
+
+                    HelpersProgramLogic.ListShippers();
+                    return "MENU";
+
+                case "SALIR":
+                    return "FIN";
 
                 default:
                     Console.WriteLine($"INGRESE UNA OPCION");
                     break;
             }
-            return "INICIO";
+            return "MENU";
         }
-        public static string CallMenu()
-        {
-            string typOperation = null;
-            do
-            {
-                typOperation = InteractionUserHelpers.Menu();
-            } while (String.IsNullOrEmpty(typOperation));
 
-            return typOperation;
-        }
-        public static void ListOrders()
-        {
-            OrdersLogic ordersLogic = new OrdersLogic();
-
-            Console.WriteLine($"Ordenes Disponibles:");
-            foreach (Orders ord in ordersLogic.GetAll())
-            {
-                Console.WriteLine($"Orden:");
-                Console.WriteLine($"Numero_orden: {ord.OrderID}.");
-                Console.WriteLine($"Compania: {ord.Customers.CompanyName}.");
-                Console.WriteLine($"IdCustomer: {ord.Customers.CustomerID}.");
-            }
-        }
-        public static void ListOrdersDetails(OrderDetailsLogic ordersLogic)
-        {
-            Console.WriteLine($"DETALLE ORDEN:");
-            foreach (Order_Details ord in ordersLogic.GetAll())
-            {
-                Console.WriteLine($"Id Detalle: {ord.OrderID}.");
-                Console.WriteLine($"Precio unidad: {ord.UnitPrice}.");
-            }
-        }
-        public static void Delete_Shipper(ShippersLogic shipperLogic, int id)
-        {
-            try
-            {
-                shipperLogic.Delete(id);
-                Console.WriteLine("Transportista Eliminado");
-            }
-            catch (NotSupportedException)
-            {
-                Console.WriteLine("HUBO UN PROBLEMA CON LA CONSULTA.");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("EL TRANSPORTISTA NO SE HA ENCONTRADO.");
-            }
-            catch (InvalidOperationException)
-            {
-                Console.WriteLine("EL TRANSPORTISTA NO SE PUEDE EDITAR.");
-
-            }
-        }
-        public static void Insert_Shipper(ShippersLogic shipperLogic, int id)
-        {
-           
-            try
-            {
-                Shippers newShip = new Shippers();
-                newShip.CompanyName = "Mercadores";
-                newShip.ShipperID = id;
-                shipperLogic.Insert(newShip);
-                Console.WriteLine("Shiper INsertado");
-            }
-            catch (NotSupportedException)
-            {
-                Console.WriteLine("HUBO UN PROBLEMA CON LA CONSULTA.");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("EL TRANSPORTISTA NO SE HA ENCONTRADO.");
-            }
-            catch (InvalidOperationException)
-            {
-                Console.WriteLine("EL TRANSPORTISTA NO SE PUEDE EDITAR.");
-
-            }
-        }
-        public static void GetCustomerById(CustomersLogic custom, string selection) {
-            try
-            {
-                custom.GetByCodigo(selection);
-                Customers c = custom.customer;
-                Console.WriteLine("Los datos del Cliente son: ");
-                Console.WriteLine($"Compania: {c.CompanyName}. " +
-                    $"Contacto: {c.CompanyName}. Region: {c.Region}.");
-            }
-            catch (System.InvalidOperationException)
-            {
-                throw new System.InvalidOperationException();
-            }
-        }
-        public static void UpdateCustomerById(CustomersLogic customerLogic, string selectionIdCustomers)
-        {
-            try
-            {
-                Console.WriteLine("\n QUIERE  EDITAR EL NOMBRE DEL CONTACTO DEL CLIENTES?");
-                if (InteractionUserHelpers.Continuar().Equals("si"))
-                {
-                    string newDate = null;
-                    do
-                    {
-                        Console.WriteLine("INGRESE UN NUEVO NOMBRE DE CONTACTO");
-                        try
-                        {
-                            newDate = InteractionUserHelpers.InsertDates();
-                        }
-                        catch (System.InvalidOperationException)
-                        {
-                            Console.WriteLine($"LOS DATOS NO PUEDE QUEDAR VACIOS");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine($"OPS ALGO AH SALIDO MAL!");
-                        }
-                    } while (newDate == null);
-
-                    try
-                    {
-                        Customers customers = new Customers();
-                        customers.ContactName = newDate;
-                        customerLogic.Update(customers);
-                    }
-                    catch (NotSupportedException)
-                    {
-                        Console.WriteLine("HUBO UN PROBLEMA CON LA CONSULTA.");
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        Console.WriteLine("EL CUSTOMER NO SE HA ENCONTRADO.");
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        Console.WriteLine("EL CUSTOMER NO SE PUEDE EDITAR.");
-
-                    }
-                    GetCustomerById(customerLogic, selectionIdCustomers);
-                }
-            }
-            catch (System.InvalidOperationException)
-            {
-                Console.WriteLine($"LOS DATOS NO PUEDEN SER NULOS!");
-            }
-            catch (Exception)
-            {
-                Console.WriteLine($"OPS ALGO AH SALIDO MAL!");
-            }
-        }
     }
 }
 

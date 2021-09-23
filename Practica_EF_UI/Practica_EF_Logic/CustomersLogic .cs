@@ -49,7 +49,8 @@ namespace Practica_EF_Logic
         public string Update(Customers c)
         {
             var customerUpdate = context.Customers.Find(customer.CustomerID);
-            customerUpdate.ContactName = customer.ContactName;
+            customerUpdate.ContactName = c.ContactName;
+
             string message;
             try
             {

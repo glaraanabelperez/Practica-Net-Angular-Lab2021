@@ -1,29 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Practica_EF_Logic.ExtensionMethodsLogic;
 
-namespace Practica_EF_Logic.ExtensionMethodsLogic
+
+namespace Practica_EF_UI.ExtensionMethodsLogic
 {
     public static class InteractionUserHelpers
     {
         public static string Menu()  
         {
            String operation;
-           Console.WriteLine("Buen dia!");
-           Console.WriteLine("INGRESA LA LETRA DE LA ENTIDAD CON LA CUAL TRABAJAR:" +
-               " \n  ORDENES ('or'), \n  ORDENES DETALLE('od'), \n  CLIENTES ('c'), \n  ENVIOS('e'),\n  SALIR ('s') ");
+           Console.WriteLine(" \nBuen dia!");
+           Console.WriteLine(" \nINGRESA LA LETRA DE LA ENTIDAD CON LA CUAL TRABAJAR:" +
+               " \n  ORDENES ('OR'), \n  ORDENES DETALLE('OD'), \n  CLIENTES ('CU'), \n  ENVIOS('SH'),\n  SALIR ('S') ");
            operation = Console.ReadLine();
-           operation = operation.Equals("or") ? "ORDERS" : operation.Equals("od") ? "ORDER_DETAILS"
-                : operation.Equals("c") ? "CUSTOMERS"
-                : operation.Equals("e") ? "SHIPPERS"
-                : operation.Equals("s") ? "s"
+            operation = operation.ToUpper();
+           operation = operation.Equals("OR") ? "ORDERS" : operation.Equals("OD") ? "ORDER_DETAILS"
+                : operation.Equals("CU") ? "CUSTOMERS"
+                : operation.Equals("SH") ? "SHIPPERS"
+                : operation.Equals("S") ? "SALIR"
                 : null;
             return operation;
         }
- 
         public static string Continuar()
         {
             String entrie;
@@ -31,14 +27,20 @@ namespace Practica_EF_Logic.ExtensionMethodsLogic
             {
                 Console.WriteLine("\n DESEA CONITNUAR? (si/no)");
                 entrie = Console.ReadLine();
-            } while (String.IsNullOrEmpty(entrie) );
+            } while (String.IsNullOrEmpty(entrie));
+
             return entrie;
         }
         public static string InsertDates()
         {
-            Console.WriteLine(" \n INGRESE EL DATO");
-            String entrada = Console.ReadLine();
-            return entrada.ThrowingNulReference();
+            String entrie;
+            do
+            {
+                Console.WriteLine(" \n INGRESE EL DATO");
+                entrie = Console.ReadLine().ToUpper();
+            } while (String.IsNullOrEmpty(entrie));
+
+            return entrie;
         }
         public static int InsertNumber()
         {

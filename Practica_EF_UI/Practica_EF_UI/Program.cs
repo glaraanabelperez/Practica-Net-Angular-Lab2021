@@ -108,6 +108,10 @@ namespace Practica_EF_UI
                         {
                             shipperLo.Delete_Shipper(idShipper);
                         }
+                        catch (DbUpdateException)
+                        {
+                            Console.WriteLine("EL TRANSPORTE ESTA VINCULADO CON OTRAS EMPRESAS");
+                        }
                         catch (NotSupportedException)
                         {
                             Console.WriteLine("ERROR AL ELIMINAR");
@@ -119,10 +123,7 @@ namespace Practica_EF_UI
                         catch (InvalidOperationException)
                         {
                             Console.WriteLine("ERROR AL ELIMINAR");
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("POSIBLEMENTE EL TRANSPORTE ESTA VINCULADO CON OTRAS EMPRESAS");
+
                         }
                     }
                     if (selection.Equals("I"))

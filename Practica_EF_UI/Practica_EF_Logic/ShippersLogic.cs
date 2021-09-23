@@ -18,6 +18,10 @@ namespace Practica_EF_Logic
             {
                 context.SaveChanges();
             }
+            catch (DbUpdateException)
+            {
+                throw new DbUpdateException();
+            }
             catch (NotSupportedException)
             {
                 throw new NotSupportedException();
@@ -29,10 +33,7 @@ namespace Practica_EF_Logic
             catch (InvalidOperationException)
             {
                 throw new InvalidOperationException();
-            }
-            catch (Exception)
-            {
-                throw new Exception();
+
             }
         }
         public List<Shippers> GetAll()

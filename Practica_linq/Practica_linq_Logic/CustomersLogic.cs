@@ -14,7 +14,7 @@ namespace Practica_linq_Logic
 
         public void Set_customCustomer_Acording_Name()
         {
-            customCustomer = context.Customers.First(custom => custom.CompanyName.Contains("s"));
+            CustomCustomer = context.Customers.First(custom => custom.CompanyName.Contains("s"));
         }
 
         public void Set_Customers_Dto_By_Region(String s)
@@ -73,11 +73,20 @@ namespace Practica_linq_Logic
 
         public  String Get_customCustomer_TO_String()
         {
-            String objectString =
-                           " \n Nombre de la Compania: " + customCustomer.CompanyName +
-                           " \n Nombre Contacto: " + customCustomer.ContactName +
-                           " \n Adress: " + customCustomer.Address +
-                           " \n Region: " + customCustomer.Region;
+            String objectString=null;
+            if (CustomCustomer != null) {
+
+                objectString =
+                           " \n Nombre de la Compania: " + CustomCustomer.CompanyName +
+                           " \n Nombre Contacto: " + CustomCustomer.ContactName +
+                           " \n Adress: " + CustomCustomer.Address +
+                           " \n Region: " + CustomCustomer.Region;
+
+            }
+            else
+            {
+                Console.WriteLine("No se encontro el cliente");
+            }
 
             return objectString;
         }
@@ -86,7 +95,8 @@ namespace Practica_linq_Logic
         {
 
             String rstaString = null;
-            if (rstaString == null)
+
+            if (Customers_Dto!=null)
             {
                 foreach (var c in Customers_Dto)
                 {
@@ -106,7 +116,7 @@ namespace Practica_linq_Logic
         public string Get_List_TO_ToString(List<String> customName)
         {
             String rstaString = null;
-            if (rstaString == null)
+            if (customName != null)
             {
                 foreach (var item in customName)
                 {

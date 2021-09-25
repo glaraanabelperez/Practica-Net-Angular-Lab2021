@@ -10,7 +10,7 @@ namespace Practica_linq_Logic.Dto_Logic
     public class CustomersDto : BaseLogic
     {
 
-        public Customers customCustomer { get; set; }
+        public Customers CustomCustomer { get; set; }
 
         public string CustomerID { get; set; }
 

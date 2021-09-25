@@ -7,7 +7,7 @@ using System.Data.Entity.Spatial;
 namespace Practica_linq_Entities
 {
 
-    public partial class Customers :BaseEntities
+    public partial class Customers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customers()

@@ -57,9 +57,12 @@
     <Compile Include="Dto_Logic\OrdersDto.cs" />
     <Compile Include="Dto_Logic\CustomersDto.cs" />
     <Compile Include="Dto_Logic\OrderDetailsDto.cs" />
+    <Compile Include="Helperes_Logic\Helpers_Logic.cs" />
     <Compile Include="IABMLogic.cs" />
+    <Compile Include="IABMLogic1.cs" />
     <Compile Include="OrdersLogic.cs" />
     <Compile Include="Order_DetailsLogic.cs" />
+    <Compile Include="Dto_Logic\ProductsDto.cs" />
     <Compile Include="ProductsLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />

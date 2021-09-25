@@ -5,21 +5,22 @@ using Practica_linq_Entities;
 
 namespace Practica_linq_Logic
 {
-    public partial class ProductsLogic : BaseLogic, IABMLogic<Products>
+    public partial class ProductsLogic : ProductsDto
     {
-        public Products product { get; set; }
-        public IEnumerable<Products>  products { get; set; }
+        //public Products product { get; set; }
+        public IEnumerable<Products> products { get; set; }
+        public IEnumerable<ProductsDto> productsDto { get; set; }
 
 
-        public void Set_Object_Acording_Stock(int x)
+        public void Set_Product_By_Stock(int x)
         {
-            product = context.Products.First(p => p.UnitsInStock == x);
+            Product = context.Products.First(p => p.UnitsInStock == x);
         }
-        public void Set_Object_Acording_Id(int x)
+        public void Set_Product_By_Id(int x)
         {
             try
             {
-                product = context.Products.First(p => p.ProductID == x);
+                Product = context.Products.First(p => p.ProductID == x);
             }
             catch (ArgumentNullException ex)
             {
@@ -32,14 +33,19 @@ namespace Practica_linq_Logic
         }
         public void Set_All_Acording_Price_Stock(decimal x)
         {
-            products = context.Products
-            .Where(p => p.UnitsInStock!=0 && p.UnitPrice>x);
+            productsDto = context.Products
+            .Where(p => p.UnitsInStock!=0 && p.UnitPrice>x)
+            .Select( p => new ProductsDto { 
+                ProductName=p.ProductName,
+                UnitPrice=p.UnitPrice,
+                UnitsInStock=p.UnitsInStock
+            });
         }
         public void Set_All_Acording_Unit_Stock(int x)
         {
             products = context.Products.Where(p => p.UnitsInStock == 0);
         }
-        public String Get_IEnumerable_String(IEnumerable<Products> customers)
+        public String Get_ProductsDto_ToString(IEnumerable<ProductsDto> customers)
         {
             //
             String rstaString=null;
@@ -58,12 +64,14 @@ namespace Practica_linq_Logic
             
             return rstaString;
         }
-        public string Get_T_String(Products obj)
+
+        public string Get_T_TO_String()
         {
             String rstaString;
-            if (product != null)
+
+            if (Product != null)
             {
-                rstaString = $" \n Nombre del Producto: {obj.ProductName} \n Nombre Contacto: {obj.ProductID }";
+                rstaString = $" \n Nombre del Producto: {Product.ProductName} \n Nombre Contacto: {Product.ProductID }";
             }
             else
             {
@@ -71,10 +79,10 @@ namespace Practica_linq_Logic
             }
             return rstaString;
         }
-        public void Set_All_Acording_Region(string s)
+
+        public string Get_IEnumerable_TO_String(IEnumerable<Products> t)
         {
             throw new NotImplementedException();
         }
-
     }
 }

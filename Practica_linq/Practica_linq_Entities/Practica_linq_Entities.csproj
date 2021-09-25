@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseEntities.cs" />
     <Compile Include="Categories.cs" />
     <Compile Include="Customers.cs" />
     <Compile Include="Employees.cs" />

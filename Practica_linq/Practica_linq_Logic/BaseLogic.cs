@@ -8,16 +8,17 @@ using Practica_linq_Data;
 
 namespace Practica_linq_Entities
 {
-    public class BaseLogic : BaseEntities
+    public  class BaseLogic 
     {
         protected readonly NorthwindContext context;
-        public BaseEntities ObjectResponse;
 
         public BaseLogic()
         {
             context = new NorthwindContext();
-        
         }
+
+        //public abstract string Get_T_TO_String();
+
 
     }
 }

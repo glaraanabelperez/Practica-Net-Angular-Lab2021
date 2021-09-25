@@ -30,7 +30,7 @@ namespace Practica_linq_Logic
                 throw new InvalidOperationException();
             }
         }
-        public void Set_All_AcordingToPriceAndStock(decimal x)
+        public void Set_All_Acording_Price_Stock(decimal x)
         {
             products = context.Products
             .Where(p => p.UnitsInStock!=0 && p.UnitPrice>x);
@@ -58,7 +58,7 @@ namespace Practica_linq_Logic
             
             return rstaString;
         }
-        public string Get_Object_String(Products obj)
+        public string Get_T_String(Products obj)
         {
             String rstaString;
             if (product != null)
@@ -75,5 +75,6 @@ namespace Practica_linq_Logic
         {
             throw new NotImplementedException();
         }
+
     }
 }

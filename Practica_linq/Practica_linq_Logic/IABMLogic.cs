@@ -15,7 +15,7 @@ namespace Practica_linq_Logic
 
         String Get_IEnumerable_String(IEnumerable<T> customers);
 
-        String Get_Object_String(T obj);
+        String Get_T_String(T obj);
 
     }
 }

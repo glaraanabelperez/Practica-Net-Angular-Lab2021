@@ -54,6 +54,9 @@
     <Compile Include="BaseLogic.cs" />
     <Compile Include="CategoriesLogic.cs" />
     <Compile Include="CustomersLogic.cs" />
+    <Compile Include="Dto_Logic\OrdersDto.cs" />
+    <Compile Include="Dto_Logic\CustomersDto.cs" />
+    <Compile Include="Dto_Logic\OrderDetailsDto.cs" />
     <Compile Include="IABMLogic.cs" />
     <Compile Include="OrdersLogic.cs" />
     <Compile Include="Order_DetailsLogic.cs" />

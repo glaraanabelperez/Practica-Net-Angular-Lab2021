@@ -7,15 +7,29 @@ namespace Practica_linq_Logic
 {
     public partial class ProductsLogic : ProductsDto
     {
-        //public Products product { get; set; }
-        public IEnumerable<Products> products { get; set; }
+      
         public IEnumerable<ProductsDto> productsDto { get; set; }
 
-
-        public void Set_Product_By_Stock(int x)
+        //Metodo solo para UNitest
+        public Products get_Product_By_Unit_Stock(int x)
         {
-            Product = context.Products.First(p => p.UnitsInStock == x);
+            Products pd = new Products();
+            try
+            {
+                pd = context.Products.First(p => p.UnitsInStock == x);
+                return pd;
+            }
+            catch(NullReferenceException)
+            {
+                Console.WriteLine("Sin coincidencias");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Sin coincidencias");
+            }
+            return pd;
         }
+
         public void Set_Product_By_Id(int x)
         {
             try
@@ -31,21 +45,36 @@ namespace Practica_linq_Logic
                 throw new InvalidOperationException();
             }
         }
-        public void Set_All_Acording_Price_Stock(decimal x)
+
+        public void Set_ProductsDto_By_Price_Stock(decimal precioMayorTres)
         {
+            short stockCero = 0;
             productsDto = context.Products
-            .Where(p => p.UnitsInStock!=0 && p.UnitPrice>x)
+            .Where(p => p.UnitsInStock > stockCero && p.UnitPrice> precioMayorTres)
             .Select( p => new ProductsDto { 
                 ProductName=p.ProductName,
+                ProductID=p.ProductID,
                 UnitPrice=p.UnitPrice,
                 UnitsInStock=p.UnitsInStock
             });
         }
-        public void Set_All_Acording_Unit_Stock(int x)
+
+        public void Set_ProductsDto_By_Unit_Stock(int x)
         {
-            products = context.Products.Where(p => p.UnitsInStock == 0);
+            productsDto = context.Products.
+                Where(p => p.UnitsInStock == x)
+                .Select(
+                    p => new ProductsDto
+                    {
+                        ProductName = p.ProductName,
+                        ProductID = p.ProductID,
+                        UnitPrice = p.UnitPrice,
+                        UnitsInStock = p.UnitsInStock
+                    }
+                );
         }
-        public String Get_ProductsDto_ToString(IEnumerable<ProductsDto> customers)
+
+        public String Get_ProductsDto_ToString(IEnumerable<ProductsDto> products)
         {
             //
             String rstaString=null;
@@ -54,7 +83,7 @@ namespace Practica_linq_Logic
                 foreach (var p in products)
                 {
                     rstaString += "\n";
-                    rstaString += $"\n Producto: { p.ProductName}\n Id_Categoria: {p.CategoryID}\n Precio: {p.UnitPrice}\n Stock: {p.UnitsInStock}";
+                    rstaString += $"\n Producto: { p.ProductName}\n Id_producto: {p.ProductID}\n Precio: {p.UnitPrice}\n Stock: {p.UnitsInStock}";
                 }
             }
             else
@@ -65,7 +94,7 @@ namespace Practica_linq_Logic
             return rstaString;
         }
 
-        public string Get_T_TO_String()
+        public string Get_Product_TO_String()
         {
             String rstaString;
 
@@ -80,9 +109,5 @@ namespace Practica_linq_Logic
             return rstaString;
         }
 
-        public string Get_IEnumerable_TO_String(IEnumerable<Products> t)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

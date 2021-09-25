@@ -10,8 +10,6 @@ namespace Practica_linq_Logic
 
     public partial class CustomersLogic : CustomersDto
     {
-        //public Customers custom { get; set; }
-        //public IEnumerable<Customers> customers { get; set; }
         public IEnumerable<CustomersDto> Customers_Dto { get; set; }
 
         public void Set_customCustomer_Acording_Name()
@@ -42,7 +40,7 @@ namespace Practica_linq_Logic
                                 CompanyName = cus.CompanyName,
                                 ContactName = cus.ContactName,
                                 Region = cus.Region,
-                                OrderDate = (DateTime)order.OrderDate
+                                OrderDate = order.OrderDate.ToString()
                             };
 
         }
@@ -61,7 +59,7 @@ namespace Practica_linq_Logic
             {
                 foreach (var c in Customers_Dto)
                 {
-                    rstaString += $"\n Producto: { c.CompanyName}\n Id_Categoria: {c.ContactName}\n Precio: {c.Region}";
+                    rstaString += $"\n Cliente: { c.CompanyName}\n Contacto: {c.ContactName}\n Region: {c.Region}";
                     rstaString += "\n";
                 }
             }
@@ -93,7 +91,7 @@ namespace Practica_linq_Logic
                 foreach (var c in Customers_Dto)
                 {
 
-                    rstaString += $"\n Nombre Compania: { c.CompanyName}\n Nombre Contacto: {c.ContactName}\n Region: {c.Region}\n Fecha Orden:{c.OrderDate} ";
+                    rstaString += $"\n Nombre Compania: { c.CompanyName}\n Nombre Contacto: {c.ContactName}\n Region: {c.Region}\n Fecha Orden:  {c.OrderDate} ";
                     rstaString += "\n";
                 }
             }

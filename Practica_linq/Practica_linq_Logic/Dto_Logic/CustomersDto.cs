@@ -26,7 +26,7 @@ namespace Practica_linq_Logic.Dto_Logic
 
         public string Region { get; set; }
 
-        public DateTime OrderDate { get; set; }
+        public String OrderDate { get; set; }
 
         //public override string Get_T_TO_String()
         //{

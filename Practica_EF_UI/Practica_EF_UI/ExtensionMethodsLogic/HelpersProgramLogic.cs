@@ -130,7 +130,6 @@ namespace Practica_EF_Logic
         }
         public static void UpdateCustomerById( this CustomersLogic customerLogic, string selectionIdCustomers)
         {
-
             Console.WriteLine("\n QUIERE  EDITAR EL NOMBRE DEL CONTACTO DEL CLIENTES?");
             String rsta = Practica_EF_UI.ExtensionMethodsLogic.InteractionUserHelpers.Continuar();
             rsta = rsta.ToUpper();

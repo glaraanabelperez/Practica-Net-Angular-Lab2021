@@ -10,15 +10,18 @@ namespace Practica_EF_Logic
     public class CustomersLogic : BaseLogic, IABMLogic<Customers>
     {
         public Customers customer { get; set; }
+
         public void Delete(int id)
         {
             throw new NotImplementedException();
         }
+
         public List<Customers> GetAll()
         {
             return context.Customers.ToList();
         }
-        public void GetByCodigo(string id)
+
+        public void GetById(string id)
         {
             try
             {
@@ -38,14 +41,17 @@ namespace Practica_EF_Logic
                 throw new Exception();
             }
         }
+
         public void GetById(int id)
         {
             throw new NotImplementedException();
         }
-        public void Insert(Shippers newShiper)
+
+        public void Insert(Customers newShiper)
         {
             throw new NotImplementedException();
         }
+
         public string Update(Customers c)
         {
             var customerUpdate = context.Customers.Find(customer.CustomerID);
@@ -63,6 +69,7 @@ namespace Practica_EF_Logic
             }
             catch (ObjectDisposedException)
             {
+                //deberia enviar el id
                 throw new ObjectDisposedException(customerUpdate.ContactName);
             }
             catch (InvalidOperationException)

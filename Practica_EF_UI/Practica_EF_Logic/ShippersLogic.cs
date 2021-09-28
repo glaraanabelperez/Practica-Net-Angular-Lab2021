@@ -28,7 +28,7 @@ namespace Practica_EF_Logic
             }
             catch (ObjectDisposedException)
             {
-                throw new ObjectDisposedException("Id: order_delete");
+                throw new ObjectDisposedException("Id: shipper_delete");
             }
             catch (InvalidOperationException)
             {
@@ -36,22 +36,27 @@ namespace Practica_EF_Logic
 
             }
         }
+
         public List<Shippers> GetAll()
         {
             return context.Shippers.ToList();
         }
-        public void GetByCodigo(string id)
+
+        public void GetById(string id)
         {
             throw new NotImplementedException();
         }
+
         public string Update(Shippers c)
         {
             throw new NotImplementedException();
         }
+
         public void GetById(int id)
         {
             var ship = context.Customers.Find(id);
         }
+
         public void Insert(Shippers newShiper)
         {
             context.Shippers.Add(newShiper);
@@ -65,7 +70,7 @@ namespace Practica_EF_Logic
             }
             catch (ObjectDisposedException)
             {
-                throw new ObjectDisposedException("Id: order_delete");
+                throw new ObjectDisposedException("Id: shipper_delete");
             }
             catch (InvalidOperationException)
             {

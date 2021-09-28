@@ -13,23 +13,28 @@ namespace Practica_EF_Logic
         {
             throw new NotImplementedException();
         }
+
         public List<Order_Details> GetAll()
         {
             return context.Order_Details.ToList();
         }
-        public void GetByCodigo(string id)
+
+        public void GetById(string id)
         {
             throw new NotImplementedException();
         }
+
         public void GetById(int id)
         {
             throw new NotImplementedException();
         }
+
         public string Update(Order_Details id)
         {
             throw new NotImplementedException();
         }
-        public void Insert(Shippers newShiper)
+
+        public void Insert(Order_Details newShiper)
         {
             throw new NotImplementedException();
         }

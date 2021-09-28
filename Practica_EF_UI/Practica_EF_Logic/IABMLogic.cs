@@ -10,10 +10,15 @@ namespace Practica_EF_Logic
     interface IABMLogic<T>
     {
         void Delete(int id);
+
         List<T> GetAll();
-        void GetByCodigo(string id);
+
+        void GetById(string id);
+
         void GetById(int id);
-        void Insert(Shippers newShiper);
+
+        void Insert(T newShiper);
+
         string Update(T c);
 
     }

@@ -9,7 +9,7 @@ using Practica_EF_UI.ExtensionMethodsLogic;
 namespace Practica_EF_Logic
 {
     //ExtensionMethos seria desde donde se escribe en program y de interactua con logic.
-    public static class  HelpersProgramLogic
+    public static class  HelpersProgram
     {
         public static string CallMenu()
         {
@@ -46,6 +46,7 @@ namespace Practica_EF_Logic
                 Console.WriteLine($"PHONE: {sh.Phone}.");
             }
         }
+
         public static void ListOrders()
         {
             OrdersLogic ordersLogic = new OrdersLogic();
@@ -58,15 +59,16 @@ namespace Practica_EF_Logic
             }
         }
 
-        public static void ListOrdersDetails( this OrderDetailsLogic ordersLogic)
-        {
-            foreach (Order_Details ord in ordersLogic.GetAll())
-            {
-                Console.WriteLine($"\n DETALLE ORDEN:");
-                Console.WriteLine($"ID_DETALLE: {ord.OrderID}.");
-                Console.WriteLine($"PRECIO UNIDAD: {ord.UnitPrice}.");
-            }
-        }
+        //public static void ListOrdersDetails( this OrderDetailsLogic ordersLogic)
+        //{
+        //    foreach (Order_Details ord in ordersLogic.GetAll())
+        //    {
+        //        Console.WriteLine($"\n DETALLE ORDEN:");
+        //        Console.WriteLine($"ID_DETALLE: {ord.OrderID}.");
+        //        Console.WriteLine($"PRECIO UNIDAD: {ord.UnitPrice}.");
+        //    }
+        //}
+
         public static void Delete_Shipper(this ShippersLogic shipperLogic, int id)
         {
             try
@@ -103,10 +105,6 @@ namespace Practica_EF_Logic
             {
                 throw new NotSupportedException();
             }
-            catch (ObjectDisposedException)
-            {
-                throw new ObjectDisposedException("Id: shipper_delete");
-            }
             catch (InvalidOperationException)
             {
                 throw new InvalidOperationException();
@@ -114,6 +112,7 @@ namespace Practica_EF_Logic
             }
 
         }
+
         public static void GetCustomerById(this CustomersLogic custom, string selection)
         {
             try
@@ -128,6 +127,7 @@ namespace Practica_EF_Logic
                 throw new System.InvalidOperationException();
             }
         }
+
         public static void UpdateCustomerById( this CustomersLogic customerLogic, string selectionIdCustomers)
         {
             Console.WriteLine("\n QUIERE  EDITAR EL NOMBRE DEL CONTACTO DEL CLIENTES?");
@@ -148,16 +148,16 @@ namespace Practica_EF_Logic
                 }
                 catch (NotSupportedException)
                 {
-                    Console.WriteLine("HUBO UN PROBLEMA CON LA CONSULTA.");
+                    throw new NotSupportedException();
                 }
                 catch (ObjectDisposedException)
                 {
-                    Console.WriteLine("EL CUSTOMER NO SE HA ENCONTRADO.");
+                    throw new ObjectDisposedException("algo?");
+
                 }
                 catch (InvalidOperationException)
                 {
-                    Console.WriteLine("EL CUSTOMER NO SE PUEDE EDITAR.");
-
+                    throw new InvalidOperationException();
                 }
             }
         }

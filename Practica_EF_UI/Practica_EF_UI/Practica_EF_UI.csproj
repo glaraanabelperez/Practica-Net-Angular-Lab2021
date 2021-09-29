@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionMethodsLogic\HelpersProgramLogic.cs" />
+    <Compile Include="ExtensionMethodsProgram\HelpersProgram.cs" />
     <Compile Include="InteractionUser\InteractionUserHelpers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

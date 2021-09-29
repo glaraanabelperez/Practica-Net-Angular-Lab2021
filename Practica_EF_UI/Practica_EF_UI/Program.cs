@@ -10,7 +10,7 @@ using Practica_EF_UI.ExtensionMethodsLogic;
 
 namespace Practica_EF_UI
 {
-    class Program
+    class Program 
     {
         static void Main(string[] args)
         {
@@ -19,7 +19,7 @@ namespace Practica_EF_UI
             {
                 if (typOperation.Equals("MENU") || typOperation=="")
                 {
-                    typOperation = HelpersProgramLogic.CallMenu();
+                    typOperation = HelpersProgram.CallMenu();
                     typOperation=typOperation.ToUpper();
                 }
                 typOperation = InitOperation(typOperation);
@@ -38,7 +38,7 @@ namespace Practica_EF_UI
             {
                 case "ORDERS":
                     Console.WriteLine(" \n ORDERS");
-                    HelpersProgramLogic.ListOrders();
+                    HelpersProgram.ListOrders();
                     Console.WriteLine(" \n QUIERE ACCEDER AL CLIENTE DE LA ORDEN?");
                     changeOperation = InteractionUserHelpers.Continuar();
                     changeOperation = changeOperation.ToUpper();
@@ -62,16 +62,16 @@ namespace Practica_EF_UI
                     CustomersLogic customerLogic = new CustomersLogic();
                     string selectionIdCustomers = null;
                     Console.WriteLine(" \n CUSTOMERS");
-                    HelpersProgramLogic.ListCustomers();
+                    HelpersProgram.ListCustomers();
                     Console.WriteLine(" \n INGRESE CODIGO A BUSCAR DE LOS INDICADOS ANTERIORMENTE");
                     do
                     {
                         selectionIdCustomers = InteractionUserHelpers.InsertDates();
                         changeOperation = changeOperation.ToUpper();
-                        Console.WriteLine($" \nCODIGO SELECCIONADO: {selectionIdCustomers}");
+                        Console.WriteLine($" \n CODIGO SELECCIONADO: {selectionIdCustomers}");
+
                         try
                         {
-                            customerLogic.GetCustomerById(selectionIdCustomers);
                             customerLogic.UpdateCustomerById(selectionIdCustomers);
                             try
                             {
@@ -83,23 +83,33 @@ namespace Practica_EF_UI
                                 selectionIdCustomers = null;
                             }
                         }
-                        catch (System.InvalidOperationException)
+                        catch (NotSupportedException)
                         {
-                            Console.WriteLine(" \n EL CODIGO ES INCORRECTO");
-                            selectionIdCustomers = null;
+                            Console.WriteLine("HUBO UN PROBLEMA CON LA CONSULTA.");
                         }
+                        catch (ObjectDisposedException ex)
+                        {
+                            Console.WriteLine("EL CUSTOMER NO SE HA ENCONTRADO." + ex.Message);
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            Console.WriteLine("EL CUSTOMER NO SE PUEDE EDITAR.");
+                        }
+
                     } while (selectionIdCustomers == null);
 
                     return "MENU";
 
                 case "SHIPPERS":
+
                     Console.WriteLine(" \n SHIPPERS");
                     ShippersLogic shipperLo = new ShippersLogic();
-                    HelpersProgramLogic.ListShippers();
+                    HelpersProgram.ListShippers();
 
                     Console.WriteLine(" \n DESEA ELIMINAR (E) o INSERTAR (I) UN TRANSPORTE?");
                     string selection = InteractionUserHelpers.InsertDates();
                     selection = selection.ToUpper();
+
                     if (selection.Equals("E"))
                     {
                         Console.WriteLine(" \n SELECCIONE UN ID DEL TRANSPORTE A ELIMINAR");
@@ -108,17 +118,13 @@ namespace Practica_EF_UI
                         {
                             shipperLo.Delete_Shipper(idShipper);
                         }
-                        catch (DbUpdateException)
-                        {
-                            Console.WriteLine("EL TRANSPORTE ESTA VINCULADO CON OTRAS EMPRESAS");
-                        }
                         catch (NotSupportedException)
                         {
                             Console.WriteLine("ERROR AL ELIMINAR");
                         }
                         catch (ObjectDisposedException)
                         {
-                            Console.WriteLine("NO SE ENCUENTRA EL TRANDPORTE");
+                            Console.WriteLine("NO SE PUEDE ELIMINAR, ESTA SIENDO USADA LA INFORMACION DEL MISMO");
                         }
                         catch (InvalidOperationException)
                         {
@@ -126,6 +132,7 @@ namespace Practica_EF_UI
 
                         }
                     }
+
                     if (selection.Equals("I"))
                      {
                         try
@@ -136,18 +143,14 @@ namespace Practica_EF_UI
                         {
                             Console.WriteLine("ERROR AL INSERTAR");
                         }
-                        catch (ObjectDisposedException)
-                        {
-                            Console.WriteLine("NO ES POSIBLE INSERTAR LOS DATOS");
-                        }
                         catch (InvalidOperationException)
                         {
                             Console.WriteLine("ERROR AL INSERTAR");
 
                         }
                     }
+                    HelpersProgram.ListShippers();
 
-                    HelpersProgramLogic.ListShippers();
                     return "MENU";
 
                 case "SALIR":

@@ -10,17 +10,17 @@ namespace Practica_EF_Logic
 {
     public class ShippersLogic : BaseLogic, IABMLogic<Shippers>
     {
-        public void Delete(int id)
+        Shippers ship;
+
+        public string Delete(Shippers ship)
         {
-            var shiper_delete = context.Shippers.Find(id);
+            var shiper_delete = context.Shippers.Find(ship.ShipperID);
             context.Shippers.Remove(shiper_delete);
+
             try
             {
                 context.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                throw new DbUpdateException();
+                return "OK";
             }
             catch (NotSupportedException)
             {
@@ -28,12 +28,11 @@ namespace Practica_EF_Logic
             }
             catch (ObjectDisposedException)
             {
-                throw new ObjectDisposedException("Id: shipper_delete");
+                throw new ObjectDisposedException("El Transporte no existe en la Base de Datos");
             }
             catch (InvalidOperationException)
             {
                 throw new InvalidOperationException();
-
             }
         }
 
@@ -42,27 +41,31 @@ namespace Practica_EF_Logic
             return context.Shippers.ToList();
         }
 
-        public void GetById(string id)
+        public Shippers GetById(Shippers shipper)
         {
-            throw new NotImplementedException();
+            try
+            {
+                ship = context.Shippers.Find(shipper.ShipperID);
+                return ship;
+            }
+            catch (System.InvalidOperationException)
+            {
+                throw new System.InvalidOperationException();
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
+            
         }
 
-        public string Update(Shippers c)
+        public String  Insert(Shippers ship)
         {
-            throw new NotImplementedException();
-        }
-
-        public void GetById(int id)
-        {
-            var ship = context.Customers.Find(id);
-        }
-
-        public void Insert(Shippers newShiper)
-        {
-            context.Shippers.Add(newShiper);
+            context.Shippers.Add(ship);
             try
             {
                 context.SaveChanges();
+                return "OK";
             }
             catch (NotSupportedException)
             {
@@ -70,7 +73,7 @@ namespace Practica_EF_Logic
             }
             catch (ObjectDisposedException)
             {
-                throw new ObjectDisposedException("Id: shipper_delete");
+                throw new ObjectDisposedException("algo?");
             }
             catch (InvalidOperationException)
             {
@@ -78,6 +81,11 @@ namespace Practica_EF_Logic
 
             }
 
+        }
+
+        public string Update(Shippers ship)
+        {
+            throw new NotImplementedException();
         }
 
     }

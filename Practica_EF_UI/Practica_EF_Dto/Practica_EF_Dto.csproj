@@ -43,8 +43,14 @@
     <Reference Include="Microsoft.Analytics.Types" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomersDto.cs" />
+    <Compile Include="Custom_New_Dto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Practica_EF_Entities\Practica_EF_Entities.csproj">
+      <Project>{5B0811A7-A1EF-41B2-BDE2-04DA68A7686F}</Project>
+      <Name>Practica_EF_Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

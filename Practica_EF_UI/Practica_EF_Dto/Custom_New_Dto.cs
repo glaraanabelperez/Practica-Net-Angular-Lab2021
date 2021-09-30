@@ -9,13 +9,11 @@ using Microsoft.Analytics.Types.Sql;
 
 namespace Practica_EF_Dto
 {
-    public class CustomersDto
+    public class Custom_New_Dto 
     {
-        public CustomersDto()
+        public Custom_New_Dto()
         {
         }
-        public string CustomerID { get; set; }
-
         public string CompanyName { get; set; }
 
         public string ContactName { get; set; }

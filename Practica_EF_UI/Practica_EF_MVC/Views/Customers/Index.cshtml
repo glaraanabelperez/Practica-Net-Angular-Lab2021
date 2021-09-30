@@ -3,7 +3,8 @@
     ViewBag.Title = "Clientes";
 }
 
-<div class="btn btn-default"><a>@Html.ActionLink("Nuevo Cliente", "Customers", "Insert")</a> &raquo;</div>
+<div class="btn btn-default"><a>@Html.ActionLink("Nuevo Cliente", "Edit", routeValues: new { custId = "NUEVO" })</a> &raquo;</div>
+<hr />
 <div>
     <table class="table-responsive table table-striped">
         <thead>
@@ -22,8 +23,8 @@
                 <td>@cust.ContactName</td>
                 <td>@cust.Country</td>
                 <td>@cust.CustomerID</td>
-                <td>
-                    @Html.ActionLink("Editar Cliente", "Edit", routeValues: new { custId = cust.CustomerID})
+                <td style="font-weight:600">
+                    @Html.ActionLink("Editar", "Edit", routeValues: new { custId = cust.CustomerID }) &raquo;
                 </td>
             </tr>
         }

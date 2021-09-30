@@ -40,6 +40,10 @@ namespace Practica_EF_MVC.Controllers
             return View(customers_view);
         }
 
+        public ActionResult Details()
+        {
+            return View(this.custView);
+        }
         public ActionResult Delete(CustomerView custom)
         {
             customEntitie = new Customers { CustomerID = custom.CustomerID };
@@ -66,68 +70,24 @@ namespace Practica_EF_MVC.Controllers
             return View(message); ;
         }
 
-        //public ActionResult GetByID(CustomerView custom);
-        public ActionResult Insert(CustomerView custom)
-        {
-            string message = null;
-            //customEntitie = new Customers
-            //{
-            //    CustomerID = custom.CustomerID,
-            //    CompanyName = custom.CompanyName,
-            //    ContactName = custom.ContactName,
-            //    Country = custom.Country
-            //};
-
-            //if (custom.CustomerID == null)
-            //{
-
-            //    try
-            //    {
-            //        customLogic.Insert(customEntitie);
-            //        message = "El dato ah sido insertado";
-            //        return View(message); ;
-            //    }
-            //    catch (NotSupportedException)
-            //    {
-            //        message = "La accion no se puede realizar";
-            //    }
-            //    catch (ObjectDisposedException)
-            //    {
-            //        message = "El Clientes no se encuentra entre los datos";
-            //    }
-            //    catch (InvalidOperationException)
-            //    {
-            //        message = "El Clientes no esta disponible";
-
-            //    }
-            //}
-            //else
-            //{
-            //    Edit(customEntitie);
-            //}
-
-            return View(message);
-               
-        }
-
         [HttpGet]
         public ActionResult Edit(string custId)
         {
-            String cu = custId;
-            ViewBag.M = custId;
             ViewBag.Mensaje1 = null;
+            ViewBag.CustomerId = null;
             custView = new CustomerView();
+
+            if (custId.Equals("NUEVO"))
+            {
+                custView = new CustomerView();
+                return View(custView);
+            }
 
             try
             {
                 Customers cust = customLogic.GetById(custId);
-                //custView = cust.Map_Customers_to_CustomView();
-                custView.CompanyName = cust.CustomerID;
-                custView.CompanyName = cust.CompanyName;
-                custView.ContactName = cust.ContactName;
-                custView.Country = cust.Country;
-
-                return View(cust);
+                custView = cust.Map_Customers_to_CustomView();
+                return View(custView);
             }
             catch (ArgumentNullException ex)
             {
@@ -147,97 +107,75 @@ namespace Practica_EF_MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save_Edit(CustomerView custom)
+        public ActionResult Result_Edit(CustomerView custom)
         {
-            customEntitie = new Customers()
-            {
-                CustomerID = custom.CustomerID,
-                CompanyName = custom.CompanyName,
-                ContactName = custom.ContactName,
-                Country = custom.Country
-            };
+            ViewBag.Mensaje = null;
 
-            String message =null;
+            if (custom.CustomerID==null)
+            {
+                try
+                {
+                    customLogic.cust.CompanyName = customEntitie.CompanyName;
+                    customLogic.cust.ContactName = customEntitie.ContactName;
+                    customLogic.cust.Country = customEntitie.Country;
+                    customLogic.Insert(customLogic.cust);
+                    ViewBag.Mensaje = "OK";
+                }
+                catch (NotSupportedException)
+                {
+                    ViewBag.Mensaje = "Error al insertar";
+                }
+                catch (ObjectDisposedException)
+                {
+                    ViewBag.Mensaje = "El Cliente no se puede insertar";
+                }
+                catch (InvalidOperationException)
+                {
+                    ViewBag.Mensaje = "El cliente no esta disponible para Insertar";
+
+                }
+            }
+            else
+            {
+                customEntitie = custom.Map_CustomView_to_Customers();
+                try
+                {
+                    string result = customLogic.Update(customEntitie);
+                    ViewBag.Mensaje = result;
+                }
+                catch (ObjectDisposedException ex)
+                {
+                    ViewBag.Mensaje = ex.Message;
+                }
+                catch (InvalidOperationException ex)
+                {
+                    ViewBag.Mensaje = ex.Message;
+
+                }
+            }
+
             try
             {
-                customLogic.Update(customEntitie);
-                message = "OK";
+                customEntitie = customLogic.GetById(customEntitie.CustomerID);
+                custView = customEntitie.Map_Customers_to_CustomView();
+                return View(custView);
+            }
+            catch (ArgumentNullException ex)
+            {
+                ViewBag.Mensaje = ex.Message;
             }
             catch (System.InvalidOperationException ex)
             {
-                message = ex.Message;
+                ViewBag.Mensaje = ex.Message;
             }
             catch (Exception ex)
             {
-                message = ex.Message;
+                ViewBag.Mensaje = ex.Message;
             }
 
-            return View(message);
+            return View(custom);
+
         }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit_prueba([Bind(Include = "CustomerID,CompanyName,ContactName,Country")] CustomerView custom)
-        //{
-        //    ViewBag.message =null;
-
-        //    customEntitie = new Customers
-        //    {
-        //        CustomerID = custom.CustomerID,
-        //        CompanyName = custom.CompanyName,
-        //        ContactName = custom.ContactName,
-        //        Country = custom.Country
-        //    };
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            try
-        //            {
-        //                customLogic.ModifyState(customEntitie);
-        //                return RedirectToAction("Index");
-        //            }
-        //            catch (NotSupportedException)
-        //            {
-        //                ViewBag.message = "La accion no se puede realizar";
-        //            }
-        //            catch (ObjectDisposedException)
-        //            {
-        //                ViewBag.message = "El Clientes no se encuentra entre los datos";
-        //            }
-        //            catch (InvalidOperationException)
-        //            {
-        //                ViewBag.message = "El Clientes no esta disponible";
-        //            }
-        //        }
-        //    }
-        //    return View(custom);        
-        //  }
-
-        //public ActionResult Edit_prueba1(Customers custom)
-        //{
-        //    if (custom.CustomerID == null)
-        //    {
-        //        return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-        //    }
-        //    var studentToUpdate = customLogic.GetById(custom);
-
-        //    if (TryUpdateModel(studentToUpdate, "",
-        //       new string[] { "LastName", "FirstMidName", "EnrollmentDate" }))
-        //    {
-        //        try
-        //        {
-        //            customLogic.Save_change();
-        //            return RedirectToAction("Index");
-        //        }
-        //        catch (DataException /* dex */)
-        //        {
-        //            ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-        //        }
-        //    }
-        //    return View(studentToUpdate);
-        //}
 
 
     }

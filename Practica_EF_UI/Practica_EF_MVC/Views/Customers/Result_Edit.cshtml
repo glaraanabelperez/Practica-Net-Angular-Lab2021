@@ -1,0 +1,40 @@
+﻿@model Practica_EF_MVC.Models.CustomerView
+
+@{
+    ViewBag.Title = "Result_Edit";
+}
+
+<h2>Cliente Editado</h2>
+<p style="color:green"> Resultado de la operacion: @ViewBag.Mensaje</p>
+
+<div class="form-horizontal" style="margin:50px">
+    <hr />
+    <div class="form-group">
+        <div class="col-md-10">
+            <div class="col-md-10" style="margin-bottom:20px;">
+                <h4 style="color:gray">Codigo Cliente</h4>
+                <p class="display-2">@Model.CustomerID</p>
+            </div>
+            <hr />
+            <div class="col-md-10" style="margin-bottom:20px;">
+                <h4 style="color:gray">Empresa</h4>
+                <p>@Model.CompanyName</p>
+            </div>
+            <div class="col-md-10" style="margin-bottom:20px;">
+                <h4 style="color:gray">Contacto</h4>
+                <p>@Model.ContactName</p>
+            </div>
+            <div class="col-md-10" style="margin-bottom:20px;">
+                <h4 style="color:gray">Ubicacion (Pais)</h4>
+                <p>@Model.Country</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="btn btn-default"><a> @Html.ActionLink("Volver", "Index")</a> &raquo;</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

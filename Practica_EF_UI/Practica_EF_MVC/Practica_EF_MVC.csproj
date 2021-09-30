@@ -179,7 +179,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Customers\Edit.cshtml" />
-    <Content Include="Views\Customers\Edit _prueba.cshtml" />
+    <Content Include="Views\Customers\Result_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -201,6 +201,10 @@
     <ProjectReference Include="..\Practica_EF_Data\Practica_EF_Data.csproj">
       <Project>{69bd75f5-3e42-4098-851f-e914f52f4535}</Project>
       <Name>Practica_EF_Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Practica_EF_Dto\Practica_EF_Dto.csproj">
+      <Project>{73079141-90DD-4C16-A135-B1440A21C4AB}</Project>
+      <Name>Practica_EF_Dto</Name>
     </ProjectReference>
     <ProjectReference Include="..\Practica_EF_Entities\Practica_EF_Entities.csproj">
       <Project>{5b0811a7-a1ef-41b2-bde2-04da68a7686f}</Project>

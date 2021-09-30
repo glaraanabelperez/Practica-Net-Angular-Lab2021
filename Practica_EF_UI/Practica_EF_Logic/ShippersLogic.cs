@@ -8,11 +8,11 @@ using Practica_EF_Entities;
 
 namespace Practica_EF_Logic
 {
-    public class ShippersLogic : BaseLogic, IABMLogic<Shippers>
+    public class ShippersLogic : BaseLogic
     {
         Shippers ship;
 
-        public string Delete(Shippers ship)
+        public void Delete(Shippers ship)
         {
             var shiper_delete = context.Shippers.Find(ship.ShipperID);
             context.Shippers.Remove(shiper_delete);
@@ -20,7 +20,6 @@ namespace Practica_EF_Logic
             try
             {
                 context.SaveChanges();
-                return "OK";
             }
             catch (NotSupportedException)
             {
@@ -59,13 +58,12 @@ namespace Practica_EF_Logic
             
         }
 
-        public String  Insert(Shippers ship)
+        public void  Insert(Shippers ship)
         {
             context.Shippers.Add(ship);
             try
             {
                 context.SaveChanges();
-                return "OK";
             }
             catch (NotSupportedException)
             {
@@ -83,7 +81,7 @@ namespace Practica_EF_Logic
 
         }
 
-        public string Update(Shippers ship)
+        public void Update(Shippers ship)
         {
             throw new NotImplementedException();
         }

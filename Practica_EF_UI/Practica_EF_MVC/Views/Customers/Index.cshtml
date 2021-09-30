@@ -1,5 +1,37 @@
-﻿@model Practica_EF_MVC.Models.CustomerView
-
+﻿@model List<Practica_EF_MVC.Models.CustomerView>
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Clientes";
 }
+
+<div class="btn btn-default"><a>@Html.ActionLink("Nuevo Cliente", "Customers", "Insert")</a> &raquo;</div>
+<div>
+    <table class="table-responsive table table-striped">
+        <thead>
+            <tr>
+                <th>Compania</th>
+                <th>Contacto</th>
+                <th>Pais</th>
+                <th>Identificador</th>
+            </tr>
+        </thead>
+
+        @foreach (var cust in Model)
+        {
+            <tr>
+                <td>@cust.CompanyName</td>
+                <td>@cust.ContactName</td>
+                <td>@cust.Country</td>
+                <td>@cust.CustomerID</td>
+                <td>
+                    @Html.ActionLink("Editar Cliente", "Edit", routeValues: new { custId = cust.CustomerID})
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

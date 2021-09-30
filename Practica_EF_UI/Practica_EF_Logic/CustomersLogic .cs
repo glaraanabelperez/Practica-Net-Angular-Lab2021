@@ -1,26 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Practica_EF_Dto;
 using Practica_EF_Entities;
 
 namespace Practica_EF_Logic
 {
     public class CustomersLogic : BaseLogic, IABMLogic<Customers>
     {
-        Customers cust;
+        Customers cust { get; set; }
 
-        public String Delete(Customers custom)
+        public List<Customers> GetAll()
         {
-            cust= context.Customers.Find(custom.CustomerID);
-            context.Customers.Remove(cust);
-            string message;
+            return context.Customers.ToList();
+        }
 
+        public Customers Delete(Customers custom)
+        {
+            cust = context.Customers.Find(custom.CustomerID);
+            context.Customers.Remove(cust);
+            return cust;
+
+            string message;
             try
             {
                 context.SaveChanges();
-                return "OK";
             }
             catch (NotSupportedException)
             {
@@ -37,31 +45,32 @@ namespace Practica_EF_Logic
             }
         }
 
-        public List<Customers> GetAll()
+        public Customers GetById(int obj)
         {
-            return context.Customers.ToList();
+            throw new NotImplementedException();
         }
 
-        public Customers GetById(Customers custom)
+        public Customers GetById(String custom)
         {
             try
             {
-                cust= (from c in context.Customers
-                        where c.CustomerID.Equals(custom.CustomerID)
+                cust = (from c in context.Customers
+                        where c.CustomerID.Equals(custom)
                         select c).Single();
                 return cust;
             }
+            catch (ArgumentNullException)
+            {
+                throw new ArgumentNullException("Ha ocurrido un error, no es posible mostrarle lo que esta buscando");
+            }
             catch (System.InvalidOperationException)
             {
-                throw new System.InvalidOperationException();
-            }
-            catch (Exception)
-            {
-                throw new Exception();
+                throw new System.InvalidOperationException("Lo que busca no se encuentra disponible");
             }
         }
+        
 
-        public String Insert(Customers newCustom)
+        public string Insert(Customers newCustom)
         {
             context.Customers.Add(newCustom);
             try
@@ -84,43 +93,58 @@ namespace Practica_EF_Logic
             }
         }
 
-        public String Update(Customers custom)
+        public string Update(Customers custom)
         {
-            //Edit([Bind(Include = "ID,LastName,FirstMidName,EnrollmentDate")] Student student
-
-            //if (ModelState.IsValid)
-            //{
-            //    db.Entry(student).State = EntityState.Modified;
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-            //return View(student);
-
-
-
-            //EditPost(int ? id)
-
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //var studentToUpdate = db.Students.Find(id);
-            //if (TryUpdateModel(studentToUpdate, "",
-            //   new string[] { "LastName", "FirstMidName", "EnrollmentDate" }))
-            //{
-            //    try
-            //    {
-            //        db.SaveChanges();
-            //        return RedirectToAction("Index");
-            //    }
-            //    catch (DataException /* dex */)
-            //    {
-            //        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-            //    }
-            //}
-            //return View(studentToUpdate);
-            return null;
-
+            try
+            {
+                 cust=GetById(custom.CustomerID);
+                return "OK";
+            }
+            catch (System.InvalidOperationException)
+            {
+                throw new System.InvalidOperationException("Operacion Invalida");
+            }
+            catch (Exception)
+            {
+                throw new Exception("HUbo un error");
+            }
         }
+
+        public void Save_change()
+        {
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DataException )
+            {
+                throw new DataException("Unable to save changes.");
+            }
+        }
+
+        public string  ModifyState(Customers custom)
+        {
+            try
+            {
+                context.Entry(custom).State = EntityState.Modified;
+                context.SaveChanges();
+                return "OK";
+            }
+            catch (NotSupportedException)
+            {
+                throw new NotSupportedException();
+            }
+            catch (ObjectDisposedException)
+            {
+                throw new ObjectDisposedException("algo?, que iria?");
+            }
+            catch (InvalidOperationException)
+            {
+                throw new InvalidOperationException();
+
+            }
+        }
+
+     
     }
 }

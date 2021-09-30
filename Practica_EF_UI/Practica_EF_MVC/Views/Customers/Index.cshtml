@@ -18,15 +18,18 @@
 
         @foreach (var cust in Model)
         {
-            <tr>
-                <td>@cust.CompanyName</td>
-                <td>@cust.ContactName</td>
-                <td>@cust.Country</td>
-                <td>@cust.CustomerID</td>
-                <td style="font-weight:600">
-                    @Html.ActionLink("Editar", "Edit", routeValues: new { custId = cust.CustomerID }) &raquo;
-                </td>
-            </tr>
+    <tr>
+        <td>@cust.CompanyName</td>
+        <td>@cust.ContactName</td>
+        <td>@cust.Country</td>
+        <td>@cust.CustomerID</td>
+        <td style="font-weight:600">
+            @Html.ActionLink("Editar", "Edit", routeValues: new { custId = cust.CustomerID }) &raquo;
+        </td>
+        <td style="font-weight:600">
+            @Html.ActionLink("Eliminar", "Delete", routeValues: new { custId = cust.CustomerID }) &raquo;
+        </td>
+    </tr>
         }
     </table>
 

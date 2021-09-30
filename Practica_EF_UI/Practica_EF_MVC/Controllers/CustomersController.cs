@@ -20,7 +20,6 @@ namespace Practica_EF_MVC.Controllers
         public List<CustomerView> customers_view;
 
 
-
         public CustomersController()
         {
             customLogic = new CustomersLogic();
@@ -44,42 +43,42 @@ namespace Practica_EF_MVC.Controllers
         {
             return View(this.custView);
         }
-        public ActionResult Delete(CustomerView custom)
+
+        public ActionResult Delete(string custId)
         {
-            customEntitie = new Customers { CustomerID = custom.CustomerID };
-            string message;
+            ViewBag.Mensaje1 = null;
             try
             {
-                customLogic.Delete(customEntitie);
-                message = "El dato ah sido eliminado";
+                customLogic.Delete(custId);
+                ViewBag.Mensaje1 = "El dato ah sido eliminado";
             }
             catch (NotSupportedException)
             {
-                message = "La accion no se puede realizar";
+                ViewBag.Mensaje1 = "La accion no se puede realizar";
             }
             catch (ObjectDisposedException)
             {
-                message = "El Clientes no se encuentra entre los datos";
+                ViewBag.Mensaje1 = "El Clientes no se encuentra entre los datos";
             }
             catch (InvalidOperationException)
             {
-                message = "El Clientes no esta disponible";
+                ViewBag.Mensaje1 = "El Clientes no esta disponible";
 
             }
 
-            return View(message); ;
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
         public ActionResult Edit(string custId)
         {
             ViewBag.Mensaje1 = null;
-            ViewBag.CustomerId = null;
-            custView = new CustomerView();
+            //ViewBag.CustomerId = null;
+            //custView = new CustomerView();
 
-            if (custId.Equals("NUEVO"))
+            if ( custId!=null && custId.Equals("NUEVO"))
             {
-                custView = new CustomerView();
+                CustomerView custView = new CustomerView();
                 return View(custView);
             }
 
@@ -106,20 +105,32 @@ namespace Practica_EF_MVC.Controllers
 
         }
 
+        public String SetNewId()
+        {
+            Random rnd = new Random();
+            int id_num = rnd.Next(1, 10);
+            string id_String = "A";
+            id_String += id_num.ToString();
+
+            return id_String;
+        }
+
         [HttpPost]
         public ActionResult Result_Edit(CustomerView custom)
         {
+            Customers customerEntitie= custom.Map_CustomView_to_Customers();
             ViewBag.Mensaje = null;
 
             if (custom.CustomerID==null)
             {
                 try
                 {
-                    customLogic.cust.CompanyName = customEntitie.CompanyName;
-                    customLogic.cust.ContactName = customEntitie.ContactName;
-                    customLogic.cust.Country = customEntitie.Country;
-                    customLogic.Insert(customLogic.cust);
+
+
+                    customerEntitie.CustomerID = SetNewId();
+                    customLogic.Insert(customerEntitie);
                     ViewBag.Mensaje = "OK";
+                    return RedirectToAction("Index");
                 }
                 catch (NotSupportedException)
                 {
@@ -132,16 +143,20 @@ namespace Practica_EF_MVC.Controllers
                 catch (InvalidOperationException)
                 {
                     ViewBag.Mensaje = "El cliente no esta disponible para Insertar";
-
+                }
+                catch (Exception)
+                {
+                    ViewBag.Mensaje = "Algo paso";
                 }
             }
             else
             {
-                customEntitie = custom.Map_CustomView_to_Customers();
                 try
                 {
-                    string result = customLogic.Update(customEntitie);
+                    string result = customLogic.Update(customerEntitie);
                     ViewBag.Mensaje = result;
+                    return RedirectToAction("Index");
+
                 }
                 catch (ObjectDisposedException ex)
                 {
@@ -152,25 +167,6 @@ namespace Practica_EF_MVC.Controllers
                     ViewBag.Mensaje = ex.Message;
 
                 }
-            }
-
-            try
-            {
-                customEntitie = customLogic.GetById(customEntitie.CustomerID);
-                custView = customEntitie.Map_Customers_to_CustomView();
-                return View(custView);
-            }
-            catch (ArgumentNullException ex)
-            {
-                ViewBag.Mensaje = ex.Message;
-            }
-            catch (System.InvalidOperationException ex)
-            {
-                ViewBag.Mensaje = ex.Message;
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Mensaje = ex.Message;
             }
 
             return View(custom);

@@ -14,18 +14,8 @@
                 <div class="col-md-10">
                     <div class="col-md-10" style="margin-bottom:20px; display:flex; flex-direction:row">
                         <div class="col-md-10" style="margin-bottom:20px; display:flex; flex-direction:row">
-                            @if (model.CustomerID == null)
-                            {
-                                <div class="col-md-10" style="margin-bottom:20px;">
-                                    @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.EditorFor(model => model.CustomerID, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-                            }
-                            else
-                            {
-                                <p style="color:deeppink; margin-right:5px">Codigo:</p>
-                                @Model.CustomerID
-                            }
+                            <p style="color:deeppink; margin-right:5px">Codigo Cliente:</p>
+                            @Html.HiddenFor(model => model.CustomerID)
                         </div>
                     </div>
                     <div class="col-md-10" style="margin-bottom:20px;">

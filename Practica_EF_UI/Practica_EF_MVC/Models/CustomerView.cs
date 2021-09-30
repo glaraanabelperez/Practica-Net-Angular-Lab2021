@@ -16,13 +16,7 @@ namespace Practica_EF_MVC.Models
 
         public string Country { get; set; }
 
-        public CustomerView()
-        {
-            CustomerID = null;
-            CompanyName = null;
-            ContactName = null;
-            Country = null;
-        }
+
 
     }
 }

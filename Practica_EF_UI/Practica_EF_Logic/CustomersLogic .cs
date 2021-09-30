@@ -12,6 +12,7 @@ namespace Practica_EF_Logic
 {
     public class CustomersLogic : BaseLogic, IABMLogic<Customers>
     {
+
         public Customers cust { get; set; }
 
         public List<Customers> GetAll()
@@ -19,16 +20,15 @@ namespace Practica_EF_Logic
             return context.Customers.ToList();
         }
 
-        public Customers Delete(Customers custom)
+        public string Delete(string customer_id)
         {
-            cust = context.Customers.Find(custom.CustomerID);
-            context.Customers.Remove(cust);
-            return cust;
+            Customers customers = context.Customers.Find(customer_id);
+            context.Customers.Remove(customers);
 
-            string message;
             try
             {
                 context.SaveChanges();
+                return "OK";
             }
             catch (NotSupportedException)
             {
@@ -69,7 +69,6 @@ namespace Practica_EF_Logic
             }
         }
         
-
         public string Insert(Customers newCustom)
         {
             context.Customers.Add(newCustom);
@@ -89,6 +88,10 @@ namespace Practica_EF_Logic
             catch (InvalidOperationException)
             {
                 throw new InvalidOperationException("El cliente no esta disponible para Insertar");
+            }
+            catch (Exception)
+            {
+                throw new Exception("Algo paso");
 
             }
         }

@@ -11,9 +11,9 @@ namespace Practica_EF_Logic
     interface IABMLogic<T>
     {
         List<T> GetAll();
-        T GetById(String obj);
+        T GetById(string obj);
         T GetById(int obj);
-        T Delete(T obj);
+        string Delete(string obj);
         string Insert(T obj);
         string Update(T obj);
     }

@@ -5,7 +5,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Practica_EF_Dto;
 using Practica_EF_Entities;
 
 namespace Practica_EF_Logic
@@ -40,9 +39,19 @@ namespace Practica_EF_Logic
             }
             catch (InvalidOperationException)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("El Clientes no esta dsipnible");
 
             }
+            catch (Exception)
+            {
+                throw new Exception("Algo paso... Seguro que los datos estan siendo usados y no pueden borrarse");
+
+            }
+        }
+
+        public string Delete(int obj)
+        {
+            throw new NotImplementedException();
         }
 
         public Customers GetById(int obj)
@@ -66,6 +75,10 @@ namespace Practica_EF_Logic
             catch (System.InvalidOperationException)
             {
                 throw new System.InvalidOperationException("Lo que busca no se encuentra disponible");
+            }
+            catch (Exception)
+            {
+                throw new Exception("Algo paso...");
             }
         }
         
@@ -115,8 +128,13 @@ namespace Practica_EF_Logic
               throw new InvalidOperationException("No se encuentra disponible el ciente para realizarle cambios");
 
           }
+          catch (Exception)
+          {
+              throw new Exception("Algo paso");
 
-            
+          }
+
+
         }
 
     }

@@ -8,83 +8,88 @@ using Practica_EF_Entities;
 
 namespace Practica_EF_Logic
 {
-    public class ShippersLogic : BaseLogic
+    public class ShippersLogic : BaseLogic, IABMLogic<Shippers>
     {
-        Shippers ship;
-
-        public void Delete(Shippers ship)
+        public string Delete(string obj)
         {
-            var shiper_delete = context.Shippers.Find(ship.ShipperID);
-            context.Shippers.Remove(shiper_delete);
+            throw new NotImplementedException();
+        }
+
+        public string Delete(int obj_id)
+        {
+            Customers customers = context.Customers.Find(obj_id);
+            context.Customers.Remove(customers);
 
             try
             {
                 context.SaveChanges();
+                return "OK";
             }
             catch (NotSupportedException)
             {
-                throw new NotSupportedException();
+                throw new NotSupportedException("La accion no se puede realizar");
             }
             catch (ObjectDisposedException)
             {
-                throw new ObjectDisposedException("El Transporte no existe en la Base de Datos");
+                throw new ObjectDisposedException("El Dato no existe en la Base de Datos");
             }
             catch (InvalidOperationException)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("El Dato no esta dsipnible");
+
+            }
+            catch (Exception)
+            {
+                throw new Exception("Algo paso... Seguro que los datos estan siendo usados y no pueden borrarse");
+
             }
         }
 
         public List<Shippers> GetAll()
         {
-            return context.Shippers.ToList();
+            throw new NotImplementedException();
         }
 
-        public Shippers GetById(Shippers shipper)
-        {
-            try
-            {
-                ship = context.Shippers.Find(shipper.ShipperID);
-                return ship;
-            }
-            catch (System.InvalidOperationException)
-            {
-                throw new System.InvalidOperationException();
-            }
-            catch (Exception)
-            {
-                throw new Exception();
-            }
-            
-        }
-
-        public void  Insert(Shippers ship)
-        {
-            context.Shippers.Add(ship);
-            try
-            {
-                context.SaveChanges();
-            }
-            catch (NotSupportedException)
-            {
-                throw new NotSupportedException();
-            }
-            catch (ObjectDisposedException)
-            {
-                throw new ObjectDisposedException("algo?");
-            }
-            catch (InvalidOperationException)
-            {
-                throw new InvalidOperationException();
-
-            }
-
-        }
-
-        public void Update(Shippers ship)
+        public Shippers GetById(string obj)
         {
             throw new NotImplementedException();
         }
 
+        public Shippers GetById(int obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Insert(Shippers obj)
+        {
+            context.Shippers.Add(obj);
+            try
+            {
+                context.SaveChanges();
+                return "OK";
+            }
+            catch (NotSupportedException)
+            {
+                throw new NotSupportedException("Error al insertar");
+            }
+            catch (ObjectDisposedException)
+            {
+                throw new ObjectDisposedException("El dato no se puede insertar");
+            }
+            catch (InvalidOperationException)
+            {
+                throw new InvalidOperationException("El dato no esta disponible para Insertar");
+            }
+            catch (Exception)
+            {
+                throw new Exception("Algo paso");
+
+            }
+        }
+
+        public string Update(Shippers obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

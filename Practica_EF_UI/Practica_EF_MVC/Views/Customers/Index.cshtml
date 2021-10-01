@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Clientes";
 }
+<h3 style="float:right;color:dodgerblue">@ViewBag.Mensaje</h3>
 
 <div class="btn btn-default"><a>@Html.ActionLink("Nuevo Cliente", "Edit", routeValues: new { custId = "NUEVO" })</a> &raquo;</div>
 <hr />
@@ -18,18 +19,18 @@
 
         @foreach (var cust in Model)
         {
-    <tr>
-        <td>@cust.CompanyName</td>
-        <td>@cust.ContactName</td>
-        <td>@cust.Country</td>
-        <td>@cust.CustomerID</td>
-        <td style="font-weight:600">
-            @Html.ActionLink("Editar", "Edit", routeValues: new { custId = cust.CustomerID }) &raquo;
-        </td>
-        <td style="font-weight:600">
-            @Html.ActionLink("Eliminar", "Delete", routeValues: new { custId = cust.CustomerID }) &raquo;
-        </td>
-    </tr>
+            <tr>
+                <td>@cust.CompanyName</td>
+                <td>@cust.ContactName</td>
+                <td>@cust.Country</td>
+                <td>@cust.CustomerID</td>
+                <td style="font-weight:600">
+                    @Html.ActionLink("Editar", "Edit", routeValues: new { custId = cust.CustomerID }) &raquo;
+                </td>
+                <td style="font-weight:600">
+                    @Html.ActionLink("Eliminar", "Delete", routeValues: new { custId = cust.CustomerID }) &raquo;
+                </td>
+            </tr>
         }
     </table>
 

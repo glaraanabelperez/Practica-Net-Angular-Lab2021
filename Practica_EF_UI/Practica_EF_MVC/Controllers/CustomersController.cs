@@ -10,71 +10,76 @@ using System.Net;
 
 namespace Practica_EF_MVC.Controllers
 {
-    //Se puede hacer metodo estatico para maper customView con Customers o cast!!!!
 
     public class CustomersController : Controller
     {
         private CustomersLogic customLogic;
-        private Customers customEntitie;
-        private CustomerView custView;
-        public List<CustomerView> customers_view;
-
-
+      
         public CustomersController()
         {
             customLogic = new CustomersLogic();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string mensaje)
         {
-        var cust = customLogic.GetAll();
-            customers_view = cust.Select(c => new CustomerView
+            ViewBag.Mensaje = "Buen dia";
+
+            if (mensaje == null)
             {
-                CustomerID = c.CustomerID,
-                ContactName = c.ContactName,
-                CompanyName = c.CompanyName,
-                Country = c.Country
-            }).ToList();
+                ViewBag.Mensaje = "Buen Dia!!";
+            }
+            else
+            {
+                ViewBag.Mensaje = mensaje;
+            }
+
+            List<CustomerView> customers_view;
+            var cust = customLogic.GetAll();
+
+            customers_view = cust.Select(c => new CustomerView
+              {
+                  CustomerID = c.CustomerID,
+                  ContactName = c.ContactName,
+                  CompanyName = c.CompanyName,
+                  Country = c.Country
+              }).ToList();
 
             return View(customers_view);
         }
 
-        public ActionResult Details()
-        {
-            return View(this.custView);
-        }
-
         public ActionResult Delete(string custId)
         {
-            ViewBag.Mensaje1 = null;
+            string mensaje="OK";
             try
             {
                 customLogic.Delete(custId);
-                ViewBag.Mensaje1 = "El dato ah sido eliminado";
+                return RedirectToAction("Index", "Customers",  new { mensaje = mensaje });
             }
             catch (NotSupportedException)
             {
-                ViewBag.Mensaje1 = "La accion no se puede realizar";
+                mensaje = "La accion no se puede realizar";
             }
             catch (ObjectDisposedException)
             {
-                ViewBag.Mensaje1 = "El Clientes no se encuentra entre los datos";
+                mensaje = "El Clientes no se encuentra entre los datos";
             }
             catch (InvalidOperationException)
             {
-                ViewBag.Mensaje1 = "El Clientes no esta disponible";
-
+                mensaje = "El Clientes no esta disponible";
+            }
+            catch (Exception)
+            {
+                mensaje = "Algo paso... Seguro que los datos estan siendo usados y no pueden borrarse";
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Error", new { mensaje=mensaje });
+
         }
 
         [HttpGet]
         public ActionResult Edit(string custId)
         {
-            ViewBag.Mensaje1 = null;
-            //ViewBag.CustomerId = null;
-            //custView = new CustomerView();
+            string mensaje = null;
 
             if ( custId!=null && custId.Equals("NUEVO"))
             {
@@ -85,23 +90,24 @@ namespace Practica_EF_MVC.Controllers
             try
             {
                 Customers cust = customLogic.GetById(custId);
-                custView = cust.Map_Customers_to_CustomView();
+                CustomerView custView = cust.MapCustomerToCustomerView();
+
                 return View(custView);
             }
             catch (ArgumentNullException ex)
             {
-                ViewBag.Mensaje1 = ex.Message;
+                mensaje = ex.Message;
             }
             catch (System.InvalidOperationException ex)
             {
-                ViewBag.Mensaje1 = ex.Message;
+                mensaje = ex.Message;
             }
             catch (Exception ex)
             {
-                ViewBag.Mensaje1 = ex.Message;
+                mensaje = ex.Message;
             }
 
-            return View(ViewBag.Mensaje1);
+            return RedirectToAction("Index", "Customers", new { mensaje = mensaje });
 
         }
 
@@ -118,19 +124,17 @@ namespace Practica_EF_MVC.Controllers
         [HttpPost]
         public ActionResult Result_Edit(CustomerView custom)
         {
-            Customers customerEntitie= custom.Map_CustomView_to_Customers();
-            ViewBag.Mensaje = null;
+            Customers customerEntitie= custom.MapCustomerViewToCustomer();
+            string mensaje = null;
 
             if (custom.CustomerID==null)
             {
                 try
                 {
-
-
                     customerEntitie.CustomerID = SetNewId();
                     customLogic.Insert(customerEntitie);
-                    ViewBag.Mensaje = "OK";
-                    return RedirectToAction("Index");
+                    mensaje = "El Insert ok";
+                    return RedirectToAction("Index", "Customers", new { mensaje = mensaje });
                 }
                 catch (NotSupportedException)
                 {
@@ -155,17 +159,24 @@ namespace Practica_EF_MVC.Controllers
                 {
                     string result = customLogic.Update(customerEntitie);
                     ViewBag.Mensaje = result;
-                    return RedirectToAction("Index");
-
+                    mensaje = "El Edit ok";
+                    return RedirectToAction("Index", "Customers", new { mensaje = mensaje });
                 }
-                catch (ObjectDisposedException ex)
+                catch (NotSupportedException)
                 {
-                    ViewBag.Mensaje = ex.Message;
+                    ViewBag.Mensaje = "Error al insertar";
                 }
-                catch (InvalidOperationException ex)
+                catch (ObjectDisposedException)
                 {
-                    ViewBag.Mensaje = ex.Message;
-
+                    ViewBag.Mensaje = "El Cliente no se puede insertar";
+                }
+                catch (InvalidOperationException)
+                {
+                    ViewBag.Mensaje = "El cliente no esta disponible para Insertar";
+                }
+                catch (Exception)
+                {
+                    ViewBag.Mensaje = "Algo paso";
                 }
             }
 

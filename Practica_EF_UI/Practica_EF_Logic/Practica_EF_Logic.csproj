@@ -65,10 +65,6 @@
       <Project>{69BD75F5-3E42-4098-851F-E914F52F4535}</Project>
       <Name>Practica_EF_Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Practica_EF_Dto\Practica_EF_Dto.csproj">
-      <Project>{73079141-90dd-4c16-a135-b1440a21c4ab}</Project>
-      <Name>Practica_EF_Dto</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Practica_EF_Entities\Practica_EF_Entities.csproj">
       <Project>{5B0811A7-A1EF-41B2-BDE2-04DA68A7686F}</Project>
       <Name>Practica_EF_Entities</Name>

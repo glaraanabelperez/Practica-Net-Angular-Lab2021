@@ -36,12 +36,15 @@ namespace Practica_EF_UI
 
             switch (typOperation)
             {
+
                 case "ORDERS":
                     Console.WriteLine(" \n ORDERS");
                     HelpersProgram.ListOrders();
+
                     Console.WriteLine(" \n QUIERE ACCEDER AL CLIENTE DE LA ORDEN?");
                     changeOperation = InteractionUserHelpers.Continuar();
                     changeOperation = changeOperation.ToUpper();
+
                     if (changeOperation.Equals("SI"))
                     {
                         return "CUSTOMERS";
@@ -52,48 +55,62 @@ namespace Practica_EF_UI
                         return "MENU";
                     }
 
+
                 case "ORDER_DETAILS":
                     Console.WriteLine(" \n ORDER_DETAILS");
                     OrderDetailsLogic ordersLogic = new OrderDetailsLogic();
-                    ordersLogic.ListOrdersDetails();
+                    ordersLogic.GetAll();
+
                     break;
+
 
                 case "CUSTOMERS":
                     CustomersLogic customerLogic = new CustomersLogic();
                     string selectionIdCustomers = null;
+
                     Console.WriteLine(" \n CUSTOMERS");
                     HelpersProgram.ListCustomers();
+
                     Console.WriteLine(" \n INGRESE CODIGO A BUSCAR DE LOS INDICADOS ANTERIORMENTE");
                     do
                     {
                         selectionIdCustomers = InteractionUserHelpers.InsertDates();
                         changeOperation = changeOperation.ToUpper();
                         Console.WriteLine($" \n CODIGO SELECCIONADO: {selectionIdCustomers}");
-
+//Ver bucle
                         try
                         {
                             customerLogic.UpdateCustomerById(selectionIdCustomers);
                             try
                             {
                                 customerLogic.GetCustomerById(selectionIdCustomers);
-                            }
-                            catch (System.InvalidOperationException)
-                            {
-                                Console.WriteLine(" \n NO SE ENCONTRO EL CLIENTE");
                                 selectionIdCustomers = null;
                             }
-                        }
-                        catch (NotSupportedException)
-                        {
-                            Console.WriteLine("HUBO UN PROBLEMA CON LA CONSULTA.");
+                            catch (ArgumentNullException ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                            catch (System.InvalidOperationException ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
                         }
                         catch (ObjectDisposedException ex)
                         {
-                            Console.WriteLine("EL CUSTOMER NO SE HA ENCONTRADO." + ex.Message);
+                            Console.WriteLine(ex.Message);
                         }
-                        catch (InvalidOperationException)
+                        catch (InvalidOperationException ex)
                         {
-                            Console.WriteLine("EL CUSTOMER NO SE PUEDE EDITAR.");
+                            Console.WriteLine(ex.Message);
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
                         }
 
                     } while (selectionIdCustomers == null);
@@ -118,18 +135,21 @@ namespace Practica_EF_UI
                         {
                             shipperLo.Delete_Shipper(idShipper);
                         }
-                        catch (NotSupportedException)
+                        catch (NotSupportedException ex)
                         {
-                            Console.WriteLine("ERROR AL ELIMINAR");
+                            Console.WriteLine(ex.Message);
                         }
-                        catch (ObjectDisposedException)
+                        catch (ObjectDisposedException ex)
                         {
-                            Console.WriteLine("NO SE PUEDE ELIMINAR, ESTA SIENDO USADA LA INFORMACION DEL MISMO");
+                            Console.WriteLine(ex.Message);
                         }
-                        catch (InvalidOperationException)
+                        catch (InvalidOperationException ex)
                         {
-                            Console.WriteLine("ERROR AL ELIMINAR");
-
+                            Console.WriteLine(ex.Message);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
                         }
                     }
 
@@ -139,13 +159,21 @@ namespace Practica_EF_UI
                         {
                             shipperLo.Insert_Shipper();
                         }
-                        catch (NotSupportedException)
+                        catch (NotSupportedException ex)
                         {
-                            Console.WriteLine("ERROR AL INSERTAR");
+                           Console.WriteLine(ex.Message);
                         }
-                        catch (InvalidOperationException)
+                        catch (ObjectDisposedException ex)
                         {
-                            Console.WriteLine("ERROR AL INSERTAR");
+                            Console.WriteLine(ex.Message);
+                        }
+                        catch (InvalidOperationException ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
 
                         }
                     }

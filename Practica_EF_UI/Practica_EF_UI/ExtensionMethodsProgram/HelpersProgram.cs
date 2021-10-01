@@ -50,24 +50,24 @@ namespace Practica_EF_Logic
         public static void ListOrders()
         {
             OrdersLogic ordersLogic = new OrdersLogic();
-            foreach (Orders ord in ordersLogic.GetAll())
+            foreach (var ord in ordersLogic.GetAll())
             {
                 Console.WriteLine($"\n ORDEN:");
-                Console.WriteLine($"NUMERO: {ord.OrderID}.");
+                Console.WriteLine($"NUMERO: {ord.Order_Details}.");
                 Console.WriteLine($"COMPANIA: {ord.Customers.CompanyName}.");
                 Console.WriteLine($"ID CUSTOMERS: {ord.Customers.CustomerID}.");
             }
         }
 
-        //public static void ListOrdersDetails( this OrderDetailsLogic ordersLogic)
-        //{
-        //    foreach (Order_Details ord in ordersLogic.GetAll())
-        //    {
-        //        Console.WriteLine($"\n DETALLE ORDEN:");
-        //        Console.WriteLine($"ID_DETALLE: {ord.OrderID}.");
-        //        Console.WriteLine($"PRECIO UNIDAD: {ord.UnitPrice}.");
-        //    }
-        //}
+        public static void ListOrdersDetails(this OrderDetailsLogic ordersLogic)
+        {
+            foreach (Order_Details ord in ordersLogic.GetAll())
+            {
+                Console.WriteLine($"\n DETALLE ORDEN:");
+                Console.WriteLine($"ID_DETALLE: {ord.OrderID}.");
+                Console.WriteLine($"PRECIO UNIDAD: {ord.UnitPrice}.");
+            }
+        }
 
         public static void Delete_Shipper(this ShippersLogic shipperLogic, int id)
         {
@@ -76,17 +76,23 @@ namespace Practica_EF_Logic
                 shipperLogic.Delete(id);
                 Console.WriteLine("Transportista Eliminado");
             }
-            catch (NotSupportedException)
+            catch (NotSupportedException ex)
             {
-                throw new NotSupportedException();
+                throw new NotSupportedException(ex.Message);
             }
-            catch (ObjectDisposedException)
+            catch (ObjectDisposedException ex)
             {
-                throw new ObjectDisposedException("Id: shipper_delete");
+                throw new ObjectDisposedException(ex.Message);
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException ex)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException(ex.Message);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+
             }
         }
 
@@ -99,32 +105,47 @@ namespace Practica_EF_Logic
                 Shippers newShip = new Shippers();
                 newShip.CompanyName = compani;
                 shipperLo.Insert(newShip);
-                Console.WriteLine("Shiper INsertado");
+                Console.WriteLine("Shiper Insertado");
             }
-            catch (NotSupportedException)
+            catch (NotSupportedException ex)
             {
-                throw new NotSupportedException();
+                throw new NotSupportedException(ex.Message);
             }
-            catch (InvalidOperationException)
+            catch (ObjectDisposedException ex)
             {
-                throw new InvalidOperationException();
+                throw new ObjectDisposedException(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
 
             }
 
         }
 
-        public static void GetCustomerById(this CustomersLogic custom, string selection)
+        public static void GetCustomerById(this CustomersLogic customerLogic, string selection)
         {
             try
             {
-                custom.GetById(selection);
-                Customers c = custom.customer;
+                Customers c = customerLogic.GetById(selection);
                 Console.WriteLine(" \n LOS DATOS DE CLIENTE SON: ");
                 Console.WriteLine($"COMPANIA: {c.CompanyName}. CONTACTO: {c.ContactName}. REGION: {c.Region}.");
             }
-            catch (System.InvalidOperationException)
+            catch (ArgumentNullException ex)
             {
-                throw new System.InvalidOperationException();
+                throw new ArgumentNullException( ex.Message);
+            }
+            catch (System.InvalidOperationException ex)
+            {
+                throw new System.InvalidOperationException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
@@ -146,18 +167,19 @@ namespace Practica_EF_Logic
                     customers.CustomerID = selectionIdCustomers.ToUpper();
                     customerLogic.Update(customers);
                 }
-                catch (NotSupportedException)
+                catch (ObjectDisposedException ex)
                 {
-                    throw new NotSupportedException();
+                    throw new ObjectDisposedException(ex.Message);
                 }
-                catch (ObjectDisposedException)
+                catch (InvalidOperationException ex)
                 {
-                    throw new ObjectDisposedException("algo?");
+                    throw new InvalidOperationException(ex.Message);
 
                 }
-                catch (InvalidOperationException)
+                catch (Exception ex)
                 {
-                    throw new InvalidOperationException();
+                    throw new Exception(ex.Message);
+
                 }
             }
         }

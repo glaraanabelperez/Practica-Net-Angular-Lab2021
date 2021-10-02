@@ -13,6 +13,7 @@ namespace Practica_EF_Logic
         {
             throw new NotImplementedException();
         }
+
         public string Delete(int obj)
         {
             throw new NotImplementedException();

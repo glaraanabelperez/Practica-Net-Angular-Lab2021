@@ -42,9 +42,9 @@ namespace Practica_EF_Logic
                 throw new InvalidOperationException("El Clientes no esta dsipnible");
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Algo paso... Seguro que los datos estan siendo usados y no pueden borrarse");
+                throw new Exception($"Hubo un error unterno {ex.Message}");
 
             }
         }
@@ -70,15 +70,15 @@ namespace Practica_EF_Logic
             }
             catch (ArgumentNullException)
             {
-                throw new ArgumentNullException("Ha ocurrido un error, no es posible mostrarle lo que esta buscando");
+                throw new ArgumentNullException("Ha ocurrido un error, no se aceptan datos nulos");
             }
             catch (System.InvalidOperationException)
             {
                 throw new System.InvalidOperationException("Lo que busca no se encuentra disponible");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Algo paso...");
+                throw new Exception($"Hubo un error: {ex.Message}");
             }
         }
         
@@ -102,17 +102,39 @@ namespace Practica_EF_Logic
             {
                 throw new InvalidOperationException("El cliente no esta disponible para Insertar");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Algo paso");
+                throw new Exception($"Hubo un error unterno {ex.Message}");
 
+            }
+        }
+
+        public string Exist(string  custom_id)
+        {
+            try
+            {
+                string id = (from c in context.Customers
+                             where c.CustomerID.Contains(custom_id)
+                             select c.CustomerID).Single();
+                return id;
+            }
+            catch (ArgumentNullException)
+            {
+                throw new ArgumentNullException("Ha ocurrido un error, no se aceptan datos nulos");
+            }
+            catch (System.InvalidOperationException)
+            {
+                throw new System.InvalidOperationException("Lo que busca no se encuentra disponible");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Hubo un error  {ex.Message}");
             }
         }
 
         public string Update(Customers custom)
         {
-          
-          context.Entry(custom).State = EntityState.Modified;
+            context.Entry(custom).State = EntityState.Modified;
 
           try
           {
@@ -128,12 +150,10 @@ namespace Practica_EF_Logic
               throw new InvalidOperationException("No se encuentra disponible el ciente para realizarle cambios");
 
           }
-          catch (Exception)
+          catch (Exception ex)
           {
-              throw new Exception("Algo paso");
-
+                throw new Exception($"Hubo un error unterno {ex.Message}");
           }
-
 
         }
 

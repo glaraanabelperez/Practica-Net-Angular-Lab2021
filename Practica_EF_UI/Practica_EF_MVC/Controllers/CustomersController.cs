@@ -33,15 +33,15 @@ namespace Practica_EF_MVC.Controllers
                 ViewBag.Mensaje = mensaje;
             }
 
-            List<CustomerView> customers_view;
             var cust = customLogic.GetAll();
 
-            customers_view = cust.Select(c => new CustomerView
+            List<CustomerView> customers_view = cust.Select(c => new CustomerView
               {
                   CustomerID = c.CustomerID,
                   ContactName = c.ContactName,
                   CompanyName = c.CompanyName,
                   Country = c.Country
+
               }).ToList();
 
             return View(customers_view);

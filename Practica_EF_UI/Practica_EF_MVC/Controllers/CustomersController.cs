@@ -53,6 +53,7 @@ namespace Practica_EF_MVC.Controllers
             try
             {
                 customLogic.Delete(custId);
+                mensaje = "Datos Borrados";
                 return RedirectToAction("Index", "Customers",  new { mensaje = mensaje });
             }
             catch (NotSupportedException)
@@ -114,8 +115,8 @@ namespace Practica_EF_MVC.Controllers
         public String SetNewId()
         {
             Random rnd = new Random();
-            int id_num = rnd.Next(1, 10);
-            string id_String = "A";
+            int id_num = rnd.Next(1, 50);
+            string id_String = "E";
             id_String += id_num.ToString();
 
             return id_String;
@@ -133,7 +134,7 @@ namespace Practica_EF_MVC.Controllers
                 {
                     customerEntitie.CustomerID = SetNewId();
                     customLogic.Insert(customerEntitie);
-                    mensaje = "El Insert ok";
+                    mensaje = $"Id insertado= {customerEntitie.CustomerID}";
                     return RedirectToAction("Index", "Customers", new { mensaje = mensaje });
                 }
                 catch (NotSupportedException)
@@ -150,7 +151,7 @@ namespace Practica_EF_MVC.Controllers
                 }
                 catch (Exception)
                 {
-                    ViewBag.Mensaje = "Algo paso";
+                    ViewBag.Mensaje = "Algo paso, puede que el id este repetido";
                 }
             }
             else

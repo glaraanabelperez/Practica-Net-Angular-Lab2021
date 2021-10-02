@@ -7,7 +7,7 @@ using Practica_EF_WebApi.Models.ModelsResponse;
 
 namespace Practica_EF_MVC.Models
 {
-    public class CustomerResponse: BaseResponse
+    public class CustomerResponse
     {    
         public string CustomerID { get; set; }
 

@@ -4,14 +4,13 @@ using System.Linq;
 using System.Web.Mvc;
 using Practica_EF_Entities;
 using Practica_EF_Logic;
-using Practica_EF_MVC.Models;
 using System.Data;
-using System.Net;
+using Practica_EF_MVC.Models;
 
 namespace Practica_EF_MVC.Controllers
 {
 
-    public class CustomersController : Controller
+    public class CustomersController : Controller, IABMControllers<CustomerView>
     {
         private CustomersLogic customLogic;
       
@@ -22,16 +21,15 @@ namespace Practica_EF_MVC.Controllers
 
         public ActionResult Index(string mensaje)
         {
-            ViewBag.Mensaje = "Buen dia";
-
-            if (mensaje == null)
-            {
-                ViewBag.Mensaje = "Buen Dia!!";
-            }
-            else
-            {
-                ViewBag.Mensaje = mensaje;
-            }
+            mensaje=mensaje==null ? ViewBag.Mensaje = "Buen Dia!!" : ViewBag.Mensaje = mensaje;
+            //if (mensaje == null)
+            //{
+            //    ViewBag.Mensaje = "Buen Dia!!";
+            //}
+            //else
+            //{
+            //    ViewBag.Mensaje = mensaje;
+            //}
 
             var cust = customLogic.GetAll();
 

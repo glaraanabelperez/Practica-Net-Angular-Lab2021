@@ -10,9 +10,10 @@ using Practica_EF_MVC.Models;
 
 namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
 {
-    public class CustomerApiController : ApiController
+    public class CustomerApiController : ApiController,IABMControllers<CustomerRequest>
     {
         public CustomersLogic customLogic = new CustomersLogic();
+
 
         [HttpGet]
         public List<CustomerResponse> GetAll()
@@ -53,8 +54,12 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
         }
 
         [HttpPost]
-        public IHttpActionResult InsertCustomer ([FromBody] CustomerRequest customerRequest)
+        public IHttpActionResult Insert([FromBody] CustomerRequest customerRequest)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("El modelo de datos esta incorrecto");
+            }
             if (customerRequest.Equals(null) && customerRequest.CustomerID!=null)
             {
                 return BadRequest( "Los Datos estan vacios, o esta intentado crear un cliente que ya existe" );
@@ -89,14 +94,20 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
         [HttpPut]
         public IHttpActionResult Put( [FromBody] CustomerRequest customerRequest)
         {
-            if (customerRequest.Equals(null) || (customerRequest.CustomerID == null) || (customerRequest.CustomerID.Equals("")))
+            if (!ModelState.IsValid)
             {
-                return BadRequest("Los Datos estan vacios");
+                return BadRequest("El modelo de datos esta incorrecto");
             }
+
             try
             {
+                if (customerRequest.Equals(null) || (customerRequest.CustomerID == null) || (customerRequest.CustomerID.Equals("")))
+                {
+                    return BadRequest("Los Datos estan vacios");
+                }
+
                 Customers customerEntitie = customerRequest.MapCustomerRequestToCustomer();
-                if (ModelState.IsValid && customLogic.Exist(customerEntitie.CustomerID)!=null)
+                if (customLogic.Exist(customerEntitie.CustomerID)!=null)
                 {
                     try
                     {
@@ -152,6 +163,7 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
             }
  
         }
+
 
     }
 }

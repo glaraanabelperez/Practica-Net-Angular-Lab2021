@@ -21,16 +21,6 @@ namespace Practica_EF_Logic
 
             return customer;
         }
-        public static CustomerResponse MapCustomerToCustomerResponse(this Customers customer)
-        {
-            CustomerResponse customerResponse = new CustomerResponse();
-            customerResponse.CustomerID = customer.CustomerID;
-            customerResponse.CompanyName = customer.CompanyName;
-            customerResponse.ContactName = customer.ContactName;
-            customerResponse.Country = customer.Country;
-
-            return customerResponse;
-        }
 
         public static Customers MapCustomerRequestToCustomer(this CustomerRequest customerRequest)
         {
@@ -42,6 +32,18 @@ namespace Practica_EF_Logic
 
             return customer;
         }
+
+        public static CustomerResponse MapCustomerToCustomerResponse(this Customers customer)
+        {
+            CustomerResponse customerResponse = new CustomerResponse();
+            customerResponse.CustomerID = customer.CustomerID;
+            customerResponse.CompanyName = customer.CompanyName;
+            customerResponse.ContactName = customer.ContactName;
+            customerResponse.Country = customer.Country;
+
+            return customerResponse;
+        }
+
         public static CustomerRequest MapCustomerToCustomerRequest(this Customers customer)
         {
             CustomerRequest customerRequest = new CustomerRequest();

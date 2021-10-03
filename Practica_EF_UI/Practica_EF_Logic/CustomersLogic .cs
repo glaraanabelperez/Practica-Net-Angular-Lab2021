@@ -152,7 +152,7 @@ namespace Practica_EF_Logic
           }
           catch (Exception ex)
           {
-                throw new Exception($"Hubo un error unterno {ex.Message}");
+                throw new Exception($"Hubo un error interno {ex.Message}");
           }
 
         }

@@ -21,7 +21,7 @@ namespace Practica_EF_MVC.Controllers
         }
 
         [HttpGet]
-        public List<CustomerView> GetAllCustomers()
+        public List<CustomerResponse> GetAllCustomers()
         {
             var cust = customLogic.GetAll();
 

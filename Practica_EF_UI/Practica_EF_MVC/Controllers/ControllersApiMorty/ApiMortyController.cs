@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Practica_EF_Logic.Practica.EF.Logic.APIMory;
 using Practica_EF_MVC.Models;
 
 namespace Practica_EF_MVC.Controllers
@@ -13,13 +14,35 @@ namespace Practica_EF_MVC.Controllers
 
     public class ApiMortyController : Controller
     {
-        List<CharactersView> listChar;
+        public ApiMortyLogic logic = new ApiMortyLogic();
+
         public ApiMortyController()
                 {
                 }
 
         public ActionResult Index(string mensaje)
         {
+            //mensaje = mensaje == null ? ViewBag.Mensaje = "Bienvenido a la api de Morty!!" : ViewBag.Mensaje = mensaje;
+
+            //List<CharactersView> listChar;
+            //List<ModelApiMorty> listCharLogic;
+            //try
+            //{
+            //    listCharLogic = logic.RequestDataApiMorty();
+            //    listChar = listCharLogic.MapListModelMortyToViewMorty();
+            //    return View(listChar);
+
+            //}
+            //catch (WebException e)
+            //{
+            //    return RedirectToAction("Index", "Error", new { mensaje = e.Message });
+            //}
+            //catch (NotSupportedException e)
+            //{
+            //    return RedirectToAction("Index", "Error", new { mensaje = e.Message });
+            //}
+
+            List<CharactersView> listChar;
 
             ViewBag.Mensaje = mensaje == null ? ViewBag.Mensaje = "Api Morty!!" : ViewBag.Mensaje = mensaje;
             var url = $"https://rickandmortyapi.com/api/character/[1,2,3,4,5,6,7,8]";
@@ -49,6 +72,7 @@ namespace Practica_EF_MVC.Controllers
                 ViewBag.Mensaje = ex.Message;
                 return View();
             }
+
 
         }
 

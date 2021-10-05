@@ -1,8 +1,9 @@
 ﻿@model List<Practica_EF_MVC.Models.CharactersView>
 @{
-        ViewBag.Title = "Personajes";
-    }
+    ViewBag.Title = "Personajes";
+}
 
+<h3 style="float:right;color:dodgerblue">@ViewBag.Mensaje</h3>
 
 <hr />
 <div>
@@ -23,6 +24,6 @@
 </div>
 
 @section Scripts {
-       @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
 }
 

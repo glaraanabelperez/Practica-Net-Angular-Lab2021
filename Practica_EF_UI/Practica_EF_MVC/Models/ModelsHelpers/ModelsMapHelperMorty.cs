@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Web.Helpers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Practica_EF_Logic.Practica.EF.Logic.APIMory;
 using Practica_EF_MVC.Models;
 
 namespace Practica_EF_MVC
@@ -34,6 +35,23 @@ namespace Practica_EF_MVC
             }
 
             return charcterList;
+        }
+
+        public static List<CharactersView> MapListModelMortyToViewMorty(this List<ModelApiMorty> modelApi)
+        {
+            List<CharactersView> chView = new List<CharactersView>();
+
+            foreach (var chList in modelApi)
+            {
+                CharactersView chNew = new CharactersView();
+                chNew.id = chList.id;
+                chNew.name = chList.name;
+                chNew.status = chList.status;
+                chNew.species = chList.species;
+                chNew.img = chList.img;
+            }
+
+            return chView;
         }
     }
 }

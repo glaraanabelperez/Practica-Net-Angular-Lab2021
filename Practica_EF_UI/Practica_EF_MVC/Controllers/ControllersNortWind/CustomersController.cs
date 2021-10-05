@@ -22,14 +22,6 @@ namespace Practica_EF_MVC.Controllers
         public ActionResult Index(string mensaje)
         {
             mensaje=mensaje==null ? ViewBag.Mensaje = "Buen Dia!!" : ViewBag.Mensaje = mensaje;
-            //if (mensaje == null)
-            //{
-            //    ViewBag.Mensaje = "Buen Dia!!";
-            //}
-            //else
-            //{
-            //    ViewBag.Mensaje = mensaje;
-            //}
 
             var cust = customLogic.GetAll();
 

@@ -11,24 +11,30 @@ namespace Practica_EF_MVC
 {
     public static class ModelsMapHelpersMorty
     {
-        public static List<CharactersView> MapCustomerToCustomerView(this string stringResponse)
+        public static List<CharactersView> SetCharactersViewOfJsonMorty(this string stringResponse)
         {
             List<CharactersView> charcterList = new List<CharactersView>();
 
-            JObject json = JObject.Parse(stringResponse);
+            //"image": "https://rickandmortyapi.com/api/character/avatar/361.jpeg",
+            JArray jsonArray = JArray.Parse(stringResponse);
+            //charcterList=JsonConvert.DeserializeObject<CharactersView>(jsonArray);
 
-            var titleProp = json.Children<JProperty>().LastOrDefault(z => z.Name == "results");
-            if (titleProp != null)
-            {
-                var list=titleProp.ToList();
-               
-            }
-            //foreach (JObject jsonCharacters in json.Children<JObject>())
+            //foreach (var ch in jsonArray.Children().ToList())
             //{
+              for(var i=0; i< jsonArray.Children().ToList().Count; i++)
+            { 
 
-            //}
+                CharactersView newChar = new CharactersView();
+                newChar.id = (int)jsonArray[i]["id"];
+                newChar.name = (string)jsonArray[i]["name"];
+                newChar.status = (string)jsonArray[i]["status"];
+                newChar.species = (string)jsonArray[i]["species"];
+                newChar.img = (string)jsonArray[i]["image"];
+                charcterList.Add(newChar);
+            }
+
             return charcterList;
-
         }
     }
 }
+

@@ -7,13 +7,15 @@ namespace Practica_EF_MVC.Models
 {
     public class CharactersView
     {
-        public string id { get; set; }
+        public int id { get; set; }
 
         public string name { get; set; }
 
         public string status { get; set; }
 
         public string species { get; set; }
+
+        public string img { get; set; }
 
         public  CharactersView(){}
 

@@ -13,6 +13,7 @@ namespace Practica_EF_MVC.Controllers
 
     public class ApiMortyController : Controller
     {
+        List<CharactersView> listChar;
         public ApiMortyController()
                 {
                 }
@@ -20,8 +21,8 @@ namespace Practica_EF_MVC.Controllers
         public ActionResult Index(string mensaje)
         {
 
-            mensaje = mensaje == null ? ViewBag.Mensaje = "Buen Dia!!" : ViewBag.Mensaje = mensaje;
-            var url = $"https://rickandmortyapi.com/api/character";
+            ViewBag.Mensaje = mensaje == null ? ViewBag.Mensaje = "Api Morty!!" : ViewBag.Mensaje = mensaje;
+            var url = $"https://rickandmortyapi.com/api/character/[1,2,3,4,5,6,7,8]";
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
             request.ContentType = "application/json";
@@ -37,7 +38,7 @@ namespace Practica_EF_MVC.Controllers
                         using (StreamReader objReader = new StreamReader(strReader))
                         {
                             string responseBody = objReader.ReadToEnd();
-                            List<CharactersView> listChar = responseBody.MapCustomerToCustomerView();
+                            listChar = responseBody.SetCharactersViewOfJsonMorty();
                             return View(listChar);
                         }
                     }
@@ -45,18 +46,16 @@ namespace Practica_EF_MVC.Controllers
             }
             catch (WebException ex)
             {
+                ViewBag.Mensaje = ex.Message;
                 return View();
             }
 
-            return View();
         }
 
-       
+        
 
     }
-
-    
-
+  
 
 }
 

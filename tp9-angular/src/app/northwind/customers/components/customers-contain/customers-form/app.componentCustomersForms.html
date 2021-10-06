@@ -1,0 +1,43 @@
+<p>hijo form</p>
+<form [formGroup]="uploadForm" #form>
+  
+    <div class="bloque1">
+
+      <input type="text" class="form-control"  [value]="" formControlName="id">
+      <div class="form-group col-md-3">
+        <label for="inputCompanyName">Empresa</label>
+        <input type="text" class="form-control" placeholder="Empresa" [value]=""
+        formControlName="companyName" [ngClass]="{'is-invalid': submitted && f.companyName.errors}" >
+      </div>
+      <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
+        <div *ngIf="f.companyName.errors.required"> Por favor ingrese datos</div>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="inputContactName">Contacto </label>
+        <input type="text" class="form-control" placeholder="Nombre del Contacto" [value]=""
+        formControlName="ContactName" [ngClass]="{'is-invalid': submitted && f.ContactName.errors}" >
+      </div>
+      <div *ngIf="submitted && f.ContactName.errors" class="invalid-feedback">
+        <div *ngIf="f.ContactName.errors.required"> Por favor ingrese datos</div>
+      </div>
+
+    </div>
+     
+    <div class="form-group col-md-12">
+      <label for="country">Pais</label>
+      <input type="text" class="form-control" placeholder="Pais" [value]=""
+      formControlName="country" >
+    </div>
+    <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+      <div *ngIf="f.country.errors.required"> Por favor ingrese datos</div>
+    </div>
+
+    <br>
+    <div class="product-detail2">
+      <div class="buttons">
+        <button class="add"><p style="padding-top: 10px;" (click)="onSubmit()" type="submit" >GUARDAR</p></button>
+        <!-- <button class="add"><p style="padding-top: 10px;" (click)="limpiar()">CANCELAR</p></button> -->
+      </div>
+    </div>
+  </form>

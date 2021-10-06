@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AppNorthwindModule } from './northwind/app.northwind-module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppCustomersModule } from './northwind/customers/app.customers-module';
+
 
 
 @NgModule({
@@ -16,8 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppNorthwindModule,
-    BrowserAnimationsModule
+    AppCustomersModule,
   ],
 
   providers: [],

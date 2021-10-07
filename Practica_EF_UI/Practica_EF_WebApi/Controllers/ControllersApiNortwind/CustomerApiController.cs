@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Practica_EF_Api.Models.ModelsRequest;
 using Practica_EF_Entities;
 using Practica_EF_Logic;
@@ -10,6 +11,7 @@ using Practica_EF_MVC.Models;
 
 namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class CustomerApiController : ApiController,IABMControllers<CustomerRequest>
     {
         public CustomersLogic customLogic = new CustomersLogic();

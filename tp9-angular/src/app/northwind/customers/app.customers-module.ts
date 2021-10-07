@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { ServiceNorthwind } from './services/service_northwind.service';
+import { HttpClientModule} from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponentCustomers } from './components/customers-contain/app.componentCustomers';
 import { AppComponentCustomersForms } from './components/customers-contain/customers-form/app.componentCustomersForms';
-import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
@@ -21,12 +23,14 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
   ],
-  providers: [],
+
+  providers: [ServiceNorthwind, HttpClientModule],
 
   bootstrap: [AppComponentCustomers]
   

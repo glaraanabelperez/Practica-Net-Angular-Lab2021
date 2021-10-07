@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./app.componentCustomersForms.sass']
 })
 
-export class AppComponentCustomersForms implements OnInit{
+export class AppComponentCustomersForms {
 
   uploadForm: FormGroup;
   actionBtnFormEditar: boolean=true;
@@ -16,7 +16,7 @@ export class AppComponentCustomersForms implements OnInit{
   constructor( private formBuilder:FormBuilder){
 
     this.uploadForm=this.formBuilder.group({
-      id:[null],
+      // id:[null],
       companyName:['', [Validators.required]],
       contactName:['', [Validators.required]],
       country:['', [Validators.required]]
@@ -25,10 +25,10 @@ export class AppComponentCustomersForms implements OnInit{
 
   }
 
-  ngOnInit(): void {
+  // ngOnInit(): void {
 
-    throw new Error('Method not implemented.');
-  }
+  //   throw new Error('Method not implemented.');
+  // }
   
   get f(){ return this.uploadForm.controls;}
 

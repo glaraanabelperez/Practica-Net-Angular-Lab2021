@@ -2,4 +2,28 @@
     <h1>customers padre</h1>
     <app-component-customers-forms></app-component-customers-forms>
 </div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Codigo cliente</th>
+        <th scope="col">Empresa</th>
+        <th scope="col">Contacto</th>
+        <th scope="col">Pais</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of customers">
+        <th scope="row">1</th>
+        <td>{{c.id}}</td>
+        <td>{{c.companyName}}</td>
+        <td>{{c.contactName}}</td>
+        <td>{{c.pais}}</td>
+        <td></td>
+        <td></td>
+
+      </tr>
+    </tbody>
+  </table>
+
+
    

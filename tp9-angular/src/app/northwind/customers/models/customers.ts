@@ -1,5 +1,5 @@
 
-export class Customers{
+export interface Customers{
     
     customerID: string;
 

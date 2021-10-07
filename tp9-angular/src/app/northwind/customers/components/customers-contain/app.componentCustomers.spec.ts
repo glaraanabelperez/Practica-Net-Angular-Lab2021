@@ -19,11 +19,11 @@ describe('AppComponentCustomers', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'tp9-angular'`, () => {
-    const fixture = TestBed.createComponent(AppComponentCustomers);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('tp9-angular');
-  });
+  // it(`should have as title 'tp9-angular'`, () => {
+  //   const fixture = TestBed.createComponent(AppComponentCustomers);
+  //   const app = fixture.componentInstance;
+  //   expect(app.title).toEqual('tp9-angular');
+  // });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponentCustomers);

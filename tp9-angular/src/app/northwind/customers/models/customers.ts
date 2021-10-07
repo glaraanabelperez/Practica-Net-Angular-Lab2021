@@ -1,13 +1,13 @@
 
 export interface Customers{
     
-    customerID: string;
+    CustomerID: string;
 
-    companyName: string;
+    CompanyName: string;
 
-    contactName: string;
+    ContactName: string;
 
-    country: string;
+    Country: string;
 
     
 }

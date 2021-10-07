@@ -18,15 +18,15 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponentCustomers,
     AppComponentCustomersForms,
+    AppComponentCustomers,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
+    RouterModule.forRoot(routes),
     CommonModule,
   ],
 

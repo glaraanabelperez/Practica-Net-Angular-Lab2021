@@ -1,29 +1,33 @@
-<div>
+<div class="containerForm">
     <h1>customers padre</h1>
     <app-component-customers-forms></app-component-customers-forms>
 </div>
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Codigo cliente</th>
-        <th scope="col">Empresa</th>
-        <th scope="col">Contacto</th>
-        <th scope="col">Pais</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let c of customers">
-        <th scope="row">1</th>
-        <td>{{c.id}}</td>
-        <td>{{c.companyName}}</td>
-        <td>{{c.contactName}}</td>
-        <td>{{c.pais}}</td>
-        <td></td>
-        <td></td>
+<div class="containerCustomer">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Codigo cliente</th>
+            <th scope="col">Empresa</th>
+            <th scope="col">Contacto</th>
+            <th scope="col">Pais</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of customers ">
+            <td>{{c.CustomerID}}</td>
+            <td>{{c.CompanyName}}</td>
+            <td>{{c.ContactName}}</td>
+            <td>{{c.Country}}</td>
+            <!-- <td><button type="button"><i class="fa fa-trash" aria-hidden="true"></i></td> -->
+            <!-- npm install --save @fortawesome/fontawesome-free -->
+            <td class="td-editar"><button type="button" class="btn btn-light" (click)="edit(c.CustomerID)">Editar</button></td>
+            <td><button type="button" class="btn btn-danger"><p>X</p></button></td>
 
-      </tr>
-    </tbody>
-  </table>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
 
 
    

@@ -21,4 +21,10 @@ export class ServiceNorthwind{
         return this.http.get<Array<Customers>>(url);
     }
 
+    GetById(custId:string):Observable<any>{
+        let idString:string='?custId=' + custId;
+        let url=environment.northwindApi + this.endpoint + idString;
+        return this.http.get<any>(url);
+    }
+
 }

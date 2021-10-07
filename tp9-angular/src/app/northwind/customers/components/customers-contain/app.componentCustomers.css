@@ -1,22 +1,37 @@
-.containerForm {
+.containerCustomers {
+  margin: 5%;
+  background-color: greyscale();
+}
+
+.containerCustomers h2 {
+  float: right;
+  margin-right: 5%;
+  margin-bottom: 3%;
+}
+
+.containerCustomers .containerForm {
   margin: 3%;
 }
 
-.containerCustomer {
+.containerCustomers .containerListCustomer {
   margin: 3%;
 }
 
-.containerCustomer table tbody .td-editar {
+.containerCustomers .containerListCustomer table tbody .td-editar {
   width: 5%;
 }
 
-.containerCustomer table tbody td {
+.containerCustomers .containerListCustomer table tbody td {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-.containerCustomer table tbody td .btn-danger {
+.containerCustomers .containerListCustomer table tbody td .btn {
+  font-size: 0.7rem;
+}
+
+.containerCustomers .containerListCustomer table tbody td .btn-danger {
   width: 50%;
   height: 50%;
   padding: 0%;
@@ -24,9 +39,15 @@
   margin-left: 7px;
 }
 
-.containerCustomer table tbody td .btn-danger p {
-  font-size: 1rem;
+.containerCustomers .containerListCustomer table tbody td .btn-danger p {
   text-align: center;
   margin: auto;
+  color: greyscale();
+}
+
+.containerCustomers .containerListCustomer table tbody td .btn-light p {
+  text-align: center;
+  margin: auto;
+  color: greyscale();
 }
 /*# sourceMappingURL=app.componentCustomers.css.map */

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Customers } from '../../../models/customers';
+import { ServiceNorthwind } from '../../../services/service_northwind.service';
 
 
 @Component({
@@ -8,28 +10,40 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./app.componentCustomersForms.sass']
 })
 
-export class AppComponentCustomersForms {
+export class AppComponentCustomersForms implements OnInit{
 
+  @Input() elementToEdit: Customers;
   uploadForm: FormGroup;
-  actionBtnFormEditar: boolean=true;
+  actionBtnFormEditar: boolean=false;
+  customer:Customers;
 
-  constructor( private formBuilder:FormBuilder){
+
+  constructor( private formBuilder:FormBuilder, private _serviceNorthwind: ServiceNorthwind){
 
     this.uploadForm=this.formBuilder.group({
-      // id:[null],
-      companyName:['', [Validators.required]],
-      contactName:['', [Validators.required]],
-      country:['', [Validators.required]]
+      CustomerID:[null],
+      CompanyName:['', [Validators.required]],
+      ContactName:['', [Validators.required]],
+      Country:['', [Validators.required]]
 
     })
+  }
+
+  ngOnInit(): void {
+    // if(this.elementToEdit!=null){
+    //   // this.editElement(this.elementToEdit);
+    //   console.log(this.elementToEdit)
+    // }
+  }
+
+  ngOnChanges(): void {
+    if(this.elementToEdit!=null){
+      this.editElement(this.elementToEdit);
+    }
+    console.log(this.elementToEdit)
 
   }
 
-  // ngOnInit(): void {
-
-  //   throw new Error('Method not implemented.');
-  // }
-  
   get f(){ return this.uploadForm.controls;}
 
   submitted=false;
@@ -38,13 +52,31 @@ export class AppComponentCustomersForms {
     if(this.uploadForm.invalid){
       return;
     }else{
+
       if(this.actionBtnFormEditar){
-        return;
+        this.customer=this.uploadForm.value;
+        console.log("aca", this.customer)
+        // this.customer.CustomerID=this.elementToEdit.CustomerID;
+        this._serviceNorthwind.Put(this.customer).subscribe(res => {
+          console.log(res);
+        });
+        this.actionBtnFormEditar=false;
       }else{
-        return;
+        this.customer=this.uploadForm.value;
+        console.log(this.customer)
+        this._serviceNorthwind.Post(this.customer);
       }
       
     }
 
+  }
+
+  editElement(cust:Customers) :void{
+    this.uploadForm.controls['CustomerID'].setValue(cust.CustomerID ? cust.CustomerID : '');
+    this.uploadForm.controls['CompanyName'].setValue(cust.CompanyName ? cust.CompanyName : '')
+    this.uploadForm.controls['ContactName'].setValue(cust.ContactName ? cust.ContactName : '')
+    this.uploadForm.controls['Country'].setValue(cust.Country ? cust.Country : '')
+    window.scrollTo(0,0);
+    this.actionBtnFormEditar=true;
   }
 }

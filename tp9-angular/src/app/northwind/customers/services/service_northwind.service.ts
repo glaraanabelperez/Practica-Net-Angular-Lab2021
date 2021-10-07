@@ -15,16 +15,30 @@ export class ServiceNorthwind{
 
     constructor(private http:HttpClient){}
 
-    public GetAll(): Observable<Array<Customers>>{
+    GetAll(): Observable<Array<Customers>>{
 
         let url=environment.northwindApi + this.endpoint;
         return this.http.get<Array<Customers>>(url);
     }
 
     GetById(custId:string):Observable<any>{
+
         let idString:string='?custId=' + custId;
         let url=environment.northwindApi + this.endpoint + idString;
         return this.http.get<any>(url);
+    }
+
+    Put(customer:Customers):Observable<any>{
+        let url=environment.northwindApi + this.endpoint;
+        let rsta=this.http.put<Array<Customers>>(url, customer);
+        console.log("rsta", rsta)
+        return rsta;
+    }
+
+    Post(customer:Customers):Observable<any>{
+
+        let url=environment.northwindApi + this.endpoint;
+        return this.http.post<Array<Customers>>(url, customer);
     }
 
 }

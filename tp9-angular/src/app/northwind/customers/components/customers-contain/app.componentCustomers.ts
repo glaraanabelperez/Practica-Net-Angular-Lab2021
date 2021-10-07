@@ -11,6 +11,7 @@ export class AppComponentCustomers implements OnInit{
 
   customers: Array<Customers>=[];
   cust: Customers;
+  elementToEdit :Customers;
 
   constructor(private _serviceNorthwind: ServiceNorthwind){
     // this.customers=new Array<Customers>();
@@ -29,8 +30,8 @@ export class AppComponentCustomers implements OnInit{
 
   edit(id : string){
     this._serviceNorthwind.GetById(id).subscribe(res=>{
-      this.cust=res;
-      console.log(this.cust);
+      this.elementToEdit=res;
+      console.log(this.elementToEdit);
     })
   }
 

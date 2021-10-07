@@ -1,1 +1,12 @@
-/* No CSS *//*# sourceMappingURL=app.componentCustomersForms.css.map */
+form {
+  margin-left: 5%;
+}
+
+form .bloque1 .form-group {
+  margin-bottom: 3%;
+}
+
+form .bloque1 .form-group .btn {
+  font-size: 0.7rem;
+}
+/*# sourceMappingURL=app.componentCustomersForms.css.map */

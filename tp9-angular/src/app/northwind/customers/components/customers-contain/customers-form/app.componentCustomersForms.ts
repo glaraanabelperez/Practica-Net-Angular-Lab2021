@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Customers } from '../../../models/customers';
 import { ServiceNorthwind } from '../../../services/service_northwind.service';
-
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-component-customers-forms',
@@ -18,7 +18,7 @@ export class AppComponentCustomersForms implements OnInit{
   customer:Customers;
 
 
-  constructor( private formBuilder:FormBuilder, private _serviceNorthwind: ServiceNorthwind){
+  constructor( private formBuilder:FormBuilder, private _serviceNorthwind: ServiceNorthwind, private router:Router){
 
     this.uploadForm=this.formBuilder.group({
       CustomerID:[null],
@@ -59,12 +59,16 @@ export class AppComponentCustomersForms implements OnInit{
         // this.customer.CustomerID=this.elementToEdit.CustomerID;
         this._serviceNorthwind.Put(this.customer).subscribe(res => {
           console.log(res);
+          window.location.reload()
         });
         this.actionBtnFormEditar=false;
       }else{
         this.customer=this.uploadForm.value;
         console.log(this.customer)
-        this._serviceNorthwind.Post(this.customer);
+        this._serviceNorthwind.Post(this.customer).subscribe(res => {
+          console.log(res);
+          window.location.reload()
+        });;
       }
       
     }

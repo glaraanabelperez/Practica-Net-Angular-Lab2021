@@ -68,23 +68,10 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
             }
             try
             {
+                customerRequest.setNewId();
                 Customers customerEntitie = customerRequest.MapCustomerRequestToCustomer();
-                if (ModelState.IsValid)
-                {
-                    Random rnd = new Random();
-                    int id_num = rnd.Next(1, 10);
-                    string id_String = "a";
-                    id_String += id_num.ToString();
-                    id_String += id_num.ToString();
-                    customerEntitie.CustomerID = id_String;
-                    var rst = customLogic.Insert(customerEntitie);
-
-                    return Ok<string>("Datos Ingresados");
-                }
-                else
-                {
-                    return BadRequest("Los Datos no son validos, o el id ya existe");
-                }
+                customLogic.Insert(customerEntitie);
+                return Ok<string>("Datos Ingresados");
             }
             catch (Exception ex)
             {

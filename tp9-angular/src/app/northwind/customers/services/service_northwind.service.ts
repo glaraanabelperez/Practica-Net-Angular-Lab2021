@@ -38,7 +38,11 @@ export class ServiceNorthwind{
     Post(customer:Customers):Observable<any>{
 
         let url=environment.northwindApi + this.endpoint;
-        return this.http.post<Array<Customers>>(url, customer);
+        let rsta=this.http.post<Array<Customers>>(url, customer);
+        console.log("rsta", rsta);
+
+        return rsta;
+
     }
 
 }

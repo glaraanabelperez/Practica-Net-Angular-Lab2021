@@ -105,7 +105,7 @@ namespace Practica_EF_MVC.Controllers
         public String SetNewId()
         {
             Random rnd = new Random();
-            int id_num = rnd.Next(1, 50);
+            int id_num = rnd.Next(1, 99);
             string id_String = "E";
             id_String += id_num.ToString();
 

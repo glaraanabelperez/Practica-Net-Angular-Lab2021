@@ -1,4 +1,4 @@
-<div style="width: 100vw;" class="containerCustomers">
+<div class="containerCustomers">
   <h2>Clientes</h2>
   <br>
   <div class="containerForm">
@@ -6,26 +6,25 @@
   </div>
   <hr>
   <div class="containerListCustomer">
-      <table class="table table-striped">
+      <table class="table ">
           <thead>
             <tr>
-              <th scope="col">Codigo cliente</th>
               <th scope="col">Empresa</th>
               <th scope="col">Contacto</th>
               <th scope="col">Pais</th>
             </tr>
           </thead>
-          <tbody>
-            <tr *ngFor="let c of customers ">
-              <td>{{c.CustomerID}}</td>
+          <tbody *ngFor="let c of customers ">
+            <tr>
               <td>{{c.CompanyName}}</td>
               <td>{{c.ContactName}}</td>
-              <td>{{c.Country}}</td>
-              <!-- <td><button type="button"><i class="fa fa-trash" aria-hidden="true"></i></td> -->
-              <!-- npm install --save @fortawesome/fontawesome-free -->
-              <td class="td-editar"><button type="button" class="btn btn-light" (click)="edit(c.CustomerID)">Editar</button></td>
-              <td><button type="button" class="btn btn-danger"><p>X</p></button></td>
+              <td>{{c.Country}}</td>   
             </tr>
+            <div style="margin-top: 5%;">
+              <button type="button" class=" btn btn-light" (click)="edit(c.CustomerID)">Editar</button>
+              <button type="button" class=" btn btn-light2" (click)="delete(c.CustomerID)">Eliminar</button>
+              <br>
+            </div>
           </tbody>
         </table>
   </div>

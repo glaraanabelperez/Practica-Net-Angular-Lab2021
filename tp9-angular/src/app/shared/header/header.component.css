@@ -74,7 +74,10 @@
 
 @media (max-width: 767px) {
   navbar {
-    width: 100%;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+            flex-direction: column !important;
   }
 }
 /*# sourceMappingURL=header.component.css.map */

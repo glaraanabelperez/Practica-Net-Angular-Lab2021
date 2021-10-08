@@ -20,33 +20,28 @@ div .containerListCustomer table tbody .td-editar {
   width: 5%;
 }
 
-div .containerListCustomer table tbody td {
+div .containerListCustomer table tbody div {
+  margin: 5px;
+  margin-bottom: 30px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-div .containerListCustomer table tbody td .btn {
+div .containerListCustomer table tbody div .btn {
   font-size: 0.7rem;
 }
 
-div .containerListCustomer table tbody td .btn-danger {
-  width: 50%;
-  height: 50%;
-  padding: 0%;
-  margin-top: 7px;
-  margin-left: 7px;
-}
-
-div .containerListCustomer table tbody td .btn-danger p {
+div .containerListCustomer table tbody div .btn-light2 {
   text-align: center;
   margin: auto;
-  color: greyscale();
+  background-color: #e75757;
+  color: white;
 }
 
-div .containerListCustomer table tbody td .btn-light p {
-  text-align: center;
-  margin: auto;
-  color: greyscale();
+div .containerListCustomer table tbody div .btn-light {
+  background-color: #e4e3e3;
+  color: white;
+  margin-right: 5px;
 }
 /*# sourceMappingURL=app.componentCustomers.css.map */

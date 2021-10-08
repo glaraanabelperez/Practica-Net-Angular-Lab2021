@@ -15,6 +15,14 @@ export class ServiceNorthwind{
 
     constructor(private http:HttpClient){}
 
+    Delete(custId:string):Observable<any>{
+
+        let idString:string='?custId=' + custId;
+        let url=environment.northwindApi + this.endpoint + idString;
+        return this.http.delete<any>(url);
+    }
+
+
     GetAll(): Observable<Array<Customers>>{
 
         let url=environment.northwindApi + this.endpoint;

@@ -35,4 +35,11 @@ export class AppComponentCustomers implements OnInit{
     })
   }
 
+  delete(id:string){
+    this._serviceNorthwind.Delete(id).subscribe(res=>{
+      this.elementToEdit=res;
+      console.log(this.elementToEdit);
+    })
+  }
+
 }

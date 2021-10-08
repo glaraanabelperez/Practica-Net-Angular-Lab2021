@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AppCustomersModule } from './northwind/customers/app.customers-module';
+import { HeaderComponent } from './shared/header/header.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent
   ],
 
   imports: [

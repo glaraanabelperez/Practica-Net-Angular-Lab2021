@@ -73,7 +73,20 @@
 }
 
 @media (max-width: 767px) {
-  navbar {
+  .navbar {
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+            flex-direction: column !important;
+  }
+  .navbar .logo {
+    width: 30%;
+  }
+  .navbar .logo img {
+    padding: 3%;
+    width: 60%;
+  }
+  .navbar .rigth {
     -webkit-box-orient: vertical !important;
     -webkit-box-direction: normal !important;
         -ms-flex-direction: column !important;

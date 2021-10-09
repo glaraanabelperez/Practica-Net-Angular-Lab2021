@@ -126,34 +126,17 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
             {
                 return BadRequest("Los Datos estan vacios");
             }
-
+ 
             try
             {
-                if (customLogic.Exist(custId) != null)
-                {
-                    try
-                    {
-                        customLogic.Delete(custId);
-                        return Ok<string>("Datos eliminados");
-                    }
-                    catch (Exception ex)
-                    {
-                        return InternalServerError(ex);
-                    }
-                }
-                else
-                {
-                    return BadRequest("Los Datos no existen, o el id es nulo");
-                }
+                customLogic.Delete(custId);
+                return Ok<string>("Datos eliminados");
             }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
- 
         }
-
-
     }
 }
 

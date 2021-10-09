@@ -21,26 +21,22 @@ export class AppComponentCustomersForms implements OnInit{
   constructor( private formBuilder:FormBuilder, private _serviceNorthwind: ServiceNorthwind, private router:Router){
 
     this.uploadForm=this.formBuilder.group({
-      CustomerID:[null],
-      CompanyName:['', [Validators.required]],
-      ContactName:['', [Validators.required]],
-      Country:['', [Validators.required]]
+      CustomerID:[''],
+      CompanyName:['', [Validators.required, Validators.maxLength(15), Validators.minLength(3)]],
+      ContactName:['', [Validators.required, Validators.maxLength(15), Validators.minLength(3)]],
+      Country:['', [Validators.required, Validators.maxLength(10), Validators.minLength(3)]]
 
     })
   }
 
   ngOnInit(): void {
-    // if(this.elementToEdit!=null){
-    //   // this.editElement(this.elementToEdit);
-    //   console.log(this.elementToEdit)
-    // }
+
   }
 
   ngOnChanges(): void {
     if(this.elementToEdit!=null){
       this.editElement(this.elementToEdit);
     }
-    console.log(this.elementToEdit)
 
   }
 
@@ -50,24 +46,33 @@ export class AppComponentCustomersForms implements OnInit{
   onSubmit():void{
     this.submitted=true;
     if(this.uploadForm.invalid){
+      alert("Los campos, no pueden estar vacios y tienen un maximo de 10 caracteres.")
       return;
     }else{
 
       if(this.actionBtnFormEditar){
         this.customer=this.uploadForm.value;
         console.log("aca", this.customer)
-        // this.customer.CustomerID=this.elementToEdit.CustomerID;
         this._serviceNorthwind.Put(this.customer).subscribe(res => {
-          console.log(res);
-          window.location.reload()
+          if(res=="OK"){
+            window.location.reload()
+            alert("Ok!! Los datos se editaron bien...")
+          }else{
+            window.location.reload()
+            alert("Ups!! Hubo un error, consulte...")
+          }
         });
         this.actionBtnFormEditar=false;
       }else{
         this.customer=this.uploadForm.value;
-        console.log(this.customer)
         this._serviceNorthwind.Post(this.customer).subscribe(res => {
-          console.log(res);
-          window.location.reload()
+          if(res=="OK"){
+            window.location.reload()
+            alert("Ok!! Los datos se ingresaron bien...")
+          }else{
+            window.location.reload()
+            alert("Ups!! Hubo un error, consulte...")
+          }
         });;
       }
       

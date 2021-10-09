@@ -71,7 +71,7 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
                 customerRequest.setNewId();
                 Customers customerEntitie = customerRequest.MapCustomerRequestToCustomer();
                 customLogic.Insert(customerEntitie);
-                return Ok<string>("Datos Ingresados");
+                return Ok<string>("OK");
             }
             catch (Exception ex)
             {
@@ -101,7 +101,7 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
                     try
                     {
                         customLogic.Update(customerEntitie);
-                        return Ok<string>("Datos editados");
+                        return Ok<string>("OK");
                     }
                     catch (Exception ex)
                     {
@@ -130,7 +130,7 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
             try
             {
                 customLogic.Delete(custId);
-                return Ok<string>("Datos eliminados");
+                return Ok<string>("OK");
             }
             catch (Exception ex)
             {

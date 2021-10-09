@@ -24,20 +24,26 @@ export class AppComponentCustomers implements OnInit{
   GetAllCustomers(){
     this._serviceNorthwind.GetAll().subscribe(res=>{
       this.customers=res;
-      console.log(this.customers);
     })
   }
 
   edit(id : string){
     this._serviceNorthwind.GetById(id).subscribe(res=>{
       this.elementToEdit=res;
-      console.log(this.elementToEdit);
     })
   }
 
   delete(id:string){
     this._serviceNorthwind.Delete(id).subscribe(res=>{
-      console.log(res);
+      console.log("res", res);
+      if(res=="OK"){
+        window.location.reload()
+        alert("Ok!! Los datos se eliminaron bien...")
+      }else{
+        window.location.reload()
+        alert("Ups!! Hubo un error, consulte...")
+      }
+     
     })
   }
 

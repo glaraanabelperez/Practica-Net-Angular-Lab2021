@@ -1,18 +1,15 @@
 <form [formGroup]="uploadForm" #form>
     <h3 class="msj-form"><span>{{msj_to_usurio}}</span> su formulario >></h3>
     <div class="bloque1">
-      
       <div class="form-group col-md-6">
-        <!-- <label for="companyName">Empresa</label> -->
         <input type="text" class="form-control" placeholder="Empresa" [value]=""
         formControlName="CompanyName" [ngClass]="{'is-invalid': submitted && f.CompanyName.errors}" >
       </div>
-      <!-- <div *ngIf="submitted && f.CompanyName.errors" class="invalid-feedback">
+      <div *ngIf="submitted && f.CompanyName.errors" class="invalid-feedback">
         <div *ngIf="f.CompanyName.errors.required"> Por favor ingrese datos</div>
-      </div> -->
+      </div>
 
       <div class="form-group col-md-6">
-        <!-- <label for="contactName">Contacto </label> -->
         <input type="text" class="form-control" placeholder="Nombre del Contacto" [value]=""
         formControlName="ContactName" [ngClass]="{'is-invalid': submitted && f.ContactName.errors}" >
       </div>
@@ -27,15 +24,14 @@
       <input type="text" class="form-control" placeholder="Pais" [value]=""
       formControlName="Country" [ngClass]="{'is-invalid': submitted && f.Country.errors}" >
     </div>
-    <!-- <div *ngIf="submitted && f.Country.errors" class="invalid-feedback">
+    <div *ngIf="submitted && f.Country.errors" class="invalid-feedback">
       <div *ngIf="f.Country.errors.required"> Por favor ingrese datos</div>
-    </div> -->
+    </div>
 
     <br>
     <div class="buttons-form">
       <div class="buttons">
         <button type="button" class="btn btn-light" (click)="onSubmit()">Guardar</button>
-        <!-- <button class="add"><p style="padding-top: 10px;" (click)="limpiar()">CANCELAR</p></button> -->
       </div>
       <div class="buttons">
         <button type="button" class="btn btn-light" (click)="clean()">Cancelar</button>

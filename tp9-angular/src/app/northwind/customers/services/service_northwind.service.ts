@@ -19,7 +19,8 @@ export class ServiceNorthwind{
 
         let idString:string='?custId=' + custId;
         let url=environment.northwindApi + this.endpoint + idString;
-        return this.http.delete<any>(url);
+        let rsta=this.http.delete<any>(url);
+        return rsta;
     }
 
 

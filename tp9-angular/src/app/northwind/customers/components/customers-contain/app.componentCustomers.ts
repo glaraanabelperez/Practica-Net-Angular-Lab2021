@@ -34,17 +34,16 @@ export class AppComponentCustomers implements OnInit{
   }
 
   delete(id:string){
-    this._serviceNorthwind.Delete(id).subscribe(res=>{
-      console.log("res", res);
-      if(res=="OK"){
-        window.location.reload()
-        alert("Ok!! Los datos se eliminaron bien...")
-      }else{
-        window.location.reload()
-        alert("Ups!! Hubo un error, consulte...")
-      }
-     
-    })
+      this._serviceNorthwind.Delete(id).subscribe(
+        res=>{
+        if(res=="OK"){
+          window.location.reload()
+          alert("Ok!! Los datos se eliminaron bien...")
+        }
+      },
+      err => {
+        alert("Ops!!, Los datos estan siendo usados por el sistema, no pueden eliminarse ...")
+      });
   }
 
 }

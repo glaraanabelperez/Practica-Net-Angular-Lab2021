@@ -31,6 +31,7 @@ namespace Practica_EF_MVC.Controllers
                 ContactName = c.ContactName,
                 CompanyName = c.CompanyName,
                 Country = c.Country
+
             }).ToList();
 
             return customers_view;

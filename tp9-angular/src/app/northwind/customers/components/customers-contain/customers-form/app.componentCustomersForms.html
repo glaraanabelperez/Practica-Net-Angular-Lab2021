@@ -1,5 +1,5 @@
 <form [formGroup]="uploadForm" #form>
-    <h3>Ingrese o edite clientes</h3>
+    <h3 class="msj-form"><span>{{msj_to_usurio}}</span> su formulario >></h3>
     <div class="bloque1">
       
       <div class="form-group col-md-6">
@@ -16,9 +16,9 @@
         <input type="text" class="form-control" placeholder="Nombre del Contacto" [value]=""
         formControlName="ContactName" [ngClass]="{'is-invalid': submitted && f.ContactName.errors}" >
       </div>
-      <!-- <div *ngIf="submitted && f.ContactName.errors" class="invalid-feedback">
+      <div *ngIf="submitted && f.ContactName.errors" class="invalid-feedback">
         <div *ngIf="f.ContactName.errors.required"> Por favor ingrese datos</div>
-      </div> -->
+      </div>
 
     </div>
      
@@ -32,10 +32,13 @@
     </div> -->
 
     <br>
-    <div class="product-detail2">
+    <div class="buttons-form">
       <div class="buttons">
         <button type="button" class="btn btn-light" (click)="onSubmit()">Guardar</button>
         <!-- <button class="add"><p style="padding-top: 10px;" (click)="limpiar()">CANCELAR</p></button> -->
+      </div>
+      <div class="buttons">
+        <button type="button" class="btn btn-light" (click)="clean()">Cancelar</button>
       </div>
     </div>
   </form>

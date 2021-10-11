@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Customers } from '../../../models/customers';
 import { ServiceNorthwind } from '../../../services/service_northwind.service';
 import { Router } from '@angular/router'
+import { Observable, Observer } from 'rxjs';
 
 @Component({
   selector: 'app-component-customers-forms',
@@ -16,6 +17,25 @@ export class AppComponentCustomersForms implements OnInit{
   uploadForm: FormGroup;
   actionBtnFormEditar: boolean=false;
   customer:Customers;
+  msj_to_usurio :string=null;
+  myObserver_msj:Observer <any> ={
+    next: actionBtnFormEditar => {
+      if(actionBtnFormEditar){
+       this. msj_to_usurio="Edite"
+      }else{
+        this. msj_to_usurio="Ingrese"
+      }
+    },
+    error: function (err: any): void {
+      throw new Error('Function not implemented.');
+    },
+    complete: function (): void {
+      throw new Error('Function not implemented.');
+    }
+  }
+  myObservable_msj=new Observable(suscriber =>{
+    suscriber.next(this.actionBtnFormEditar);
+  })
 
 
   constructor( private formBuilder:FormBuilder, private _serviceNorthwind: ServiceNorthwind, private router:Router){
@@ -36,11 +56,26 @@ export class AppComponentCustomersForms implements OnInit{
   ngOnChanges(): void {
     if(this.elementToEdit!=null){
       this.editElement(this.elementToEdit);
+      this.actionBtnFormEditar=true;
+      this.myObservable_msj.subscribe(this.myObserver_msj)
     }
-
   }
 
   get f(){ return this.uploadForm.controls;}
+
+  clean(){
+    this.uploadForm.reset();
+    this.actionBtnFormEditar=false;
+      this.myObservable_msj.subscribe(this.myObserver_msj)
+  }
+
+  editElement(cust:Customers) :void{
+    this.uploadForm.controls['CustomerID'].setValue(cust.CustomerID ? cust.CustomerID : '');
+    this.uploadForm.controls['CompanyName'].setValue(cust.CompanyName ? cust.CompanyName : '')
+    this.uploadForm.controls['ContactName'].setValue(cust.ContactName ? cust.ContactName : '')
+    this.uploadForm.controls['Country'].setValue(cust.Country ? cust.Country : '')
+    window.scrollTo(0,0);
+  }
 
   submitted=false;
   onSubmit():void{
@@ -80,12 +115,5 @@ export class AppComponentCustomersForms implements OnInit{
 
   }
 
-  editElement(cust:Customers) :void{
-    this.uploadForm.controls['CustomerID'].setValue(cust.CustomerID ? cust.CustomerID : '');
-    this.uploadForm.controls['CompanyName'].setValue(cust.CompanyName ? cust.CompanyName : '')
-    this.uploadForm.controls['ContactName'].setValue(cust.ContactName ? cust.ContactName : '')
-    this.uploadForm.controls['Country'].setValue(cust.Country ? cust.Country : '')
-    window.scrollTo(0,0);
-    this.actionBtnFormEditar=true;
-  }
+  
 }

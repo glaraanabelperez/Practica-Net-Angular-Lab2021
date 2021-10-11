@@ -1,28 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-// import { HttpClientModule} from '@angular/common/http';
-// import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AppCustomersModule } from './northwind/customers/app.customers-module';
 import { HeaderComponent } from './shared/header/header.component';
+import { AppNorthwindModule } from './northwind/app.northwind-module';
+import { AppComponentMorty } from './apiMorty/app.componenteMorty';
 
+const routes: Routes = [
+  {path: '', redirectTo: 'northwind', pathMatch:'full'},
+  {path: 'apiMorty', component: AppComponentMorty},
 
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    AppComponentMorty
   ],
 
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppCustomersModule,
-    // HttpClientModule,
-    // CommonModule
+    AppNorthwindModule,
+    RouterModule.forRoot(routes),
   ],
 
   providers: [],

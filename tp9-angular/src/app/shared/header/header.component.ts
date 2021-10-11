@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  apiNortShow:boolean;
+
+  constructor() { 
+    this.apiNortShow=true;
+  }
 
   ngOnInit(): void {
   }
+ 
+  showApiNort(){
+    console.log(this.apiNortShow)
+    this.apiNortShow=true;
+  }
+
+  showApiMorty(){
+    console.log(this.apiNortShow)
+    this.apiNortShow=false;
+  }
+
 
 }

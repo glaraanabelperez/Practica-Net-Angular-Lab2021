@@ -57,8 +57,6 @@
     <Compile Include="OrdersDetailsLogic.cs" />
     <Compile Include="Practica.EF.Logic.APIMory\ConexionApiMorty.cs" />
     <Compile Include="Practica.EF.Logic.APIMory\ApiMortyLogic.cs" />
-    <Compile Include="Practica.EF.Logic.APIMory\ModelApiMorty.cs" />
-    <Compile Include="Practica.EF.Logic.APIMory\HelperesMapJsonMorty.cs" />
     <Compile Include="ShippersLogic.cs" />
     <Compile Include="OrdersLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

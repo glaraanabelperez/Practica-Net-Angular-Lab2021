@@ -22,56 +22,56 @@ namespace Practica_EF_MVC.Controllers
 
         public ActionResult Index(string mensaje)
         {
-            //mensaje = mensaje == null ? ViewBag.Mensaje = "Bienvenido a la api de Morty!!" : ViewBag.Mensaje = mensaje;
-
-            //List<CharactersView> listChar;
-            //List<ModelApiMorty> listCharLogic;
-            //try
-            //{
-            //    listCharLogic = logic.RequestDataApiMorty();
-            //    listChar = listCharLogic.MapListModelMortyToViewMorty();
-            //    return View(listChar);
-
-            //}
-            //catch (WebException e)
-            //{
-            //    return RedirectToAction("Index", "Error", new { mensaje = e.Message });
-            //}
-            //catch (NotSupportedException e)
-            //{
-            //    return RedirectToAction("Index", "Error", new { mensaje = e.Message });
-            //}
+            mensaje = mensaje == null ? ViewBag.Mensaje = "Bienvenido a la api de Morty!!" : ViewBag.Mensaje = mensaje;
 
             List<CharactersView> listChar;
-
-            ViewBag.Mensaje = mensaje == null ? ViewBag.Mensaje = "Api Morty!!" : ViewBag.Mensaje = mensaje;
-            var url = $"https://rickandmortyapi.com/api/character/[1,2,3,4,5,6,7,8]";
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "GET";
-            request.ContentType = "application/json";
-            request.Accept = "application/json";
-
+            string logicRequest;
             try
             {
-                using (WebResponse response = request.GetResponse())
-                {
-                    using (Stream strReader = response.GetResponseStream())
-                    {
-                        if (strReader == null) return View();
-                        using (StreamReader objReader = new StreamReader(strReader))
-                        {
-                            string responseBody = objReader.ReadToEnd();
-                            listChar = responseBody.SetCharactersViewOfJsonMorty();
-                            return View(listChar);
-                        }
-                    }
-                }
+                logicRequest = logic.RequestDataApiMorty();
+                listChar = logicRequest.SetCharactersViewOfJsonMorty();
+                return View(listChar);
+
             }
-            catch (WebException ex)
+            catch (WebException e)
             {
-                ViewBag.Mensaje = ex.Message;
-                return View();
+                return RedirectToAction("Index", "Error", new { mensaje = e.Message });
             }
+            catch (NotSupportedException e)
+            {
+                return RedirectToAction("Index", "Error", new { mensaje = e.Message });
+            }
+
+            //List<CharactersView> listChar;
+
+            //ViewBag.Mensaje = mensaje == null ? ViewBag.Mensaje = "Api Morty!!" : ViewBag.Mensaje = mensaje;
+            //var url = $"https://rickandmortyapi.com/api/character/[1,2,3,4,5,6,7,8]";
+            //var request = (HttpWebRequest)WebRequest.Create(url);
+            //request.Method = "GET";
+            //request.ContentType = "application/json";
+            //request.Accept = "application/json";
+
+            //try
+            //{
+            //    using (WebResponse response = request.GetResponse())
+            //    {
+            //        using (Stream strReader = response.GetResponseStream())
+            //        {
+            //            if (strReader == null) return View();
+            //            using (StreamReader objReader = new StreamReader(strReader))
+            //            {
+            //                string responseBody = objReader.ReadToEnd();
+            //                listChar = responseBody.SetCharactersViewOfJsonMorty();
+            //                return View(listChar);
+            //            }
+            //        }
+            //    }
+            //}
+            //catch (WebException ex)
+            //{
+            //    ViewBag.Mensaje = ex.Message;
+            //    return View();
+            //}
 
 
         }

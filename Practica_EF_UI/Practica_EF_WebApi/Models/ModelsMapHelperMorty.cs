@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
-using System.Web.Helpers;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Practica_EF_Logic.Practica.EF.Logic.APIMory;
-using Practica_EF_MVC.Models;
 
-namespace Practica_EF_MVC
+using Newtonsoft.Json.Linq;
+using Practica_EF_WebApi.Models;
+
+namespace Practica_EF_WebApi
 {
     public static class ModelsMapHelpersMorty
     {
-        public static List<CharactersView> SetCharactersViewOfJsonMorty(this string stringResponse)
+        public static List<CharactersViewApi> SetCharactersViewOfJsonMorty(this string stringResponse)
         {
-            List<CharactersView> charcterList = new List<CharactersView>();
+            List<CharactersViewApi> charcterList = new List<CharactersViewApi>();
             JArray jsonArray = JArray.Parse(stringResponse);
 
               for(var i=0; i< jsonArray.Children().ToList().Count; i++)
-            { 
+            {
 
-                CharactersView newChar = new CharactersView();
+                CharactersViewApi newChar = new CharactersViewApi();
                 newChar.id = (int)jsonArray[i]["id"];
                 newChar.name = (string)jsonArray[i]["name"];
                 newChar.status = (string)jsonArray[i]["status"];

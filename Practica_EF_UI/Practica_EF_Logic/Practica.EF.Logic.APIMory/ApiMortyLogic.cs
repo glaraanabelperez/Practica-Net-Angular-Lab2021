@@ -9,13 +9,13 @@ namespace Practica_EF_Logic.Practica.EF.Logic.APIMory
     {
         public string RequestDataApiMorty()
         {
-
+            try
+            {
                 var url = $"https://rickandmortyapi.com/api/character/[1,2,3,4,5,6,7,8]";
                 var request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "GET";
                 request.ContentType = "application/json";
                 request.Accept = "application/json";
-
                 try
                 {
                     using (WebResponse response = request.GetResponse())
@@ -29,13 +29,23 @@ namespace Practica_EF_Logic.Practica.EF.Logic.APIMory
                                 string responseBody = objReader.ReadToEnd();
                                 return responseBody;
                             }
-                    }
+                        }
                     }
                 }
-                catch (Exception e)
+                catch (WebException e)
                 {
                     throw e;
                 }
+
+            }
+            catch (ArgumentNullException e)
+            {
+                throw e;
+            }
+            catch(UriFormatException e){
+                throw e;
+            }
+           
         }
     }
 }

@@ -170,12 +170,15 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ControllersApiNortwind\CustomerApiController.cs" />
     <Compile Include="Controllers\ControllersApiNortwind\IABMControllers.cs" />
+    <Compile Include="Controllers\ControllersMorty\MortyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelsMapHelper..cs" />
+    <Compile Include="Models\ModelsMapHelperMorty.cs" />
+    <Compile Include="Models\ModelsMorty\CharactersViewApi.cs" />
     <Compile Include="Models\ModelsRequest\CustomerRequest.cs" />
     <Compile Include="Models\ModelsResponse\CustomerReponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -234,6 +237,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Customers\" />
+    <Folder Include="Views\Morty\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

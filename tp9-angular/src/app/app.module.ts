@@ -8,11 +8,12 @@ import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './shared/header/header.component';
 import { AppNorthwindModule } from './northwind/app.northwind-module';
-import { AppComponentMorty } from './apiMorty/app.componenteMorty';
+// import { AppComponentMorty } from './apiMorty/app.componenteMorty';
+import { AppMortyModule } from './apiMorty/app.morty-module';
 
 const routes: Routes = [
   {path: '', redirectTo: 'northwind', pathMatch:'full'},
-  {path: 'apiMorty', component: AppComponentMorty},
+  // {path: 'apiMorty', component: AppComponentMorty},
 
 ];
 
@@ -20,13 +21,14 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
-    AppComponentMorty
+    // AppComponentMorty
   ],
 
   imports: [
     BrowserModule,
     AppRoutingModule,
     AppNorthwindModule,
+    AppMortyModule,
     RouterModule.forRoot(routes),
   ],
 

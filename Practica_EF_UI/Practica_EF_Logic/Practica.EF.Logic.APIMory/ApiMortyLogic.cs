@@ -36,7 +36,6 @@ namespace Practica_EF_Logic.Practica.EF.Logic.APIMory
                 {
                     throw e;
                 }
-
             }
             catch (ArgumentNullException e)
             {

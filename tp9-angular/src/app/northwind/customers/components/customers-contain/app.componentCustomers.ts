@@ -24,6 +24,7 @@ export class AppComponentCustomers implements OnInit{
   GetAllCustomers(){
     this._serviceNorthwind.GetAll().subscribe(res=>{
       this.customers=res;
+      console.log(res)
     })
   }
 

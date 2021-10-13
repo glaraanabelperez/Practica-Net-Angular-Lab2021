@@ -25,7 +25,7 @@ namespace Practica_EF_WebApi.Controllers.ControllersMorty
             logicRequest = logic.RequestDataApiMorty();
             listChar = logicRequest.SetCharactersViewOfJsonMorty();
             return listChar;
-            //como manejar las excepciones que tengo en mi logic de apiMorty (logic.RequestDataApiMorty()) ?
+
         }
 
     }

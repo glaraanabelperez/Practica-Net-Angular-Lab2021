@@ -2,11 +2,35 @@ form {
   margin-left: 5%;
 }
 
-form .bloque1 .form-group {
+form .msj-form {
+  font-size: 1rem;
+  color: #a7a6a6;
+}
+
+form span {
+  background-color: #e75757;
+  color: white;
+}
+
+form .form-group {
   margin-bottom: 3%;
 }
 
-form .bloque1 .form-group .btn {
+form .buttons-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+form .buttons-form .buttons {
+  margin-left: 3%;
+}
+
+form .buttons-form .btn {
   font-size: 0.7rem;
 }
 /*# sourceMappingURL=app.componentCustomersForms.css.map */

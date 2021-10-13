@@ -17,10 +17,15 @@ export class AppComponentMorty  {
   }
 
   GetAllCharacters(){
-    this._serviceMorty.GetAll().subscribe(res=>{
-      this.characters=res;
-      console.log(res);
-    })
+    this._serviceMorty.GetAll().subscribe(
+      res=>{
+        if(res!=null){
+          this.characters=res;
+        }
+      },
+      err => {
+        alert("Oops!!, Hubo un error para traer los datos")
+      })
   }
 
 

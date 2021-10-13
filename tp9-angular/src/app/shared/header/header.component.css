@@ -44,6 +44,10 @@
   margin-right: 10%;
 }
 
+.navbar .rigth .navbar-nav .nav-item a {
+  cursor: pointer;
+}
+
 .navbar .rigth .form_search {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -70,6 +74,23 @@
 
 .navbar .rigth .form_search button img {
   width: 90%;
+}
+
+.solapas {
+  margin: 3%;
+}
+
+.solapas a {
+  color: #e76d57;
+  font-size: 0.9rem;
+}
+
+.solapas a:hover {
+  color: #b3acac;
+}
+
+.solapas a:focus {
+  color: #b3acac;
 }
 
 @media (max-width: 767px) {

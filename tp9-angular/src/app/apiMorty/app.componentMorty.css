@@ -1,0 +1,45 @@
+.conteinerApiMorty {
+  margin: 5%;
+}
+
+.conteinerApiMorty h2 {
+  text-align: right;
+}
+
+.conteinerApiMorty .containerMorty {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  vertical-align: middle;
+  overflow-x: scroll;
+}
+
+.conteinerApiMorty .containerMorty .baseCharacters {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: -4px;
+  margin: 2%;
+}
+
+.conteinerApiMorty .containerMorty .baseCharacters .card {
+  margin: auto;
+  width: 220px;
+}
+
+.conteinerApiMorty .containerMorty .baseCharacters .card .btn {
+  width: 30px;
+  height: 30px;
+  float: right;
+  background-color: #e76d57;
+  border: none;
+  padding: 0%;
+}
+
+.conteinerApiMorty .containerMorty .baseCharacters .card .btn p {
+  padding: 0%;
+}
+/*# sourceMappingURL=app.componentMorty.css.map */

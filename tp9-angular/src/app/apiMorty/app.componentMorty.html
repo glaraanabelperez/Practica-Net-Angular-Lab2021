@@ -1,17 +1,21 @@
-<div class="containerMorty">
+<div class="conteinerApiMorty">
     <h2>Morty</h2>
-</div>
-
-<div *ngFor="let ch of characters ">
-    <div class="card" style="width: 18rem;">
-        <!-- <img class="imgCard" [src]="'assets/' + p.nombreImagen"> -->
-        <a href="https://rickandmortyapi.com/api/character/avatar/8.jpeg">o</a>
-        <a href="`{{ch.Img}}`">link</a>
-        <img src={{ch.Img}} class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{ch.name}}</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="containerMorty">
+        <div class="baseCharacters" *ngFor="let ch of characters ">
+            <div class="card">
+                <img [src]="ch.img" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Name: {{ch.name}}</h5>
+                  <p class="card-text">Especie: {{ch.species}}</p>
+                  <p class="card-text">Estatus: {{ch.status}}</p>
+                  <div class="btn btn-primary">
+                    <p>...</p>
+                  </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
+

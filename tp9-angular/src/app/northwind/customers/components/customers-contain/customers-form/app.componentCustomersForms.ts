@@ -42,9 +42,9 @@ export class AppComponentCustomersForms implements OnInit{
 
     this.uploadForm=this.formBuilder.group({
       CustomerID:[''],
-      CompanyName:['', [Validators.required, Validators.maxLength(15), Validators.minLength(3)]],
-      ContactName:['', [Validators.required, Validators.maxLength(15), Validators.minLength(3)]],
-      Country:['', [Validators.required, Validators.maxLength(10), Validators.minLength(3)]]
+      CompanyName:['', [Validators.required, Validators.maxLength(25), Validators.minLength(2)]],
+      ContactName:['', [Validators.required, Validators.maxLength(25), Validators.minLength(2)]],
+      Country:['', [Validators.required, Validators.maxLength(20), Validators.minLength(2)]]
 
     })
   }
@@ -81,7 +81,7 @@ export class AppComponentCustomersForms implements OnInit{
   onSubmit():void{
     this.submitted=true;
     if(this.uploadForm.invalid){
-      alert("Los campos, no pueden estar vacios y tienen un maximo de 10 caracteres.")
+      alert("Los campos, no pueden estar vacios y tienen un maximo de 10 y minimo de 3 caracteres.")
       return;
     }else{
 
@@ -94,7 +94,7 @@ export class AppComponentCustomersForms implements OnInit{
             alert("Ok!! Los datos se editaron bien...")
           }else{
             window.location.reload()
-            alert("Ups!! Hubo un error, consulte...")
+            alert("Oops!! Hubo un error, consulte...")
           }
         });
         this.actionBtnFormEditar=false;
@@ -106,7 +106,7 @@ export class AppComponentCustomersForms implements OnInit{
             alert("Ok!! Los datos se ingresaron bien...")
           }else{
             window.location.reload()
-            alert("Ups!! Hubo un error, consulte...")
+            alert("Oops!! Hubo un error, consulte...")
           }
         });;
       }

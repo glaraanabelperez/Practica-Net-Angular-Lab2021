@@ -4,28 +4,21 @@
       <div class="form-group col-md-6">
         <input type="text" class="form-control" placeholder="Empresa" [value]=""
         formControlName="CompanyName" [ngClass]="{'is-invalid': submitted && f.CompanyName.errors}" >
-      </div>
-      <div *ngIf="submitted && f.CompanyName.errors" class="invalid-feedback">
-        <div *ngIf="f.CompanyName.errors.required"> Por favor ingrese datos</div>
+        <div *ngIf="submitted && f.Country.errors"> Por favor ingrese datos</div>
       </div>
 
       <div class="form-group col-md-6">
         <input type="text" class="form-control" placeholder="Nombre del Contacto" [value]=""
         formControlName="ContactName" [ngClass]="{'is-invalid': submitted && f.ContactName.errors}" >
-      </div>
-      <div *ngIf="submitted && f.ContactName.errors" class="invalid-feedback">
-        <div *ngIf="f.ContactName.errors.required"> Por favor ingrese datos</div>
+        <div *ngIf="submitted && f.Country.errors"> Por favor ingrese datos</div>
       </div>
 
     </div>
      
     <div class="form-group col-md-6">
-      <label for="Country">Pais</label>
       <input type="text" class="form-control" placeholder="Pais" [value]=""
       formControlName="Country" [ngClass]="{'is-invalid': submitted && f.Country.errors}" >
-    </div>
-    <div *ngIf="submitted && f.Country.errors" class="invalid-feedback">
-      <div *ngIf="f.Country.errors.required"> Por favor ingrese datos</div>
+      <div *ngIf="submitted && f.Country.errors"> Por favor ingrese datos</div>
     </div>
 
     <br>

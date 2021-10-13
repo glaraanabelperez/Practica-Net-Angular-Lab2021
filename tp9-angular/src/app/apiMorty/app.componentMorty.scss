@@ -1,6 +1,35 @@
-.containerMorty{
-    margin: 3%;
+.conteinerApiMorty{
+    margin: 5%;
     h2{
         text-align: right;
     }
+    .containerMorty{
+        display: flex;
+        flex-direction: row;
+        vertical-align: middle;
+        overflow-x: scroll; 
+        .baseCharacters{
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: -4px;
+            margin: 2%;
+            .card{
+                margin: auto;
+                width: 220px;
+                .btn{
+                    width: 30px;
+                    height: 30px;
+                    float: right;
+                    background-color:#e76d57 ;
+                    border: none;
+                    padding: 0%;
+                    p{
+                        padding: 0%;
+                    }
+                }
+            }
+        }
+    }
 }
+
+

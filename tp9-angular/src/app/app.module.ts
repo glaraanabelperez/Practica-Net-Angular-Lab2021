@@ -12,7 +12,7 @@ import { AppNorthwindModule } from './northwind/app.northwind-module';
 import { AppMortyModule } from './apiMorty/app.morty-module';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'northwind', pathMatch:'full'},
+  {path: '', redirectTo: 'northwind/customers', pathMatch:'full'},
   // {path: 'apiMorty', component: AppComponentMorty},
 
 ];

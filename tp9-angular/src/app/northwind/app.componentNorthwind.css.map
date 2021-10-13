@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "app.componentNorthwind.scss"
+    ],
+    "names": [],
+    "file": "app.componentNorthwind.css"
+}

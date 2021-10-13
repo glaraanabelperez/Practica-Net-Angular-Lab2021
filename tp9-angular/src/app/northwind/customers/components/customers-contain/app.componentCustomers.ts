@@ -14,18 +14,23 @@ export class AppComponentCustomers implements OnInit{
   elementToEdit :Customers;
 
   constructor(private _serviceNorthwind: ServiceNorthwind){
-    // this.customers=new Array<Customers>();
   }
 
   ngOnInit(){
     this.GetAllCustomers();
   }
 
+
   GetAllCustomers(){
-    this._serviceNorthwind.GetAll().subscribe(res=>{
-      this.customers=res;
-      console.log(res)
-    })
+    this._serviceNorthwind.GetAll().subscribe(
+      res=>{
+        if(res!=null){
+          this.customers=res;
+        }
+      },
+      err => {
+        alert("Oops!!, Hubo un error para traer los datos")
+      })
   }
 
   edit(id : string){
@@ -43,7 +48,7 @@ export class AppComponentCustomers implements OnInit{
         }
       },
       err => {
-        alert("Ops!!, Los datos estan siendo usados por el sistema, no pueden eliminarse ...")
+        alert("Oops!!, Los datos estan siendo usados por el sistema, no pueden eliminarse ..." + err)
       });
   }
 

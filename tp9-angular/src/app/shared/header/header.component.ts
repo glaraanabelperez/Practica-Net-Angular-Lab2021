@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
   apiNortShow:boolean;
 
   constructor() { 
-    this.apiNortShow=true;
+    this.apiNortShow=false;
   }
 
   ngOnInit(): void {

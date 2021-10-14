@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseLogic.cs" />
-    <Compile Include="CustomersLogic .cs" />
+    <Compile Include="CustomersLogic.cs" />
     <Compile Include="IABMLogic.cs" />
     <Compile Include="OrdersDetailsLogic.cs" />
     <Compile Include="Practica.EF.Logic.APIMory\ApiMortyLogic.cs" />

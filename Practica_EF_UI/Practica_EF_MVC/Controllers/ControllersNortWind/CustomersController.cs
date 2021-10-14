@@ -6,6 +6,7 @@ using Practica_EF_Entities;
 using Practica_EF_Logic;
 using System.Data;
 using Practica_EF_MVC.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Practica_EF_MVC.Controllers
 {
@@ -24,17 +25,25 @@ namespace Practica_EF_MVC.Controllers
             mensaje=mensaje==null ? ViewBag.Mensaje = "Buen Dia!!" : ViewBag.Mensaje = mensaje;
 
             var cust = customLogic.GetAll();
+            try
+            {
+                List<CustomerView> customers_view = cust.Select(c => new CustomerView
+                {
+                    CustomerID = c.CustomerID,
+                    ContactName = c.ContactName,
+                    CompanyName = c.CompanyName,
+                    Country = c.Country
 
-            List<CustomerView> customers_view = cust.Select(c => new CustomerView
-              {
-                  CustomerID = c.CustomerID,
-                  ContactName = c.ContactName,
-                  CompanyName = c.CompanyName,
-                  Country = c.Country
+                }).ToList();
 
-              }).ToList();
+                return View(customers_view);
+            }
+            catch (ArgumentNullException)
+            {
+                mensaje = "No se encuentran datos para mostrar";
+            }
 
-            return View(customers_view);
+            return RedirectToAction("Index", "Error", new { mensaje = mensaje });
         }
 
         public ActionResult Delete(string custId)
@@ -113,61 +122,65 @@ namespace Practica_EF_MVC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Result_Edit(CustomerView custom)
         {
-            Customers customerEntitie= custom.MapCustomerViewToCustomer();
-            string mensaje = null;
+            if (ModelState.IsValid)
+            {
+                Customers customerEntitie = custom.MapCustomerViewToCustomer();
+                string mensaje = null;
 
-            if (custom.CustomerID==null)
-            {
-                try
+                if (custom.CustomerID == null)
                 {
-                    customerEntitie.CustomerID = SetNewId();
-                    customLogic.Insert(customerEntitie);
-                    mensaje = $"Id insertado= {customerEntitie.CustomerID}";
-                    return RedirectToAction("Index", "Customers", new { mensaje = mensaje });
+                    try
+                    {
+                        customerEntitie.CustomerID = SetNewId();
+                        customLogic.Insert(customerEntitie);
+                        mensaje = $"Id insertado= {customerEntitie.CustomerID}";
+                        return RedirectToAction("Index", "Customers", new { mensaje = mensaje });
+                    }
+                    catch (NotSupportedException)
+                    {
+                        ViewBag.Mensaje = "Error al insertar";
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        ViewBag.Mensaje = "El Cliente no se puede insertar";
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        ViewBag.Mensaje = "El cliente no esta disponible para Insertar";
+                    }
+                    catch (Exception)
+                    {
+                        ViewBag.Mensaje = "Algo paso, puede que el id este repetido";
+                    }
                 }
-                catch (NotSupportedException)
+                else
                 {
-                    ViewBag.Mensaje = "Error al insertar";
-                }
-                catch (ObjectDisposedException)
-                {
-                    ViewBag.Mensaje = "El Cliente no se puede insertar";
-                }
-                catch (InvalidOperationException)
-                {
-                    ViewBag.Mensaje = "El cliente no esta disponible para Insertar";
-                }
-                catch (Exception)
-                {
-                    ViewBag.Mensaje = "Algo paso, puede que el id este repetido";
-                }
-            }
-            else
-            {
-                try
-                {
-                    string result = customLogic.Update(customerEntitie);
-                    ViewBag.Mensaje = result;
-                    mensaje = "El Edit ok";
-                    return RedirectToAction("Index", "Customers", new { mensaje = mensaje });
-                }
-                catch (NotSupportedException)
-                {
-                    ViewBag.Mensaje = "Error al insertar";
-                }
-                catch (ObjectDisposedException)
-                {
-                    ViewBag.Mensaje = "El Cliente no se puede insertar";
-                }
-                catch (InvalidOperationException)
-                {
-                    ViewBag.Mensaje = "El cliente no esta disponible para Insertar";
-                }
-                catch (Exception)
-                {
-                    ViewBag.Mensaje = "Algo paso";
+                    try
+                    {
+                        string result = customLogic.Update(customerEntitie);
+                        ViewBag.Mensaje = result;
+                        mensaje = "El Edit ok";
+                        return RedirectToAction("Index", "Customers", new { mensaje = mensaje });
+                    }
+                    catch (NotSupportedException)
+                    {
+                        ViewBag.Mensaje = "Error al insertar";
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        ViewBag.Mensaje = "El Cliente no se puede insertar";
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        ViewBag.Mensaje = "El cliente no esta disponible para Insertar";
+                    }
+                    catch (Exception)
+                    {
+                        ViewBag.Mensaje = "Algo paso";
+                    }
                 }
             }
 

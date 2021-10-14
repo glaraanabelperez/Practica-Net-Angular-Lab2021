@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule} from '@angular/common/http';
-import { ServiceMorty } from './services/service_morty.service';
-import { AppComponentMorty } from './app.componenteMorty';
+import { ServiceMorty } from './services/morty.service';
+import { AppComponentMorty } from './morty.component';
 
 
 const routes: Routes = [

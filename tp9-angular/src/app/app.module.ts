@@ -7,9 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './shared/header/header.component';
-import { AppNorthwindModule } from './northwind/app.northwind-module';
+import { AppNorthwindModule } from './northwind/northwind.module';
 // import { AppComponentMorty } from './apiMorty/app.componenteMorty';
-import { AppMortyModule } from './apiMorty/app.morty-module';
+import { AppMortyModule } from './apiMorty/morty.module';
 
 const routes: Routes = [
   {path: '', redirectTo: 'northwind/customers', pathMatch:'full'},

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Morty } from './models/Morty';
-import { ServiceMorty } from './services/service_morty.service';
+import { ServiceMorty } from './services/morty.service';
 
 @Component({
   selector: 'app-Morty',
-  templateUrl: './app.componentMorty.html',
-  styleUrls: ['./app.componentMorty.scss']
+  templateUrl: './morty.component.html',
+  styleUrls: ['./morty.component.scss']
 })
 export class AppComponentMorty  {
 

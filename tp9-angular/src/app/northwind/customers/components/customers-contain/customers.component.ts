@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Customers } from '../../models/customers';
-import { ServiceNorthwind } from '../../services/service_northwind.service';
+import { ServiceNorthwind } from '../../services/northwind.service';
 
 @Component({
   selector: 'app-component-customers',
-  templateUrl: './app.componentCustomers.html',
-  styleUrls: ['./app.componentCustomers.sass']
+  templateUrl: './customers.component.html',
+  styleUrls: ['./customers.component.sass']
 })
 export class AppComponentCustomers implements OnInit{
 
@@ -43,12 +43,12 @@ export class AppComponentCustomers implements OnInit{
       this._serviceNorthwind.Delete(id).subscribe(
         res=>{
         if(res=="OK"){
-          window.location.reload()
           alert("Ok!! Los datos se eliminaron bien...")
+          window.location.reload()
         }
       },
       err => {
-        alert("Oops!!, Los datos estan siendo usados por el sistema, no pueden eliminarse ..." + err)
+        alert("Oops!!, Elimine un id nuevo, este id esta siendo usado por otros datos ...")
       });
   }
 

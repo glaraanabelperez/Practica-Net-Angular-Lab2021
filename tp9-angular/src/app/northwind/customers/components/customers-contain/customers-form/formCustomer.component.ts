@@ -1,24 +1,27 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Customers } from '../../../models/customers';
-import { ServiceNorthwind } from '../../../services/service_northwind.service';
+import { ServiceNorthwind } from '../../../services/northwind.service';
 import { Router } from '@angular/router'
 import { Observable, Observer } from 'rxjs';
 
 @Component({
   selector: 'app-component-customers-forms',
-  templateUrl: './app.componentCustomersForms.html',
-  styleUrls: ['./app.componentCustomersForms.sass']
+  templateUrl: './formCustomer.component.html',
+  styleUrls: ['./formCustomer.component.sass']
 })
 
 export class AppComponentCustomersForms implements OnInit{
 
   @Input() elementToEdit: Customers;
+  
   uploadForm: FormGroup;
   actionBtnFormEditar: boolean=false;
   customer:Customers;
   msj_to_usurio :string=null;
+
   myObserver_msj:Observer <any> ={
+
     next: actionBtnFormEditar => {
       if(actionBtnFormEditar){
        this. msj_to_usurio="Edite"
@@ -33,7 +36,9 @@ export class AppComponentCustomersForms implements OnInit{
       throw new Error('Function not implemented.');
     }
   }
+  
   myObservable_msj=new Observable(suscriber =>{
+
     suscriber.next(this.actionBtnFormEditar);
   })
 

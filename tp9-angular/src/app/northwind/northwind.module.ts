@@ -2,14 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { ServiceNorthwind } from './customers/services/service_northwind.service';
+import { ServiceNorthwind } from './customers/services/northwind.service';
 import { HttpClientModule} from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppComponentShippers } from './shippers/app.componentShippers';
-import { AppComponentCustomers } from './customers/components/customers-contain/app.componentCustomers'
-import { AppComponentCustomersForms } from './customers/components/customers-contain/customers-form/app.componentCustomersForms'
+import { AppComponentShippers } from './shippers/shippers.component';
+import { AppComponentCustomers } from './customers/components/customers-contain/customers.component'
+import { AppComponentCustomersForms } from './customers/components/customers-contain/customers-form/formCustomer.component'
 import { AppComponentNorthwind } from './app.componentNorthwind.';
 
 export const childrenRoute:Routes=[

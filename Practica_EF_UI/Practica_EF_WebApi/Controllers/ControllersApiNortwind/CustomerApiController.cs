@@ -16,23 +16,30 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
     {
         public CustomersLogic customLogic = new CustomersLogic();
 
-
         [HttpGet]
-        public List<CustomerResponse> GetAll()
+        public IHttpActionResult GetAll()
         {
-            List<CustomerResponse> customersResponse;
-            var cust = customLogic.GetAll();
-
-            customersResponse = cust.Select(c => new CustomerResponse
+            try
             {
-                CustomerID = c.CustomerID,
-                ContactName = c.ContactName,
-                CompanyName = c.CompanyName,
-                Country = c.Country
+                List<CustomerResponse> customersResponse;
+                var cust = customLogic.GetAll();
 
-            }).ToList();
+                customersResponse = cust.Select(c => new CustomerResponse
+                {
+                    CustomerID = c.CustomerID,
+                    ContactName = c.ContactName,
+                    CompanyName = c.CompanyName,
+                    Country = c.Country
 
-            return customersResponse;
+                }).ToList();
+
+                return  Ok(customersResponse);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
         }
 
         [HttpGet]

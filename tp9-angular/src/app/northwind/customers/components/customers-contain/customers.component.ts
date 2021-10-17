@@ -29,7 +29,7 @@ export class AppComponentCustomers implements OnInit{
         }
       },
       err => {
-        alert("Oops!!, Hubo un error para traer los datos")
+        alert(`Oops!!, Hubo un error en la conexion para traer los datos: Status error: ${err.status}, Mensaje: ${err.statusText}`)
       })
   }
 
@@ -48,7 +48,7 @@ export class AppComponentCustomers implements OnInit{
         }
       },
       err => {
-        alert("Oops!!, Elimine un id nuevo, este id esta siendo usado por otros datos ...")
+        alert(`Oops!!, No se puede eliminar este id: Status error: ${err.status}, Mensaje: ${err.error.Message}`)
       });
   }
 

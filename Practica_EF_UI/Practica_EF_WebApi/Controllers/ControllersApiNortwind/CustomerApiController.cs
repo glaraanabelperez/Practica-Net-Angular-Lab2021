@@ -65,20 +65,21 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
         [HttpPost]
         public IHttpActionResult Insert([FromBody] CustomerRequest customerRequest)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("El modelo de datos esta incorrecto");
-            }
-            if (customerRequest.Equals(null) && customerRequest.CustomerID!=null)
-            {
-                return BadRequest( "Los Datos estan vacios, o esta intentado crear un cliente que ya existe" );
-            }
             try
             {
-                customerRequest.setNewId();
-                Customers customerEntitie = customerRequest.MapCustomerRequestToCustomer();
-                customLogic.Insert(customerEntitie);
-                return Ok<string>("OK");
+                if (!ModelState.IsValid)
+                {
+                    customerRequest.setNewId();
+                    Customers customerEntitie = customerRequest.MapCustomerRequestToCustomer();
+                    customLogic.Insert(customerEntitie);
+
+                    return Ok<string>("OK");
+                }
+                else
+                {
+                    return BadRequest("El modelo de datos esta incorrecto");
+                }
+
             }
             catch (Exception ex)
             {
@@ -89,12 +90,11 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
 
         [HttpPut]
         public IHttpActionResult Put( [FromBody] CustomerRequest customerRequest)
-        {
-            if (!ModelState.IsValid)
+        {       
+            if (customerRequest == null || !ModelState.IsValid)
             {
-                return BadRequest("El modelo de datos esta incorrecto");
+                return BadRequest("El modelo de datos esta incorrecto o vacio");
             }
-
             try
             {
                 if (customerRequest.Equals(null) || (customerRequest.CustomerID == null) || (customerRequest.CustomerID.Equals("")))

@@ -24,21 +24,20 @@ export class AppComponentCustomersForms implements OnInit{
 
     next: actionBtnFormEditar => {
       if(actionBtnFormEditar){
-       this. msj_to_usurio="Edite"
-      }else{
-        this. msj_to_usurio="Ingrese"
-      }
+          this. msj_to_usurio="Edite"
+        }else{
+          this. msj_to_usurio="Ingrese"
+        }
     },
     error: function (err: any): void {
-      throw new Error('Function not implemented.');
+        throw new Error('Function not implemented.');
     },
     complete: function (): void {
-      throw new Error('Function not implemented.');
+        throw new Error('Function not implemented.');
     }
   }
   
   myObservable_msj=new Observable(suscriber =>{
-
     suscriber.next(this.actionBtnFormEditar);
   })
 
@@ -47,7 +46,7 @@ export class AppComponentCustomersForms implements OnInit{
 
     this.uploadForm=this.formBuilder.group({
       CustomerID:[''],
-      CompanyName:['', [Validators.required, Validators.maxLength(25), Validators.minLength(2)]],
+      CompanyName:['', [Validators.required, Validators.maxLength(35), Validators.minLength(2)]],
       ContactName:['', [Validators.required, Validators.maxLength(25), Validators.minLength(2)]],
       Country:['', [Validators.required, Validators.maxLength(20), Validators.minLength(2)]]
 
@@ -86,38 +85,37 @@ export class AppComponentCustomersForms implements OnInit{
   onSubmit():void{
     this.submitted=true;
     if(this.uploadForm.invalid){
-      alert("Los campos, no pueden estar vacios y tienen un maximo de 10 y minimo de 3 caracteres.")
-      return;
+        alert("Los campos, no pueden estar vacios y tienen un maximo de 10 y minimo de 3 caracteres.")
+        return;
     }else{
-
-      if(this.actionBtnFormEditar){
-        this.customer=this.uploadForm.value;
-        console.log("aca", this.customer)
-        this._serviceNorthwind.Put(this.customer).subscribe(res => {
-          if(res=="OK"){
-            window.location.reload()
-            alert("Ok!! Los datos se editaron bien...")
+        if(this.actionBtnFormEditar){
+            this.customer=this.uploadForm.value;
+            this._serviceNorthwind.Put(this.customer).subscribe(
+              res => {
+                if(res!=null){
+                  window.location.reload()
+                  alert("Ok!! Los datos se editaron bien...")
+                }
+              },
+              err => {
+                alert(`Oops!! Hubo un error, consulte: Status error: ${err.status}, Mensaje: ${err.error.Message}`);
+              })     
+            this.actionBtnFormEditar=false;              
           }else{
-            window.location.reload()
-            alert("Oops!! Hubo un error, consulte...")
+              this.customer=this.uploadForm.value;
+              this._serviceNorthwind.Post(this.customer).subscribe(
+                res => {
+                  if(res!=null){
+                    window.location.reload()
+                    alert("Ok!! Los datos se ingresaron bien...")
+                  }
+                },
+                (err) => {
+                  window.location.reload()
+                  alert(`Oops!! Hubo un error, consulte: Status error: ${err.status}, Mensaje: ${err.error.Message}`);
+                })
           }
-        });
-        this.actionBtnFormEditar=false;
-      }else{
-        this.customer=this.uploadForm.value;
-        this._serviceNorthwind.Post(this.customer).subscribe(res => {
-          if(res=="OK"){
-            window.location.reload()
-            alert("Ok!! Los datos se ingresaron bien...")
-          }else{
-            window.location.reload()
-            alert("Oops!! Hubo un error, consulte...")
-          }
-        });;
-      }
-      
     }
-
   }
 
   

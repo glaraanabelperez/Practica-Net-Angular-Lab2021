@@ -76,23 +76,6 @@
   width: 90%;
 }
 
-.solapas {
-  margin: 3%;
-}
-
-.solapas a {
-  color: #e76d57;
-  font-size: 0.9rem;
-}
-
-.solapas a:hover {
-  color: #b3acac;
-}
-
-.solapas a:focus {
-  color: #b3acac;
-}
-
 @media (max-width: 767px) {
   .navbar {
     -webkit-box-orient: vertical !important;

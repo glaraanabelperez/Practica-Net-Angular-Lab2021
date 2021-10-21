@@ -2,14 +2,9 @@ div {
   background-color: giansboro;
 }
 
-div h2 {
-  float: right;
-  margin-right: 5%;
-  margin-bottom: 3%;
-}
-
 div .containerForm {
-  margin: 3%;
+  margin: auto;
+  width: 70%;
 }
 
 div .containerListCustomer {
@@ -20,7 +15,7 @@ div .containerListCustomer table tbody .td-editar {
   width: 5%;
 }
 
-div .containerListCustomer table tbody div {
+div .containerListCustomer table tbody td {
   margin: 5px;
   margin-bottom: 30px;
   -webkit-box-pack: center;
@@ -28,20 +23,20 @@ div .containerListCustomer table tbody div {
           justify-content: center;
 }
 
-div .containerListCustomer table tbody div .btn {
+div .containerListCustomer table tbody td .btn {
   font-size: 0.7rem;
 }
 
-div .containerListCustomer table tbody div .btn-light2 {
+div .containerListCustomer table tbody td .btn-primary {
   text-align: center;
   margin: auto;
-  background-color: #e75757;
+  background-color: #03c9fa;
   color: white;
 }
 
-div .containerListCustomer table tbody div .btn-light {
-  background-color: #e4e3e3;
+div .containerListCustomer table tbody td .btn-danger {
+  background-color: #eb4040;
   color: white;
   margin-right: 5px;
 }
-/*# sourceMappingURL=app.componentCustomers.css.map */
+/*# sourceMappingURL=customers.component.css.map */

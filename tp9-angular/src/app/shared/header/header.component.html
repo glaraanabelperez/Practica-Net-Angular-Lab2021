@@ -3,29 +3,12 @@
     <div class="rigth">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" (click)="showApiNort()" [routerLink]="['/northwind/customers']"  ><h2>Api Northwind</h2></a>
+          <a class="nav-link"  [routerLink]="['/northwind/home']"  ><h2>Api Northwind</h2></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="showApiMorty()" [routerLink]="['/apiMorty']" ><h2>Api Morty</h2></a>
+          <a class="nav-link" [routerLink]="['/apiMorty']" ><h2>Api Morty</h2></a>
         </li>
       </ul>
-      <form class="form_search">
-        <input  type="search" placeholder="Search" aria-label="Search">
-        <button  type="submit"><img src="assets/images/hand.png" alt=""></button>
-      </form>
     </div>
 </nav>
-<div *ngIf="apiNortShow" class="solapas">
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class=" nav-link" aria-selected="false" [routerLink]="['/northwind/customers']" >Customers</a>
-    </li>
-    <li class="nav-item">
-      <a class="it nav-link" aria-selected="false"  [routerLink]="['/northwind/shippers']">Shippers</a>
-    </li>
-    <li class="nav-item">
-      <a class="it nav-link" aria-selected="false" >Disabled</a>
-    </li>
-  </ul>
-</div>
 

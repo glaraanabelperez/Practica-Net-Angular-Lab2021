@@ -11,20 +11,25 @@ import { AppComponentShippers } from './shippers/shippers.component';
 import { AppComponentCustomers } from './customers/components/customers.component'
 import { AppComponentCustomersForms } from './customers/components/customers-form/formCustomer.component'
 import { AppComponentNorthwind } from './northwind.component';
-import { ServiceInfoCustomers } from './customers/services/customers-info.service';
+import { HomeNorthwind } from './home/home-northwind.component';
+
 
 export const childrenRoute:Routes=[
     {path: 'customers', component: AppComponentCustomers},
     {path: 'shippers', component: AppComponentShippers},
+    {path: 'home', component: HomeNorthwind},
+
 ]
 
 const routes: Routes = [
+  {path: '', redirectTo: 'northwind/home', pathMatch:'full'},
   {path: 'northwind', component: AppComponentNorthwind, children: childrenRoute},
 ];
 
 
 @NgModule({
   declarations: [
+    HomeNorthwind,
     AppComponentCustomers,
     AppComponentCustomersForms,
     AppComponentShippers,
@@ -41,7 +46,7 @@ const routes: Routes = [
   // schemas: [ 
   //   CUSTOM_ELEMENTS_SCHEMA, 
   // ],
-  providers: [ HttpClientModule,ServiceNorthwind, ServiceInfoCustomers],
+  providers: [ HttpClientModule,ServiceNorthwind],
 
   bootstrap: []
   

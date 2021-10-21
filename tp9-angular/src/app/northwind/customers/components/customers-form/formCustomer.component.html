@@ -1,33 +1,27 @@
-<form [formGroup]="uploadForm" #form>
-    <h3 class="msj-form"><span>Datos</span> de clientes> ></h3>
-    <div class="bloque1">
-      <div class="form-group col-md-6">
-        <input type="text" class="form-control" placeholder="Empresa" [value]=""
-        formControlName="CompanyName" [ngClass]="{'is-invalid': submitted && f.CompanyName.errors}" >
-        <div *ngIf="submitted && f.Country.errors"> Por favor ingrese datos</div>
-      </div>
-
-      <div class="form-group col-md-6">
-        <input type="text" class="form-control" placeholder="Nombre del Contacto" [value]=""
-        formControlName="ContactName" [ngClass]="{'is-invalid': submitted && f.ContactName.errors}" >
-        <div *ngIf="submitted && f.Country.errors"> Por favor ingrese datos</div>
-      </div>
-
+<form class="conteiner-form" [formGroup]="uploadForm" #form>
+    <h3>Sistema de regsistro y actualizacion</h3>
+    <h2>Clientes Northwind</h2>
+    <hr>
+    <p>{{msj_edit}} los datos del cliente</p>
+    <div class="form-group col-md-6">
+      <input type="text" class="form-control" placeholder="Empresa" [value]=""
+      formControlName="CompanyName" [ngClass]="{'is-invalid': submitted && f.CompanyName.errors}" >
+      <div *ngIf="submitted && f.CompanyName.errors"> Por favor ingrese Empresa</div>
     </div>
-     
+    <div class="form-group col-md-6">
+      <input type="text" class="form-control" placeholder="Nombre del Contacto" [value]=""
+      formControlName="ContactName" [ngClass]="{'is-invalid': submitted && f.ContactName.errors}" >
+      <div *ngIf="submitted && f.ContactName.errors"> Por favor ingrese el nombre</div>
+    </div>
     <div class="form-group col-md-6">
       <input type="text" class="form-control" placeholder="Pais" [value]=""
       formControlName="Country" [ngClass]="{'is-invalid': submitted && f.Country.errors}" >
-      <div *ngIf="submitted && f.Country.errors"> Por favor ingrese datos</div>
+      <div *ngIf="submitted && f.Country.errors"> Por favor ingrese Pais</div>
     </div>
 
-    <br>
     <div class="buttons-form">
-      <div class="buttons">
-        <button type="button" class="btn btn-light" (click)="onSubmit()">Guardar</button>
-      </div>
-      <div class="buttons">
-        <button type="button" class="btn btn-light" (click)="cleanForm()">Cancelar</button>
-      </div>
+      <button type="button" class="btn btn-info" (click)="onSubmit()">Guardar</button>
+      <button type="button" class="btn btn-warning" (click)="cleanForm()">Cancelar</button>
     </div>
-  </form>
+</form>
+

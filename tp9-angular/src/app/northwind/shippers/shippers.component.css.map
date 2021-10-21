@@ -1,9 +1,9 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAAA,kBAAkB,CAAA;EACd,MAAM,EAAE,EAAE;CAIb;;AALD,AAEI,kBAFc,CAEd,EAAE,CAAA;EACE,UAAU,EAAE,KAAK;CACpB",
+    "mappings": "AAAA,AAAA,kBAAkB,CAAC;EACf,MAAM,EAAE,EAAE;CAEgB;;AAH9B,AAEI,kBAFc,CAEd,EAAE,CAAC;EACC,UAAU,EAAE,KAAK;CAAG;;AAC5B,AAAA,gBAAgB,CAAC;EACb,MAAM,EAAE,WAAW;EACnB,KAAK,EAAE,GAAG;EACV,OAAO,EAAE,EAAE;EACX,gBAAgB,EAAE,OAAO;EACzB,aAAa,EAAE,IAAI;CAGK;;AAR5B,AAMI,gBANY,CAMZ,EAAE,CAAC;EACC,KAAK,EAAE,OAAO;EACd,SAAS,EAAE,IAAI;CAAG",
     "sources": [
-        "app.componentShippers.scss"
+        "shippers.component.sass"
     ],
     "names": [],
-    "file": "app.componentShippers.css"
+    "file": "shippers.component.css"
 }

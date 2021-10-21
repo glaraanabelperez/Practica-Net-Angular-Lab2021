@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 import { Customers } from '../models/customers';
-import { ServiceInfoCustomers } from '../services/customers-info.service';
 import { ServiceNorthwind } from '../services/northwind.service';
 
 @Component({
@@ -12,40 +11,50 @@ import { ServiceNorthwind } from '../services/northwind.service';
 export class AppComponentCustomers implements OnInit{
 
   customers: Array<Customers>=[];
-  customers$: Observable<Customers[]>;
-  cust: Customers;
   elementToEdit :Customers;
-  msj_successfull_edition:boolean=false;
 
 
-  changedCustomers:boolean=false;
-
-
-  constructor(private _serviceNorthwind: ServiceNorthwind, private _serviceInfoNorthwind: ServiceInfoCustomers){
+  constructor(private _serviceNorthwind: ServiceNorthwind){
   }
 
   ngOnInit(){
-
-    this.customers$=this._serviceInfoNorthwind.getAllCustomers$();
-    this.customers$.subscribe(customers => this.customers = customers);
-    console.log("aca", this.customers)
-
+    this.getAllCustomers();
   }
 
   edit(id : string){
-    this._serviceNorthwind.GetById(id).subscribe(res=>{
+    this._serviceNorthwind.getById(id).subscribe(res=>{
       this.elementToEdit=res;
     })
   }
 
   delete(id:string){
-      this._serviceNorthwind.Delete(id).subscribe(
-        ()=>{
-          alert("Ok!! Los datos se eliminaron bien...")
-          this._serviceInfoNorthwind.setAllCustomers();
-      },
-      err => {      
-        alert(`Oops!! Hubo un error, consulte: Status error: ${err.status}, Mensaje: ${err.error.Message}`)
-      });
+    this._serviceNorthwind.delete(id).subscribe(
+      ()=>{
+        alert("Ok!! Los datos se eliminaron bien...")
+        this.getAllCustomers();
+    },
+    err => {      
+      alert(`Oops!! Hubo un error, consulte: Status error: ${err.status}, Mensaje: ${err.error.Message}`)
+    });
   }
+
+  getAllCustomers(){
+    this._serviceNorthwind.getAll().subscribe(
+      res=>{
+        if(res!=null){
+            this.customers=res;
+        }
+      },
+      err => {
+        alert(`Oops!!, Hubo un error en la conexion para traer los datos: Status error: ${err.status}, Mensaje: ${err.statusText}`)
+      })
+  }
+
+  refresh(changed){
+    console.log(changed)
+    if(changed==true){
+      this.getAllCustomers();
+    }
+  }
+
 }

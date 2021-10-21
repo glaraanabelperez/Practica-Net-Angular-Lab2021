@@ -1,1 +1,17 @@
-/* No CSS *//*# sourceMappingURL=app.componentNorthwind.css.map */
+.solapas {
+  margin: 3%;
+}
+
+.solapas a {
+  color: #e0b31c;
+  font-size: 0.9rem;
+}
+
+.solapas a:hover {
+  color: #03c9fa;
+}
+
+.solapas a:focus {
+  color: #03c9fa;
+}
+/*# sourceMappingURL=northwind.component.css.map */

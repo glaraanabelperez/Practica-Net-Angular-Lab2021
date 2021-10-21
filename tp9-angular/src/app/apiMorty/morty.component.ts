@@ -12,11 +12,11 @@ export class AppComponentMorty  {
   characters: Array<Morty>=[];
 
   constructor(private _serviceMorty: ServiceMorty){
-    this.GetAllCharacters();
+    this.getAllCharacters();
 
   }
 
-  GetAllCharacters(){
+  getAllCharacters(){
     this._serviceMorty.getAll().subscribe(
       res=>{
         if(res!=null){

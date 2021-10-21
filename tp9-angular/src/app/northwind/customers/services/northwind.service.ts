@@ -20,7 +20,7 @@ export class ServiceNorthwind{
     constructor(private http:HttpClient){
     }
 
-    Delete(custId:string):Observable<any>{
+    delete(custId:string):Observable<any>{
 
         let idString:string='?custId=' + custId;
         let url=environment.northwindApi + this.endpoint + idString;
@@ -28,25 +28,24 @@ export class ServiceNorthwind{
         return rsta;
     }
 
-    GetAll(): Observable<Array<Customers>>{
+    getAll(): Observable<Array<Customers>>{
         let url=environment.northwindApi + this.endpoint;
         return this.http.get<Array<Customers>>(url);
     }
 
-    GetById(custId:string):Observable<any>{
+    getById(custId:string):Observable<any>{
         let idString:string='?custId=' + custId;
         let url=environment.northwindApi + this.endpoint + idString;
         return this.http.get<any>(url);
     }
 
-    Put(customer:Customers):Observable<any>{
+    put(customer:Customers):Observable<any>{
         let url=environment.northwindApi + this.endpoint;
         let rsta=this.http.put<Array<Customers>>(url, customer);
         return rsta;
     }
 
-    Post(customer:Customers):Observable<any>{
-
+    post(customer:Customers):Observable<any>{
         let url=environment.northwindApi + this.endpoint;
         let rsta=this.http.post<Array<Customers>>(url, customer);
         return rsta;

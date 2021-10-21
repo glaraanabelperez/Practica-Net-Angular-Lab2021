@@ -1,22 +1,43 @@
 form {
-  margin-left: 5%;
+  padding: 3%;
+  border-radius: 5px;
+  background-color: #bfeefa;
 }
 
-form .msj-form {
-  font-size: 1rem;
-  color: #a7a6a6;
+form h3 {
+  text-align: left;
+  margin-bottom: 0%;
+  color: #727677;
 }
 
-form span {
-  background-color: #e75757;
-  color: white;
+form h2 {
+  margin-bottom: 0%;
+}
+
+form hr {
+  margin: 2px;
+}
+
+form p {
+  margin-bottom: 6%;
+  color: #e0b31c;
+  margin-left: 2%;
 }
 
 form .form-group {
-  margin-bottom: 3%;
+  margin: auto;
+  margin-bottom: 4%;
+}
+
+form .form-group .form-control {
+  font-size: 0.7rem;
+  color: #dad8d8;
 }
 
 form .buttons-form {
+  padding-top: 3%;
+  padding-bottom: 3%;
+  width: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -24,13 +45,15 @@ form .buttons-form {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-}
-
-form .buttons-form .buttons {
-  margin-left: 3%;
+  margin: auto;
 }
 
 form .buttons-form .btn {
   font-size: 0.7rem;
+  margin-right: 15px;
 }
-/*# sourceMappingURL=app.componentCustomersForms.css.map */
+
+form .buttons-form .btn:hover {
+  background-color: #dad8d8;
+}
+/*# sourceMappingURL=formCustomer.component.css.map */

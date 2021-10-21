@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,gBAAgB,CAAC;EACb,MAAM,EAAE,WAAW;EACnB,KAAK,EAAE,GAAG;EACV,OAAO,EAAE,EAAE;EACX,gBAAgB,EAAE,OAAO;EACzB,aAAa,EAAE,IAAI;CAGK;;AAR5B,AAMI,gBANY,CAMZ,EAAE,CAAC;EACC,KAAK,EAAE,OAAO;EACd,SAAS,EAAE,IAAI;CAAG;;AAC1B,AAAA,EAAE,CAAC;EACC,UAAU,EAAE,KAAK;EACjB,YAAY,EAAE,GAAG;EACjB,WAAW,EAAE,GAAG;EAChB,KAAK,EAAE,OAAO;CAAG",
+    "sources": [
+        "home-northwind.component.sass"
+    ],
+    "names": [],
+    "file": "home-northwind.component.css"
+}

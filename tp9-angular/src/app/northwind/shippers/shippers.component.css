@@ -5,4 +5,17 @@
 .containerShippers h2 {
   text-align: right;
 }
-/*# sourceMappingURL=app.componentShippers.css.map */
+
+.start-container {
+  margin: 8% 8% 1% 8%;
+  width: 80%;
+  padding: 5%;
+  background-color: #f08b79;
+  border-radius: 20px;
+}
+
+.start-container h1 {
+  color: #fcfbf7;
+  font-size: 2rem;
+}
+/*# sourceMappingURL=shippers.component.css.map */

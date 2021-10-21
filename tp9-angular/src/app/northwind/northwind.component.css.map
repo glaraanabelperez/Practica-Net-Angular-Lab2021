@@ -1,9 +1,9 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,AAAA,QAAQ,CAAC;EACL,MAAM,EAAE,EAAE;CAOa;;AAR3B,AAEI,QAFI,CAEJ,CAAC,CAAC;EACE,KAAK,EAAE,OAAO;EACd,SAAS,EAAE,MAAM;CAAG;;AAJ5B,AAKI,QALI,CAKJ,CAAC,AAAA,MAAM,CAAC;EACJ,KAAK,EAAE,OAAO;CAAG;;AANzB,AAOI,QAPI,CAOJ,CAAC,AAAA,MAAM,CAAC;EACJ,KAAK,EAAE,OAAO;CAAG",
     "sources": [
-        "app.componentNorthwind.scss"
+        "northwind.component.sass"
     ],
     "names": [],
-    "file": "app.componentNorthwind.css"
+    "file": "northwind.component.css"
 }

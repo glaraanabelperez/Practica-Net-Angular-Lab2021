@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Morty } from "../models/Morty";
+import { Morty } from "../models/morty";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 
@@ -16,7 +16,7 @@ export class ServiceMorty{
 
     constructor(private http:HttpClient){}
 
-    GetAll(): Observable<Array<Morty>>{
+    getAll(): Observable<Array<Morty>>{
 
         let url=environment.northwindApi + this.endpointMorty;
         return this.http.get<Array<Morty>>(url);

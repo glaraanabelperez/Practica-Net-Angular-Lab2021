@@ -8,9 +8,10 @@ import { HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponentShippers } from './shippers/shippers.component';
-import { AppComponentCustomers } from './customers/components/customers-contain/customers.component'
-import { AppComponentCustomersForms } from './customers/components/customers-contain/customers-form/formCustomer.component'
-import { AppComponentNorthwind } from './app.componentNorthwind.';
+import { AppComponentCustomers } from './customers/components/customers.component'
+import { AppComponentCustomersForms } from './customers/components/customers-form/formCustomer.component'
+import { AppComponentNorthwind } from './northwind.component';
+import { ServiceInfoCustomers } from './customers/services/customers-info.service';
 
 export const childrenRoute:Routes=[
     {path: 'customers', component: AppComponentCustomers},
@@ -40,7 +41,7 @@ const routes: Routes = [
   // schemas: [ 
   //   CUSTOM_ELEMENTS_SCHEMA, 
   // ],
-  providers: [ HttpClientModule,ServiceNorthwind],
+  providers: [ HttpClientModule,ServiceNorthwind, ServiceInfoCustomers],
 
   bootstrap: []
   

@@ -1,5 +1,5 @@
 <form [formGroup]="uploadForm" #form>
-    <h3 class="msj-form"><span>{{msj_to_usurio}}</span> su formulario >></h3>
+    <h3 class="msj-form"><span>Datos</span> de clientes> ></h3>
     <div class="bloque1">
       <div class="form-group col-md-6">
         <input type="text" class="form-control" placeholder="Empresa" [value]=""
@@ -27,7 +27,7 @@
         <button type="button" class="btn btn-light" (click)="onSubmit()">Guardar</button>
       </div>
       <div class="buttons">
-        <button type="button" class="btn btn-light" (click)="clean()">Cancelar</button>
+        <button type="button" class="btn btn-light" (click)="cleanForm()">Cancelar</button>
       </div>
     </div>
   </form>

@@ -65,21 +65,16 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
         [HttpPost]
         public IHttpActionResult Insert([FromBody] CustomerRequest customerRequest)
         {
+            if (customerRequest == null || !ModelState.IsValid)
+            {
+                return BadRequest("El modelo de datos esta incorrecto o vacio");
+            } 
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    customerRequest.setNewId();
-                    Customers customerEntitie = customerRequest.MapCustomerRequestToCustomer();
-                    customLogic.Insert(customerEntitie);
-
-                    return Ok<string>("OK");
-                }
-                else
-                {
-                    return BadRequest("El modelo de datos esta incorrecto");
-                }
-
+                customerRequest.setNewId();
+                Customers customerEntitie = customerRequest.MapCustomerRequestToCustomer();
+                customLogic.Insert(customerEntitie);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -96,28 +91,16 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
                 return BadRequest("El modelo de datos esta incorrecto o vacio");
             }
             try
-            {
-                if (customerRequest.Equals(null) || (customerRequest.CustomerID == null) || (customerRequest.CustomerID.Equals("")))
-                {
-                    return BadRequest("Los Datos estan vacios");
-                }
-
+            { 
                 Customers customerEntitie = customerRequest.MapCustomerRequestToCustomer();
                 if (customLogic.Exist(customerEntitie.CustomerID)!=null)
                 {
-                    try
-                    {
-                        customLogic.Update(customerEntitie);
-                        return Ok<string>("OK");
-                    }
-                    catch (Exception ex)
-                    {
-                        return InternalServerError(ex);
-                    }
+                   customLogic.Update(customerEntitie);
+                   return Ok();
                 }
                 else
                 {
-                    return BadRequest("Los Datos no son validos, o el id es nulo");
+                    return BadRequest("El cliente no existe");
                 }
             }
             catch (Exception ex)
@@ -129,15 +112,14 @@ namespace Practica_EF_WebApi.Controllers.ControllersApiNortwind
         [HttpDelete]
         public IHttpActionResult Delete(string custId)
         {
-            if (custId ==null)
+            if (custId.Equals(null))
             {
-                return BadRequest("Los Datos estan vacios");
+                return NotFound();
             }
- 
             try
             {
                 customLogic.Delete(custId);
-                return Ok<string>("OK");
+                return Ok();
             }
             catch (Exception ex)
             {

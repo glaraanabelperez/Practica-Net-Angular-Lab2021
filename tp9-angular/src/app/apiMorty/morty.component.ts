@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Morty } from './models/Morty';
+import { Morty } from './models/morty';
 import { ServiceMorty } from './services/morty.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class AppComponentMorty  {
   }
 
   GetAllCharacters(){
-    this._serviceMorty.GetAll().subscribe(
+    this._serviceMorty.getAll().subscribe(
       res=>{
         if(res!=null){
           this.characters=res;

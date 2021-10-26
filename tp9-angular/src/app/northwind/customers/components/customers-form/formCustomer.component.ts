@@ -35,13 +35,11 @@ export class AppComponentCustomersForms implements OnInit{
   }
 
   ngOnChanges(): void {
-    //alpedo esto
     if(this.elementToEdit!=null){
       this.setEditElement(this.elementToEdit);
       this.enableEditing=true;
       this.msj_edit="Edite"
     }
-    this.msj_edit=this.enableEditing==true ? "Edite" : "Ingrese";
   }
 
   get f(){ return this.uploadForm.controls;}
@@ -70,6 +68,7 @@ export class AppComponentCustomersForms implements OnInit{
          this.insert();
      }
      this.submitted=false;
+     this.msj_edit="Ingrese"
      this.cleanForm();
   }
 

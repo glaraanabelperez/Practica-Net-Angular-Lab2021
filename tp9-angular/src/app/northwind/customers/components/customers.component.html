@@ -3,7 +3,7 @@
   <div class="containerForm">
       <app-component-customers-forms 
       [elementToEdit]="elementToEdit"
-      (changedTheForm)="refresh($event)"
+      (changedTheForm)="changedForm($event)"
       ></app-component-customers-forms>
   </div>
   <hr><br>
@@ -35,15 +35,7 @@
                   </svg>
                 </button>
               </td>
-              
-               
             </tr>
-            
-            <!-- <div style="margin-top: 5%;">
-              <button type="button" class=" btn btn-light" (click)="edit(c.CustomerID)">Editar</button>
-              <button type="button" class=" btn btn-light2" (click)="delete(c.CustomerID)">Eliminar</button>
-              <br>
-            </div> -->
           </tbody>
         </table>
   </div>

@@ -14,14 +14,12 @@ export class ServiceNorthwind{
     endpoint: string='CustomerApi';
     changedCustomers:boolean=false;
     customers: Array<Customers>=[];
-    private customers$ = new Subject<Array<Customers>>();
     
 
     constructor(private http:HttpClient){
     }
 
     delete(custId:string):Observable<any>{
-
         let idString:string='?custId=' + custId;
         let url=environment.northwindApi + this.endpoint + idString;
         let rsta=this.http.delete<any>(url);

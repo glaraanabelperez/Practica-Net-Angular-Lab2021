@@ -13,7 +13,6 @@ export class AppComponentCustomers implements OnInit{
   customers: Array<Customers>=[];
   elementToEdit :Customers;
 
-
   constructor(private _serviceNorthwind: ServiceNorthwind){
   }
 
@@ -50,11 +49,11 @@ export class AppComponentCustomers implements OnInit{
       })
   }
 
-  refresh(changed){
-    console.log(changed)
-    if(changed==true){
+  changedForm(changed){
+    if(changed){
       this.getAllCustomers();
     }
   }
+
 
 }

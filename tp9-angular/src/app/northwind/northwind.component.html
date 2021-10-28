@@ -1,13 +1,13 @@
-<div class="solapas">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class=" nav-link active" aria-selected="false" [routerLink]="['/northwind/customers']" >Customers</a>
+<div class="solapas" rol="tabpanel">
+    <ul class="nav nav-tabs" rol="tablist">
+      <li class="nav-item active" rol="presentation">
+        <a class=" nav-link" aria-selected="false" data-toggle="tab" [routerLink]="['/northwind/customers']" >Customers</a>
       </li>
-      <li class="nav-item">
-        <a class="it nav-link" aria-selected="false"   [routerLink]="['/northwind/shippers']">Shippers</a>
+      <li class="nav-item" rol="presentation">
+        <a class="it nav-link" aria-selected="false" data-toggle="tab"   [routerLink]="['/northwind/shippers']">Shippers</a>
       </li>
-      <li class="nav-item">
-        <a class="it nav-link" aria-selected="false" >Disabled</a>
+      <li class="nav-item" rol="presentation">
+        <a class="it nav-link" aria-selected="false" data-toggle="tab" >Disabled</a>
       </li>
     </ul>
   </div>

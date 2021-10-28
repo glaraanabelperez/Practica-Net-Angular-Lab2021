@@ -4,7 +4,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ServiceNorthwind } from './customers/services/northwind.service';
 import { HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponentShippers } from './shippers/shippers.component';
@@ -12,7 +14,6 @@ import { AppComponentCustomers } from './customers/components/customers.componen
 import { AppComponentCustomersForms } from './customers/components/customers-form/formCustomer.component'
 import { AppComponentNorthwind } from './northwind.component';
 import { HomeNorthwind } from './home/home-northwind.component';
-
 
 export const childrenRoute:Routes=[
     {path: 'customers', component: AppComponentCustomers},
@@ -27,6 +28,7 @@ const routes: Routes = [
 ];
 
 
+
 @NgModule({
   declarations: [
     HomeNorthwind,
@@ -37,6 +39,8 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

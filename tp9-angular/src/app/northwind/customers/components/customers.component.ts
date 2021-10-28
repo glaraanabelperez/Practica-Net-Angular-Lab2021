@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 import { Customers } from '../models/customers';
 import { ServiceNorthwind } from '../services/northwind.service';
 
@@ -13,7 +13,7 @@ export class AppComponentCustomers implements OnInit{
   customers: Array<Customers>=[];
   elementToEdit :Customers;
 
-  constructor(private _serviceNorthwind: ServiceNorthwind){
+  constructor(private _serviceNorthwind: ServiceNorthwind,private toastr: ToastrService){
   }
 
   ngOnInit(){
@@ -29,14 +29,14 @@ export class AppComponentCustomers implements OnInit{
   delete(id:string){
     this._serviceNorthwind.delete(id).subscribe(
       ()=>{
-        alert("Ok!! Los datos se eliminaron bien...")
+        this.toastr.success('Los datos se borraron con exito');
         this.getAllCustomers();
     },
     err => {      
-      alert(`Oops!! Hubo un error, consulte: Status error: ${err.status}, Mensaje: ${err.error.Message}`)
+      this.toastr.error(`Oops!! Hubo un error: Consulte: Error: ${err.status}, Mensaje: ${err.error.Message}`)
     });
   }
-
+  
   getAllCustomers(){
     this._serviceNorthwind.getAll().subscribe(
       res=>{
@@ -45,7 +45,8 @@ export class AppComponentCustomers implements OnInit{
         }
       },
       err => {
-        alert(`Oops!!, Hubo un error en la conexion para traer los datos: Status error: ${err.status}, Mensaje: ${err.statusText}`)
+        // alert(`Oops!!, Hubo un error en la conexion para traer los datos: Status error: ${err.status}, Mensaje: ${err.statusText}`)
+        this.toastr.error(`Oops!! Hubo un error: Consulte: Error: ${err.status}, Mensaje: ${err.error.Message}`)
       })
   }
 

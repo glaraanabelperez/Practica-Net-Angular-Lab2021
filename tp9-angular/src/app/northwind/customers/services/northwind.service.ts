@@ -22,8 +22,7 @@ export class ServiceNorthwind{
     delete(custId:string):Observable<any>{
         let idString:string='?custId=' + custId;
         let url=environment.northwindApi + this.endpoint + idString;
-        let rsta=this.http.delete<any>(url);
-        return rsta;
+        return this.http.delete<any>(url);
     }
 
     getAll(): Observable<Array<Customers>>{

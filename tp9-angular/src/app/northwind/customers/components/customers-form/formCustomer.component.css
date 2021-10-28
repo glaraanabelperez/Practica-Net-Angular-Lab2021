@@ -1,6 +1,10 @@
 form {
+  margin-top: 5% !important;
+  margin-bottom: 5% !important;
+  margin: auto;
   padding: 3%;
-  border-radius: 5px;
+  border-top-right-radius: 20px;
+  width: 70%;
   background-color: #bfeefa;
 }
 
@@ -31,7 +35,7 @@ form .form-group {
 
 form .form-group .form-control {
   font-size: 0.7rem;
-  color: #dad8d8;
+  color: #3d3c3c;
 }
 
 form .buttons-form {

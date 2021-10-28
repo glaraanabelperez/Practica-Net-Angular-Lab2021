@@ -1,11 +1,11 @@
-<form class="conteiner-form" [formGroup]="uploadForm" #form>
+<form [formGroup]="uploadForm" #form >
     <h3>Sistema de regsistro y actualizacion</h3>
     <h2>Clientes Northwind</h2>
     <hr>
     <p>{{msj_edit}} los datos del cliente</p>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-6" >
       <input type="text" class="form-control" placeholder="Empresa" [value]=""
-      formControlName="CompanyName" [ngClass]="{'is-invalid': submitted && f.CompanyName.errors}" >
+      formControlName="CompanyName" name=CompanyName [ngClass]="{'is-invalid': submitted && f.CompanyName.errors}" >
       <div *ngIf="submitted && f.CompanyName.errors"> Por favor ingrese Empresa</div>
     </div>
     <div class="form-group col-md-6">
@@ -20,7 +20,7 @@
     </div>
 
     <div class="buttons-form">
-      <button type="button" class="btn btn-info" (click)="onSubmit()">Guardar</button>
+      <button type="button" class="btn btn-info"  [disabled]="this.uploadForm.invalid" (click)="onSubmit()">Guardar</button>
       <button type="button" class="btn btn-warning" (click)="cleanForm()">Cancelar</button>
     </div>
 </form>

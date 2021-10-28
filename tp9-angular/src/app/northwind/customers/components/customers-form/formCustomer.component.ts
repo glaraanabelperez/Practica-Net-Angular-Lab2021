@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Customers } from '../../models/customers';
 import { ServiceNorthwind } from '../../services/northwind.service';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-component-customers-forms',
@@ -21,7 +21,7 @@ export class AppComponentCustomersForms implements OnInit{
   msj_edit:string;
   submitted=false;
 
-  constructor( private formBuilder:FormBuilder, private _serviceNorthwind: ServiceNorthwind){
+  constructor( private formBuilder:FormBuilder, private _serviceNorthwind: ServiceNorthwind,private toastr: ToastrService){
     this.msj_edit="Ingrese";
   }
 
@@ -59,9 +59,6 @@ export class AppComponentCustomersForms implements OnInit{
 
   onSubmit():void{
     this.submitted=true;
-    if(this.uploadForm.invalid){
-        return;
-      }
     if(this.enableEditing){
          this.edit();            
      }else{
@@ -73,39 +70,38 @@ export class AppComponentCustomersForms implements OnInit{
   }
 
   insert(){
-    this.customer=this.uploadForm.value;
-    console.log(this.customer)
+    this.mapeoCustomerForm();
     this._serviceNorthwind.post(this.customer).subscribe(
         () => {
           this.changedTheForm.emit(true);
-            alert("Ok!! Los datos se ingresaron bien...")
+          this.toastr.success('Los datos se insertaron con exito');
           },
       (err) => {
-            console.log(err, err.error)
-            window.location.reload()
-            alert(`Oops!! Hubo un error, consulte: Status error: ${err.status}, Mensaje: ${err.error.Message}`);
+          this.toastr.error(`Oops!! Hubo un error: Consulte: Error: ${err.status}, Mensaje: ${err.error.Message}`)
           })
   }
 
   edit(){
-    this.enableEditing=false;
-    this.customer=this.uploadForm.value;
-    //mapear a mano
+    this.mapeoCustomerForm();
     this._serviceNorthwind.put(this.customer).subscribe(
       () => {
         this.changedTheForm.emit(true);
-         alert("Ok!! Los datos se editaron bien...")
+        this.toastr.success('Los datos se editaron con exito');
       },
       (err) => {
-        alert(`Oops!! Hubo un error, consulte: Status error: ${err.status}, Mensaje: ${err.error.Message}`);
+        this.toastr.error(`Oops!! Hubo un error: Consulte: Error: ${err.status}, Mensaje: ${err.error.Message}`)
       })     
-    
+    this.enableEditing=false;
   }
-  // mapeoCustomerForm(){
-  //   this.customer.CustomerID= this.uploadForm.controls['CustomerID']
-  //   this.customer.CompanyName= this.uploadForm.controls['CompanyName']
 
-  // }
+  mapeoCustomerForm(){
+    this.customer={
+      CustomerID: this.uploadForm.get('CustomerID').value,
+      CompanyName: this.uploadForm.get('CompanyName').value,
+      ContactName: this.uploadForm.get('ContactName').value,
+      Country: this.uploadForm.get('Country').value
+    };
+  }
 
 }
 

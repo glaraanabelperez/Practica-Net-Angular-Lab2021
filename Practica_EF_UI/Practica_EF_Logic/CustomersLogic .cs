@@ -44,7 +44,7 @@ namespace Practica_EF_Logic
             }
             catch (Exception ex)
             {
-                throw new Exception($"Hubo un error unterno {ex.Message}");
+                throw new Exception($"Hubo un error interno {ex.Message}");
 
             }
         }
@@ -81,7 +81,7 @@ namespace Practica_EF_Logic
                 throw new Exception($"Hubo un error: {ex.Message}");
             }
         }
-        
+
         public string Insert(Customers newCustom)
         {
             context.Customers.Add(newCustom);
@@ -104,12 +104,12 @@ namespace Practica_EF_Logic
             }
             catch (Exception ex)
             {
-                throw new Exception($"Hubo un error unterno {ex.Message}");
+                throw new Exception($"Hubo un error interno {ex.Message}");
 
             }
         }
 
-        public string Exist(string  custom_id)
+        public string Exist(string custom_id)
         {
             try
             {
@@ -136,24 +136,24 @@ namespace Practica_EF_Logic
         {
             context.Entry(custom).State = EntityState.Modified;
 
-          try
-          {
-              context.SaveChanges();
-              return "OK";
-          }
-          catch (ObjectDisposedException)
-          {
-              throw new ObjectDisposedException("El cliente no esta disponible en los datos");
-          }
-          catch (InvalidOperationException)
-          {
-              throw new InvalidOperationException("No se encuentra disponible el ciente para realizarle cambios");
+            try
+            {
+                context.SaveChanges();
+                return "OK";
+            }
+            catch (ObjectDisposedException)
+            {
+                throw new ObjectDisposedException("El cliente no esta disponible en los datos");
+            }
+            catch (InvalidOperationException)
+            {
+                throw new InvalidOperationException("No se encuentra disponible el ciente para realizarle cambios");
 
-          }
-          catch (Exception ex)
-          {
-                throw ex ;
-          }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
         }
 

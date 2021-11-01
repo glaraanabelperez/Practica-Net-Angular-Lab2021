@@ -3,7 +3,7 @@
 namespace Practica_EF_Logic
 {
     //protected
-    public  class BaseLogic 
+    public class BaseLogic
     {
         protected readonly NorthwindContext context;
         public BaseLogic()
@@ -12,5 +12,5 @@ namespace Practica_EF_Logic
         }
 
     }
-   
+
 }

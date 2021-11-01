@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace Practica_EF_Logic.Practica.EF.Logic.APIMory
+namespace Practica_EF_WebApi.Models
 {
-    public class ModelApiMorty
+    public class CharactersViewApi
     {
         public int id { get; set; }
 
@@ -18,7 +17,8 @@ namespace Practica_EF_Logic.Practica.EF.Logic.APIMory
 
         public string img { get; set; }
 
-        public ModelApiMorty() { }
+        public CharactersViewApi() { }
+
 
     }
 }

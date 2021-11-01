@@ -16,5 +16,16 @@ namespace Practica_EF_Api.Models.ModelsRequest
 
         public string Country { get; set; }
 
+        private int id { get; set; }
+
+        private static int idNext = 1;
+
+
+        public void setNewId()
+        {
+            id = idNext;
+            CustomerID = $"B{id}";
+            idNext++;
+        }
     }
 }

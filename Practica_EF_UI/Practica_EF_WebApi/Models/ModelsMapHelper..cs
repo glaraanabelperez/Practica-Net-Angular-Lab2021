@@ -11,7 +11,7 @@ namespace Practica_EF_Logic
 {
     public static class ModelsMapHelper
     {
-        public static Customers MapCustomerResponseToCustomer( this CustomerResponse customerResponse)
+        public static Customers MapCustomerResponseToCustomer(this CustomerResponse customerResponse)
         {
             Customers customer = new Customers();
             customer.CustomerID = customerResponse.CustomerID;

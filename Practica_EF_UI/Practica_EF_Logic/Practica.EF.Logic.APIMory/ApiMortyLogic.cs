@@ -5,42 +5,39 @@ using System.Net;
 
 namespace Practica_EF_Logic.Practica.EF.Logic.APIMory
 {
-    public class ApiMortyLogic 
+    public class ApiMortyLogic
     {
-        ConexionApiMorty conexion;
-        public ApiMortyLogic()
+        public string RequestDataApiMorty()
         {
-            conexion = new ConexionApiMorty();
-        }
-
-        public List<ModelApiMorty> RequestDataApiMorty()
-        {
-            HttpWebRequest request;
-            List<ModelApiMorty> listChar;
             try
             {
-                request = conexion.ConexionApi();
-                using (WebResponse response = request.GetResponse())
+                var url = $"https://rickandmortyapi.com/api/character/[1,2,3,4,5,6,7,8]";
+                var request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "GET";
+                request.ContentType = "application/json";
+                request.Accept = "application/json";
+                try
                 {
-                    try
+                    using (WebResponse response = request.GetResponse())
                     {
                         using (Stream strReader = response.GetResponseStream())
                         {
-                                using (StreamReader objReader = new StreamReader(strReader))
-                                {
-                                    string responseBody = objReader.ReadToEnd();
-                                    listChar = responseBody.SetCharactersOfJsonMorty();
-                                    return listChar;
-                                }
+                            if (strReader == null) return "Request Vacia";
+
+                            using (StreamReader objReader = new StreamReader(strReader))
+                            {
+                                string responseBody = objReader.ReadToEnd();
+                                return responseBody;
+                            }
                         }
                     }
-                    catch (NotSupportedException e)
-                    {
-                        throw e;
-                    }
+                }
+                catch (WebException e)
+                {
+                    throw e;
                 }
             }
-            catch (WebException e)
+            catch (ArgumentNullException e)
             {
                 throw e;
             }

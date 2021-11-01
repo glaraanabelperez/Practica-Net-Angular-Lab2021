@@ -7,7 +7,7 @@ using Practica_EF_Entities;
 namespace Practica_EF_MVC.Models
 {
     public class CustomerResponse
-    {    
+    {
         public string CustomerID { get; set; }
 
         public string CompanyName { get; set; }

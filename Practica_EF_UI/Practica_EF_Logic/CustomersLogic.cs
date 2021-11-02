@@ -12,16 +12,14 @@ namespace Practica_EF_Logic
     public class CustomersLogic : BaseLogic, IABMLogic<Customers>
     {
 
-        public Customers cust { get; set; }
-
-        public List<Customers> GetAll()
+        public string Delete(int id)
         {
-            return context.Customers.ToList();
+            throw new NotImplementedException();
         }
 
-        public string Delete(string customer_id)
+        public string Delete(string id)
         {
-            Customers customers = context.Customers.Find(customer_id);
+            Customers customers = context.Customers.Find(id);
             context.Customers.Remove(customers);
 
             try
@@ -29,59 +27,39 @@ namespace Practica_EF_Logic
                 context.SaveChanges();
                 return "OK";
             }
-            catch (NotSupportedException)
+            catch (Exception)
             {
-                throw new NotSupportedException("La accion no se puede realizar");
-            }
-            catch (ObjectDisposedException)
-            {
-                throw new ObjectDisposedException("El Clientes no existe en la Base de Datos");
-            }
-            catch (InvalidOperationException)
-            {
-                throw new InvalidOperationException("El Clientes no esta dsipnible");
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Hubo un error interno {ex.Message}");
-
+                throw new Exception("Ocurrio un Problema, al borrar los datos");
             }
         }
 
-        public string Delete(int obj)
+        public List<Customers> GetAll()
         {
-            throw new NotImplementedException();
+            return context.Customers.ToList();
         }
 
-        public Customers GetById(int obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Customers GetById(String custom)
+        public Customers GetById(string id)
         {
             try
             {
+                Customers cust = new Customers();
                 cust = (from c in context.Customers
-                        where c.CustomerID.Equals(custom)
+                        where c.CustomerID.Equals(id)
                         select c).Single();
                 return cust;
+
             }
-            catch (ArgumentNullException)
+            catch (Exception)
             {
-                throw new ArgumentNullException("Ha ocurrido un error, no se aceptan datos nulos");
-            }
-            catch (System.InvalidOperationException)
-            {
-                throw new System.InvalidOperationException("Lo que busca no se encuentra disponible");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Hubo un error: {ex.Message}");
+                throw new Exception("Ocurrio un Problema, al traer los datos");
             }
         }
-        
+
+        public Customers GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public string Insert(Customers newCustom)
         {
             context.Customers.Add(newCustom);
@@ -90,26 +68,28 @@ namespace Practica_EF_Logic
                 context.SaveChanges();
                 return "OK";
             }
-            catch (NotSupportedException)
+            catch (Exception)
             {
-                throw new NotSupportedException("Error al insertar");
-            }
-            catch (ObjectDisposedException)
-            {
-                throw new ObjectDisposedException("El Cliente no se puede insertar");
-            }
-            catch (InvalidOperationException)
-            {
-                throw new InvalidOperationException("El cliente no esta disponible para Insertar");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Hubo un error interno {ex.Message}");
-
+                throw new Exception("Ocurrio un Problema, al guardar los datos");
             }
         }
 
-        public string Exist(string  custom_id)
+        public string Update(Customers custom)
+        {
+            context.Entry(custom).State = EntityState.Modified;
+
+            try
+            {
+                context.SaveChanges();
+                return "OK";
+            }
+            catch (Exception)
+            {
+                throw new Exception("Ocurrio un Problema, al actualizar los datos");
+            }
+        }
+
+        public string Exist(string custom_id)
         {
             try
             {
@@ -118,43 +98,10 @@ namespace Practica_EF_Logic
                              select c.CustomerID).Single();
                 return id;
             }
-            catch (ArgumentNullException)
+            catch (Exception)
             {
-                throw new ArgumentNullException("Ha ocurrido un error, no se aceptan datos nulos");
+                throw new Exception("Ocurrio un Problema, al buscar los datos");
             }
-            catch (System.InvalidOperationException)
-            {
-                throw new System.InvalidOperationException("Lo que busca no se encuentra disponible");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Hubo un error  {ex.Message}");
-            }
-        }
-
-        public string Update(Customers custom)
-        {
-            context.Entry(custom).State = EntityState.Modified;
-
-          try
-          {
-              context.SaveChanges();
-              return "OK";
-          }
-          catch (ObjectDisposedException)
-          {
-              throw new ObjectDisposedException("El cliente no esta disponible en los datos");
-          }
-          catch (InvalidOperationException)
-          {
-              throw new InvalidOperationException("No se encuentra disponible el ciente para realizarle cambios");
-
-          }
-          catch (Exception ex)
-          {
-                throw ex ;
-          }
-
         }
 
     }

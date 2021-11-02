@@ -26,23 +26,9 @@ namespace Practica_EF_Logic
                 context.SaveChanges();
                 return "OK";
             }
-            catch (NotSupportedException ex)
+            catch (Exception)
             {
-                throw ex;
-            }
-            catch (ObjectDisposedException ex)
-            {
-                throw ex;
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw ex;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-
+                throw new Exception("Ocurrio un Problema, al borrar los datos");
             }
         }
 
@@ -62,17 +48,9 @@ namespace Practica_EF_Logic
                 return  cust;
 
             }
-            catch (ArgumentNullException ex)
+            catch (Exception)
             {
-                throw ex;
-            }
-            catch (System.InvalidOperationException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                throw new Exception("Ocurrio un Problema, al traer los datos");
             }
         }
 
@@ -89,22 +67,9 @@ namespace Practica_EF_Logic
                 context.SaveChanges();
                 return "OK";
             }
-            catch (NotSupportedException ex)
+            catch (Exception)
             {
-                throw ex;
-            }
-            catch (ObjectDisposedException ex)
-            {
-                throw ex;
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-
+                throw new Exception("Ocurrio un Problema, al guardar los datos");
             }
         }
 
@@ -117,18 +82,9 @@ namespace Practica_EF_Logic
                 context.SaveChanges();
                 return "OK";
             }
-            catch (ObjectDisposedException ex)
+            catch (Exception)
             {
-                throw ex;
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw ex;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                throw new Exception("Ocurrio un Problema, al actualizar los datos");
             }
         }
 
@@ -141,17 +97,9 @@ namespace Practica_EF_Logic
                              select c.CustomerID).Single();
                 return id;
             }
-            catch (ArgumentNullException ex)
+            catch (Exception)
             {
-                throw ex;
-            }
-            catch (System.InvalidOperationException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                throw new Exception("Ocurrio un Problema, al buscar los datos");
             }
         }
 

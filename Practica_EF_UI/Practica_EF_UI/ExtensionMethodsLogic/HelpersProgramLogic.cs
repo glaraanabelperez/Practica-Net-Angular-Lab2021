@@ -16,7 +16,7 @@ namespace Practica_EF_Logic
             string typOperation = null;
             do
             {
-                typOperation = InteractionUserHelpers.Menu();
+                typOperation = InteractionUser.Menu();
             } while (String.IsNullOrEmpty(typOperation));
 
             return typOperation;
@@ -90,8 +90,7 @@ namespace Practica_EF_Logic
 
         public static void Insert_Shipper(this ShippersLogic shipperLo)
         {
-            Console.WriteLine(" \n INGRESE NOMBRE DE LA COMPANIA");
-            string compani = InteractionUserHelpers.InsertDates();
+            string compani = InteractionUser.InsertDataAndCheck("NOMBRE DE LA COMPANIA");
             try
             {
                 Shippers newShip = new Shippers();
@@ -114,52 +113,40 @@ namespace Practica_EF_Logic
             }
 
         }
-        public static void GetCustomerById(this CustomersLogic custom, string selection)
+        public static Customers GetCustomerById(this CustomersLogic custom, string selection)
         {
             try
-            {
-                custom.GetById(selection);
-                Customers c = custom.customer;
-                Console.WriteLine(" \n LOS DATOS DE CLIENTE SON: ");
-                Console.WriteLine($"COMPANIA: {c.CompanyName}. CONTACTO: {c.ContactName}. REGION: {c.Region}.");
+            {   
+                Customers c = custom.GetById(selection);
+                return c;
             }
-            catch (System.InvalidOperationException)
+            catch (Exception ex)
             {
-                throw new System.InvalidOperationException();
-            }
+                throw ex;
+            }    
         }
-        public static void UpdateCustomerById( this CustomersLogic customerLogic, string selectionIdCustomers)
-        {
-            Console.WriteLine("\n QUIERE  EDITAR EL NOMBRE DEL CONTACTO DEL CLIENTES?");
-            String rsta = Practica_EF_UI.ExtensionMethodsLogic.InteractionUserHelpers.Continuar();
-            rsta = rsta.ToUpper();
-            if (rsta.Equals("SI"))
-            {
-                string newDate = null;
-                Console.WriteLine(" \nINGRESE UN NUEVO NOMBRE DE CONTACTO");
-                newDate = InteractionUserHelpers.InsertDates();
-                Console.WriteLine(newDate);
+
+        public static void UpdateCustomerById( this CustomersLogic customerLogic, Customers custom)
+        {     
+                string newData = null;
+                newData = InteractionUser.InsertDataAndCheck("NUEVO NOMBRE");          
                 try
                 {
-                    Customers customers = new Customers();
-                    customers.ContactName = newDate;
-                    customers.CustomerID = selectionIdCustomers.ToUpper();
-                    customerLogic.Update(customers);
+                    if (customerLogic.Exist(custom.CustomerID) != null)
+                    {
+                        custom.ContactName = newData;
+                        InteractionUser.WriteMessage("EDICION " + customerLogic.Update(custom));
+                    }
+                    else
+                    {
+                        InteractionUser.WriteMessage("\nHUBO UN PROBLEMA CON LOS DATOS DE CLIENTES, PUEDE QUE NO ESTEN ENTRE LOS DATOS");
+                    }
                 }
-                catch (NotSupportedException)
+                catch (Exception ex)
                 {
-                    Console.WriteLine("HUBO UN PROBLEMA CON LA CONSULTA.");
-                }
-                catch (ObjectDisposedException)
-                {
-                    Console.WriteLine("EL CUSTOMER NO SE HA ENCONTRADO.");
-                }
-                catch (InvalidOperationException)
-                {
-                    Console.WriteLine("EL CUSTOMER NO SE PUEDE EDITAR.");
+                    throw ex;
+                } 
 
-                }
-            }
         }
 
    }

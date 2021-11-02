@@ -39,8 +39,9 @@ namespace Practica_EF_UI
                 case "ORDERS":
                     Console.WriteLine(" \n ORDERS");
                     HelpersProgramLogic.ListOrders();
+
                     Console.WriteLine(" \n QUIERE ACCEDER AL CLIENTE DE LA ORDEN?");
-                    changeOperation = InteractionUserHelpers.Continuar();
+                    changeOperation = InteractionUser.Continuar();
                     changeOperation = changeOperation.ToUpper();
                     if (changeOperation.Equals("SI"))
                     {
@@ -61,33 +62,29 @@ namespace Practica_EF_UI
                 case "CUSTOMERS":
                     CustomersLogic customerLogic = new CustomersLogic();
                     string selectionIdCustomers = null;
-                    Console.WriteLine(" \n CUSTOMERS");
+                    Customers custom;
+
+                    InteractionUser.WriteMessage(" \n CUSTOMERS");
                     HelpersProgramLogic.ListCustomers();
-                    Console.WriteLine(" \n INGRESE CODIGO A BUSCAR DE LOS INDICADOS ANTERIORMENTE");
                     do
                     {
-                        selectionIdCustomers = InteractionUserHelpers.InsertDates();
+                        selectionIdCustomers = InteractionUser.InsertDataAndCheck("CODIGO A BUSCAR");
                         changeOperation = changeOperation.ToUpper();
-                        Console.WriteLine($" \nCODIGO SELECCIONADO: {selectionIdCustomers}");
+
                         try
                         {
-                            customerLogic.GetCustomerById(selectionIdCustomers);
-                            customerLogic.UpdateCustomerById(selectionIdCustomers);
-                            try
+                            custom = customerLogic.GetCustomerById(selectionIdCustomers);
+                            InteractionUser.WriteMessage($"\nCONTACTO: {custom.ContactName}. \n QUIERE  EDITAR EL NOMBRE?");
+                            if (InteractionUser.Continuar().ToUpper().Equals("SI"))
                             {
-                                customerLogic.GetCustomerById(selectionIdCustomers);
-                            }
-                            catch (System.InvalidOperationException)
-                            {
-                                Console.WriteLine(" \n NO SE ENCONTRO EL CLIENTE");
-                                selectionIdCustomers = null;
+                                customerLogic.UpdateCustomerById(custom);
                             }
                         }
-                        catch (System.InvalidOperationException)
+                        catch (Exception ex)
                         {
-                            Console.WriteLine(" \n EL CODIGO ES INCORRECTO");
-                            selectionIdCustomers = null;
-                        }
+                            InteractionUser.WriteMessage($" \nERROR: {ex.Message}");
+                        }   
+
                     } while (selectionIdCustomers == null);
 
                     return "MENU";
@@ -97,13 +94,12 @@ namespace Practica_EF_UI
                     ShippersLogic shipperLo = new ShippersLogic();
                     HelpersProgramLogic.ListShippers();
 
-                    Console.WriteLine(" \n DESEA ELIMINAR (E) o INSERTAR (I) UN TRANSPORTE?");
-                    string selection = InteractionUserHelpers.InsertDates();
+                    string selection = InteractionUser.InsertDataAndCheck("ELIMINAR (E) o INSERTAR (I) UN TRANSPORTE?");
                     selection = selection.ToUpper();
                     if (selection.Equals("E"))
                     {
                         Console.WriteLine(" \n SELECCIONE UN ID DEL TRANSPORTE A ELIMINAR");
-                        int idShipper = InteractionUserHelpers.InsertNumber();
+                        int idShipper = InteractionUser.InsertNumber();
                         try
                         {
                             shipperLo.Delete_Shipper(idShipper);

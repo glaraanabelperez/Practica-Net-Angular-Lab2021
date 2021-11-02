@@ -3,23 +3,9 @@
 
 namespace Practica_EF_UI.ExtensionMethodsLogic
 {
-    public static class InteractionUserHelpers
+    public static class InteractionUser
     {
-        public static string Menu()  
-        {
-           String operation;
-           Console.WriteLine(" \nBuen dia!");
-           Console.WriteLine(" \nINGRESA LA LETRA DE LA ENTIDAD CON LA CUAL TRABAJAR:" +
-               " \n  ORDENES ('OR'), \n  ORDENES DETALLE('OD'), \n  CLIENTES ('CU'), \n  ENVIOS('SH'),\n  SALIR ('S') ");
-           operation = Console.ReadLine();
-            operation = operation.ToUpper();
-           operation = operation.Equals("OR") ? "ORDERS" : operation.Equals("OD") ? "ORDER_DETAILS"
-                : operation.Equals("CU") ? "CUSTOMERS"
-                : operation.Equals("SH") ? "SHIPPERS"
-                : operation.Equals("S") ? "SALIR"
-                : null;
-            return operation;
-        }
+      
         public static string Continuar()
         {
             String entrie;
@@ -31,12 +17,12 @@ namespace Practica_EF_UI.ExtensionMethodsLogic
 
             return entrie;
         }
-        public static string InsertDates()
+        public static string InsertDataAndCheck(string instructions)
         {
             String entrie;
             do
             {
-                Console.WriteLine(" \n INGRESE EL DATO");
+                Console.WriteLine($" \n INGRESE {instructions}");
                 entrie = Console.ReadLine().ToUpper();
             } while (String.IsNullOrEmpty(entrie));
 
@@ -55,6 +41,27 @@ namespace Practica_EF_UI.ExtensionMethodsLogic
             {
                 throw new Exception();
             }
+        }
+
+        public static void WriteMessage(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        public static string Menu()
+        {
+            String operation;
+            Console.WriteLine(" \nBuen dia!");
+            Console.WriteLine(" \nINGRESA LA LETRA DE LA ENTIDAD CON LA CUAL TRABAJAR:" +
+                " \n  ORDENES ('OR'), \n  ORDENES DETALLE('OD'), \n  CLIENTES ('CU'), \n  ENVIOS('SH'),\n  SALIR ('S') ");
+            operation = Console.ReadLine();
+            operation = operation.ToUpper();
+            operation = operation.Equals("OR") ? "ORDERS" : operation.Equals("OD") ? "ORDER_DETAILS"
+                 : operation.Equals("CU") ? "CUSTOMERS"
+                 : operation.Equals("SH") ? "SHIPPERS"
+                 : operation.Equals("S") ? "SALIR"
+                 : null;
+            return operation;
         }
     }
 }

@@ -9,7 +9,12 @@ namespace Practica_EF_Logic
 {
     public class OrdersLogic : BaseLogic, IABMLogic<Orders>
     {
-        public void Delete(int id)
+        public string Delete(string obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Delete(int obj)
         {
             throw new NotImplementedException();
         }
@@ -19,22 +24,22 @@ namespace Practica_EF_Logic
             return context.Orders.ToList();
         }
 
-        public void GetById(string id)
+        public Orders GetById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public void GetById(int id)
+        public Orders GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Insert(Orders newShiper)
+        public string Insert(Orders obj)
         {
             throw new NotImplementedException();
         }
 
-        public string Update(Orders c)
+        public string Update(Orders obj)
         {
             throw new NotImplementedException();
         }

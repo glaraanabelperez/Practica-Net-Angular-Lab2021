@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,40 @@ namespace Practica_EF_Logic
 {
     public class CustomersLogic : BaseLogic, IABMLogic<Customers>
     {
-        public Customers customer { get; set; }
 
-        public void Delete(int id)
+        public string Delete(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public string Delete(string id)
+        {
+            Customers customers = context.Customers.Find(id);
+            context.Customers.Remove(customers);
+
+            try
+            {
+                context.SaveChanges();
+                return "OK";
+            }
+            catch (NotSupportedException ex)
+            {
+                throw ex;
+            }
+            catch (ObjectDisposedException ex)
+            {
+                throw ex;
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw ex;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
         }
 
         public List<Customers> GetAll()
@@ -21,7 +51,7 @@ namespace Practica_EF_Logic
             return context.Customers.ToList();
         }
 
-        public void GetById(string id)
+        public Customers GetById(string id)
         {
             try
             {
@@ -29,55 +59,102 @@ namespace Practica_EF_Logic
                 cust = (from c in context.Customers
                         where c.CustomerID.Equals(id)
                         select c).Single();
-                this.customer = cust;
+                return  cust;
 
             }
-            catch (System.InvalidOperationException)
+            catch (ArgumentNullException ex)
             {
-                throw new System.InvalidOperationException();
+                throw ex;
             }
-            catch (Exception)
+            catch (System.InvalidOperationException ex)
             {
-                throw new Exception();
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
-        public void GetById(int id)
+        public Customers GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Insert(Customers newShiper)
+        public string Insert(Customers newCustom)
         {
-            throw new NotImplementedException();
-        }
-
-        public string Update(Customers c)
-        {
-            var customerUpdate = context.Customers.Find(customer.CustomerID);
-            customerUpdate.ContactName = c.ContactName;
-
-            string message;
+            context.Customers.Add(newCustom);
             try
             {
                 context.SaveChanges();
-                message = "MUY BIEN SE EDITO EL CUSTOMER";
+                return "OK";
             }
-            catch (NotSupportedException)
+            catch (NotSupportedException ex)
             {
-                throw new NotSupportedException();
+                throw ex;
             }
-            catch (ObjectDisposedException)
+            catch (ObjectDisposedException ex)
             {
-                //deberia enviar el id
-                throw new ObjectDisposedException(customerUpdate.ContactName);
+                throw ex;
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException ex)
             {
-                throw new InvalidOperationException();
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
 
             }
-            return message;
         }
+
+        public string Update(Customers custom)
+        {
+            context.Entry(custom).State = EntityState.Modified;
+
+            try
+            {
+                context.SaveChanges();
+                return "OK";
+            }
+            catch (ObjectDisposedException ex)
+            {
+                throw ex;
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw ex;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string Exist(string custom_id)
+        {
+            try
+            {
+                string id = (from c in context.Customers
+                             where c.CustomerID.Contains(custom_id)
+                             select c.CustomerID).Single();
+                return id;
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw ex;
+            }
+            catch (System.InvalidOperationException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
     }
 }

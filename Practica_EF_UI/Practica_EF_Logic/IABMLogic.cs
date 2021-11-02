@@ -9,17 +9,20 @@ namespace Practica_EF_Logic
 {
     interface IABMLogic<T>
     {
-        void Delete(int id);
+        string Delete(string obj);
+
+        string Delete(int obj);
 
         List<T> GetAll();
 
-        void GetById(string id);
+        T GetById(string id);
 
-        void GetById(int id);
+        T GetById(int id);
 
-        void Insert(T newShiper);
+        string Insert(T obj);
 
-        string Update(T c);
+        string Update(T obj);
 
     }
 }
+
